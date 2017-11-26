@@ -3,7 +3,7 @@ RUN mkdir /node
 WORKDIR /node
 ADD ./package.json .
 ADD ./yarn.lock .
-RUN yarn install --frozen-lock
+RUN yarn install --frozen-lock --production
 
 ADD ./static ./static
 ADD ./lib ./lib
