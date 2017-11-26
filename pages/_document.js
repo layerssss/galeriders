@@ -13,6 +13,11 @@ export default class MyDocument extends Document {
     return (
       <html lang="zh">
         <Head>
+          <link
+            rel="shortcut icon"
+            type="image/x-icon"
+            href="/static/favicon.ico"
+          />
           <meta
             name="viewport"
             content={
