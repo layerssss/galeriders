@@ -96,6 +96,11 @@ class Layout extends React.PureComponent {
               alt="Welly Queen"
             />
           </a>
+          <a href="https://github.com/layerssss/galeriders">
+            <span className="fa fa-github" style={{ color: '#444' }}>
+              <span className="sr-only">GitHub</span>
+            </span>
+          </a>
         </div>
         <div
           style={{
