@@ -11,13 +11,24 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <html lang="zh-cn">
+      <html lang="zh">
         <Head>
           <style>{`body { margin: 0 } /* custom! */`}</style>
           <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css"
             integrity="sha256-LxKiHTQko0DUCUSgrIK23SYMymvfuj8uxXmblBvVWm0="
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css"
+            integrity="sha256-pMhcV6/TBDtqH9E9PWKgS+P32PVguLG8IipkPyqMtfY="
+            crossOrigin="anonymous"
+          />
+          <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"
+            integrity="sha256-XWzSUJ+FIQ38dqC06/48sNRwU1Qh3/afjmJ080SneA8="
             crossOrigin="anonymous"
           />
           <meta
@@ -28,7 +39,7 @@ export default class MyDocument extends Document {
             }
           />
         </Head>
-        <body className="custom_class">
+        <body>
           {this.props.customValue}
           <Main />
           <NextScript />

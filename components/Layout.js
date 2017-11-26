@@ -2,6 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import Link from 'next/link';
+import Router from 'next/router';
+
+Router.onRouteChangeStart = () => {
+  window.NProgress.start();
+};
+
+Router.onRouteChangeComplete = () => {
+  window.NProgress.done();
+  window.NProgress.remove();
+};
 
 class Layout extends React.PureComponent {
   static propTypes = {
