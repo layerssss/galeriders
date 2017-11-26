@@ -58,7 +58,7 @@ class Page extends React.PureComponent {
               >
                 <Link
                   prefetch
-                  href={{ pathname: '/wiki', query: { id: item.sys.id } }}
+                  href={{ pathname: '/wiki', query: { name: item.fields.name } }}
                 >
                   <a>{item.fields.name}</a>
                 </Link>
@@ -72,7 +72,7 @@ class Page extends React.PureComponent {
               <div>
                 <Link
                   prefetch
-                  href={{ pathname: '/wiki', query: { id: item.sys.id } }}
+                  href={{ pathname: '/wiki', query: { name: item.fields.name } }}
                 >
                   <a>查看...</a>
                 </Link>

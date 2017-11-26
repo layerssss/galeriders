@@ -7,8 +7,14 @@ import contentful from '../lib/contentful.js';
 import DisqusThread from '../components/DisqusThread.js';
 
 class Page extends React.PureComponent {
-  static async getInitialProps({ query: { id } }) {
-    const item = await contentful.getEntry(id);
+  static async getInitialProps({ query: { name } }) {
+    const { items: [item] } = await contentful.getEntries({
+      content_type: 'wiki',
+      'fields.name': name,
+    });
+
+    if (!item) throw new Error('该词条可能已被删除');
+
     return {
       item,
     };
@@ -56,7 +62,7 @@ class Page extends React.PureComponent {
             ”
           </span>
         </div>
-        <DisqusThread identifier={`wiki:${item.sys.id}`} />
+        <DisqusThread identifier={`wiki:${item.fields.name}`} />
       </Layout>
     );
   }
