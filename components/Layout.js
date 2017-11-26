@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import Head from 'next/head';
 import Link from 'next/link';
 import Router from 'next/router';
+import ReactGA from 'react-ga';
+
+ReactGA.initialize('UA-80409715-5');
 
 Router.onRouteChangeStart = () => {
   window.NProgress.start();
@@ -29,6 +32,7 @@ class Layout extends React.PureComponent {
   }
 
   componentDidMount() {
+    ReactGA.pageview(document.location.href);
     if (window.innerWidth < 640)
       // eslint-disable-next-line react/no-did-mount-set-state
       this.setState({ small: true });
