@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Head from 'next/head';
 import Link from 'next/link';
 import Router from 'next/router';
+import { IsBrowser } from '../lib/contants.js';
 
 Router.onRouteChangeStart = () => {
   window.NProgress.start();
@@ -20,6 +21,18 @@ class Layout extends React.PureComponent {
     children: PropTypes.any.isRequired,
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      small: false,
+    };
+  }
+
+  componentDidMount() {
+    if (window.innerWidth < 640) this.setState({ small: true });
+  }
+
   render() {
     const { title, category, children } = this.props;
 
@@ -34,6 +47,55 @@ class Layout extends React.PureComponent {
         <Head>
           <title>{title ? `${title} - ${category}` : '大风车'}</title>
         </Head>
+        <div
+          style={
+            this.state.small
+              ? {
+                  fontSize: 32,
+                  textAlign: 'center',
+                }
+              : {
+                  position: 'absolute',
+                  top: 10,
+                  right: 10,
+                  fontSize: 32,
+                  lineHeight: 1,
+                }
+          }
+        >
+          <a href="https://www.facebook.com/galeriders/">
+            <span
+              className="fa fa-fw fa-facebook-official"
+              style={{ color: '#4267b2' }}
+            >
+              <span className="sr-only">Facebook</span>
+            </span>
+          </a>
+          <a href="https://www.facebook.com/galeriders/">
+            <span className="fa fa-fw fa-weixin" style={{ color: '#44b549' }}>
+              <span className="sr-only">微信</span>
+            </span>
+          </a>
+          <a href="https://www.strava.com/clubs/galeriders">
+            <img
+              style={{ width: '.9em', position: 'relative', top: '-.1em' }}
+              src="/static/icon_strava.jpg"
+              alt="Strava"
+            />
+          </a>
+          <a href="https://www.oxfamtrailwalker.org.nz/otw18/teams/welly-queen">
+            <img
+              style={{
+                width: '.9em',
+                position: 'relative',
+                top: '-.1em',
+                margin: '0 .1em',
+              }}
+              src="/static/icon_wellyqueen.png"
+              alt="Welly Queen"
+            />
+          </a>
+        </div>
         <div
           style={{
             padding: 10,
@@ -68,49 +130,6 @@ class Layout extends React.PureComponent {
               </h2>
             </div>
           )}
-        </div>
-        <div
-          className="hidden-xs"
-          style={{
-            position: 'absolute',
-            top: 10,
-            right: 10,
-            fontSize: 32,
-            lineHeight: 1,
-          }}
-        >
-          <a href="https://www.facebook.com/galeriders/">
-            <span
-              className="fa fa-fw fa-facebook-official"
-              style={{ color: '#4267b2' }}
-            >
-              <span className="sr-only">Facebook</span>
-            </span>
-          </a>
-          <a href="https://www.facebook.com/galeriders/">
-            <span className="fa fa-fw fa-weixin" style={{ color: '#44b549' }}>
-              <span className="sr-only">微信</span>
-            </span>
-          </a>
-          <a href="https://www.strava.com/clubs/galeriders">
-            <img
-              style={{ width: '.9em', position: 'relative', top: '-.1em' }}
-              src="/static/icon_strava.jpg"
-              alt="Strava"
-            />
-          </a>
-          <a href="https://www.oxfamtrailwalker.org.nz/otw18/teams/welly-queen">
-            <img
-              style={{
-                width: '.9em',
-                position: 'relative',
-                top: '-.1em',
-                margin: '0 .1em',
-              }}
-              src="/static/icon_wellyqueen.png"
-              alt="Welly Queen"
-            />
-          </a>
         </div>
         <div
           style={{
