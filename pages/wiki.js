@@ -22,7 +22,7 @@ class Page extends React.PureComponent {
     const { item } = this.props;
 
     return (
-      <Layout title={item.fields.name}>
+      <Layout title={item.fields.name} category="大风车百科">
         <div
           style={{
             display: 'flex',
