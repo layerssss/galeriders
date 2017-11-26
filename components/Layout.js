@@ -70,6 +70,7 @@ class Layout extends React.PureComponent {
           )}
         </div>
         <div
+          className="hidden-xs"
           style={{
             position: 'absolute',
             top: 10,
@@ -93,7 +94,7 @@ class Layout extends React.PureComponent {
           </a>
           <a href="https://www.strava.com/clubs/galeriders">
             <img
-              style={{ width: 28, position: 'relative', top: -3 }}
+              style={{ width: '.9em', position: 'relative', top: '-.1em' }}
               src="/static/icon_strava.jpg"
               alt="Strava"
             />
@@ -101,10 +102,10 @@ class Layout extends React.PureComponent {
           <a href="https://www.oxfamtrailwalker.org.nz/otw18/teams/welly-queen">
             <img
               style={{
-                width: 28,
+                width: '.9em',
                 position: 'relative',
-                top: -3,
-                margin: '0 5px',
+                top: '-.1em',
+                margin: '0 .1em',
               }}
               src="/static/icon_wellyqueen.png"
               alt="Welly Queen"
