@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Head from 'next/head';
 import Link from 'next/link';
 import Router from 'next/router';
-import { IsBrowser } from '../lib/contants.js';
 
 Router.onRouteChangeStart = () => {
   window.NProgress.start();
@@ -30,7 +29,9 @@ class Layout extends React.PureComponent {
   }
 
   componentDidMount() {
-    if (window.innerWidth < 640) this.setState({ small: true });
+    if (window.innerWidth < 640)
+      // eslint-disable-next-line react/no-did-mount-set-state
+      this.setState({ small: true });
   }
 
   render() {
