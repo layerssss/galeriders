@@ -56,7 +56,7 @@ class Layout extends React.PureComponent {
                   width: '100%',
                 }}
                 src="/static/logo.png"
-                alt="Gale Riders Logo"
+                alt="大风车"
               />
             </a>
           </Link>
