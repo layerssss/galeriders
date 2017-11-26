@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Layout from '../components/Layout.js';
 import Markdown from '../components/Markdown.js';
 import contentful from '../lib/contentful.js';
+import DisqusThread from '../components/DisqusThread.js';
 
 class Page extends React.PureComponent {
   static async getInitialProps({ query: { id } }) {
@@ -55,6 +56,7 @@ class Page extends React.PureComponent {
             ”
           </span>
         </div>
+        <DisqusThread identifier={`wiki:${item.sys.id}`} />
       </Layout>
     );
   }
