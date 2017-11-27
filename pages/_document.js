@@ -50,7 +50,6 @@ export default class MyDocument extends Document {
           />
         </Head>
         <body>
-          {this.props.customValue}
           <Main />
           <NextScript />
         </body>

@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Router from 'next/router';
 import ReactGA from 'react-ga';
+import FacebookProvider from 'react-facebook';
 
 ReactGA.initialize('UA-80409715-5');
 
@@ -147,7 +148,9 @@ class Layout extends React.PureComponent {
             padding: '20px 10px',
           }}
         >
-          {children}
+          <FacebookProvider appId="147211725922734" language="zh_CN">
+            {children}
+          </FacebookProvider>
         </div>
       </div>
     );
