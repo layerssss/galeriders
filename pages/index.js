@@ -1,28 +1,42 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import Router from 'next/router';
+import { Label, Pagination } from 'react-bootstrap';
 
 import Layout from '../components/Layout.js';
-import Markdown from '../components/Markdown.js';
 import contentful from '../lib/contentful.js';
+import Time from '../components/Time.js';
 
 class Page extends React.PureComponent {
-  static async getInitialProps() {
-    const { items } = await contentful.getEntries({
+  static async getInitialProps({ query: { page: pageStr } }) {
+    const page = Number(pageStr || '');
+    const perPage = 24;
+    const { total, items } = await contentful.getEntries({
+      skip: page * perPage,
+      limit: perPage,
       content_type: 'wiki',
+      order: '-sys.updatedAt',
     });
 
+    const totalPages = Math.ceil(total / perPage);
+
     return {
+      total,
+      totalPages,
       items,
+      page,
     };
   }
 
   static propTypes = {
     items: PropTypes.array.isRequired,
+    totalPages: PropTypes.number.isRequired,
+    page: PropTypes.number.isRequired,
   };
 
   render() {
-    const { items } = this.props;
+    const { items, totalPages, page } = this.props;
 
     return (
       <Layout>
@@ -34,51 +48,72 @@ class Page extends React.PureComponent {
           }}
         >
           {items.map(item => (
-            <div
+            <Link
               key={item.sys.id}
-              style={{
-                width: 200,
-                margin: 10,
-                flex: '1 0 auto',
-
-                boxShadow: '0 1px 5px #aaa',
-                borderRadius: 5,
-                padding: 10,
-
-                display: 'flex',
-                flexFlow: 'column nowrap',
-                justifyContent: 'stretch',
+              prefetch
+              href={{
+                pathname: '/wiki',
+                query: { name: item.fields.name },
               }}
             >
-              <h2
+              <a
                 style={{
-                  fontSize: '2em',
-                  margin: '10px 0',
+                  display: 'block',
+                  width: 250,
+                  margin: 10,
+                  flex: '1 0 auto',
+
+                  boxShadow: '0 1px 5px #aaa',
+                  textDecoration: 'none',
+                  borderRadius: 5,
+                  padding: 10,
                 }}
               >
-                <Link
-                  prefetch
-                  href={{ pathname: '/wiki', query: { name: item.fields.name } }}
+                <Label className="pull-right">
+                  <Time time={item.sys.updatedAt} />
+                </Label>
+                <h2
+                  style={{
+                    fontSize: '1.5em',
+                    margin: 0,
+                  }}
                 >
-                  <a>{item.fields.name}</a>
-                </Link>
-              </h2>
-              <Markdown
-                style={{
-                  flex: '1 0 auto',
-                }}
-                source={item.fields.content}
-              />
-              <div>
-                <Link
-                  prefetch
-                  href={{ pathname: '/wiki', query: { name: item.fields.name } }}
-                >
-                  <a>查看...</a>
-                </Link>
-              </div>
-            </div>
+                  {item.fields.name}
+                </h2>
+                <div style={{ margin: '5px 0' }}>
+                  {item.fields.aliases &&
+                    item.fields.aliases.map(alias => (
+                      <Label bsStyle="info" style={{ margin: 5 }} key={alias}>
+                        {alias}
+                      </Label>
+                    ))}
+                </div>
+              </a>
+            </Link>
           ))}
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
+          <Pagination
+            prev
+            next
+            first
+            last
+            ellipsis
+            boundaryLinks
+            items={totalPages}
+            activePage={page + 1}
+            onSelect={eventKey => {
+              Router.push({
+                pathname: '/',
+                query: { page: String(eventKey - 1) },
+              });
+            }}
+          />
         </div>
       </Layout>
     );

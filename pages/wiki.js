@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Label } from 'react-bootstrap';
 
 import Layout from '../components/Layout.js';
 import Markdown from '../components/Markdown.js';
@@ -28,6 +29,15 @@ class Page extends React.PureComponent {
 
     return (
       <Layout title={item.fields.name} category="大风车百科">
+        <p>
+          别名：
+          {item.fields.aliases &&
+            item.fields.aliases.map(alias => (
+              <Label bsStyle="info" style={{ margin: 5 }} key={alias}>
+                {alias}
+              </Label>
+            ))}
+        </p>
         <div
           style={{
             display: 'flex',
