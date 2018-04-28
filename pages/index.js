@@ -1,123 +1,48 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import gql from 'graphql-tag';
 import Link from 'next/link';
-import Router from 'next/router';
-import { Label, Pagination } from 'react-bootstrap';
+import { PageHeader, Button } from 'react-bootstrap';
 
+import data from '../lib/data.js';
 import Layout from '../components/Layout.js';
-import contentful from '../lib/contentful.js';
-import Time from '../components/Time.js';
 
-class Page extends React.PureComponent {
-  static async getInitialProps({ query: { page: pageStr } }) {
-    const page = Number(pageStr || '');
-    const perPage = 24;
-    const { total, items } = await contentful.getEntries({
-      skip: page * perPage,
-      limit: perPage,
-      content_type: 'wiki',
-      order: '-sys.updatedAt',
-    });
-
-    const totalPages = Math.ceil(total / perPage);
-
-    return {
-      total,
-      totalPages,
-      items,
-      page,
-    };
+@data(gql`
+  query {
+    allTeams {
+      id
+      name
+    }
+  }
+`)
+class May extends React.PureComponent {
+  static async getInitialProps() {
+    return {};
   }
 
   static propTypes = {
-    items: PropTypes.array.isRequired,
-    totalPages: PropTypes.number.isRequired,
-    page: PropTypes.number.isRequired,
+    data: PropTypes.object.isRequired,
   };
 
   render() {
-    const { items, totalPages, page } = this.props;
+    const { data: { loading, allTeams } } = this.props;
 
     return (
-      <Layout>
-        <div
-          style={{
-            display: 'flex',
-            flexFlow: 'row wrap',
-            justifyContent: 'stretch',
-          }}
-        >
-          {items.map(item => (
-            <Link
-              key={item.sys.id}
-              prefetch
-              href={{
-                pathname: '/wiki',
-                query: { name: item.fields.name },
-              }}
-            >
-              <a
-                style={{
-                  display: 'block',
-                  width: 250,
-                  margin: 10,
-                  flex: '1 0 auto',
-
-                  boxShadow: '0 1px 5px #aaa',
-                  textDecoration: 'none',
-                  borderRadius: 5,
-                  padding: 10,
-                }}
-              >
-                <Label className="pull-right">
-                  <Time time={item.sys.updatedAt} />
-                </Label>
-                <h2
-                  style={{
-                    fontSize: '1.5em',
-                    margin: 0,
-                  }}
-                >
-                  {item.fields.name}
-                </h2>
-                <div style={{ margin: '5px 0' }}>
-                  {item.fields.aliases &&
-                    item.fields.aliases.map(alias => (
-                      <Label bsStyle="info" style={{ margin: 5 }} key={alias}>
-                        {alias}
-                      </Label>
-                    ))}
-                </div>
-              </a>
-            </Link>
+      <Layout title="五月挑战">
+        <p>别名：</p>
+        {!loading &&
+          allTeams.map(team => (
+            <div key={team.id}>
+              <p>{team.name}</p>
+            </div>
           ))}
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-          }}
-        >
-          <Pagination
-            prev
-            next
-            first
-            last
-            ellipsis
-            boundaryLinks
-            items={totalPages}
-            activePage={page + 1}
-            onSelect={eventKey => {
-              Router.push({
-                pathname: '/',
-                query: { page: String(eventKey - 1) },
-              });
-            }}
-          />
-        </div>
+        <PageHeader>其它</PageHeader>
+        <Link href="/wikiIndex">
+          <Button block>风车大百科</Button>
+        </Link>
       </Layout>
     );
   }
 }
 
-export default Page;
+export default May;

@@ -24,6 +24,11 @@ class Layout extends React.PureComponent {
     children: PropTypes.any.isRequired,
   };
 
+  static defaultProps = {
+    title: '首页',
+    category: '大风车',
+  };
+
   constructor(props) {
     super(props);
 
@@ -51,7 +56,9 @@ class Layout extends React.PureComponent {
         }}
       >
         <Head>
-          <title>{title ? `${title} - ${category}` : '大风车'}</title>
+          <title>
+            {title} - {category}
+          </title>
         </Head>
         <div
           style={
@@ -113,13 +120,13 @@ class Layout extends React.PureComponent {
             display: 'flex',
             flexFlow: 'row wrap',
             alignItems: 'center',
-            justifyContent: title ? 'flex-start' : 'center',
+            justifyContent: 'flex-start',
           }}
         >
           <Link href="/">
             <a
               style={{
-                width: title ? 80 : 100,
+                width: 80,
                 maxWidth: '10vw',
                 marginRight: 20,
               }}
@@ -133,14 +140,12 @@ class Layout extends React.PureComponent {
               />
             </a>
           </Link>
-          {title && (
-            <div>
-              <h1 style={{ fontSize: '2em', margin: '5px 0' }}>{title}</h1>
-              <h2 style={{ fontSize: '1em', color: '#888', margin: 0 }}>
-                {category}
-              </h2>
-            </div>
-          )}
+          <div>
+            <h1 style={{ fontSize: '2em', margin: '5px 0' }}>{title}</h1>
+            <h2 style={{ fontSize: '1em', color: '#888', margin: 0 }}>
+              {category}
+            </h2>
+          </div>
         </div>
         <div
           style={{
