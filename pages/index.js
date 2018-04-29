@@ -118,7 +118,9 @@ class May extends React.PureComponent {
               ))}
             </div>
           ))}
-        {currentUser && (
+        {!currentUser ? (
+          <Alert>登录后查看更多</Alert>
+        ) : (
           <Panel>
             <Panel.Heading>我的状态</Panel.Heading>
             <Panel.Body>
