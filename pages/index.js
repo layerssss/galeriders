@@ -134,6 +134,10 @@ class May extends React.PureComponent {
     addRecord: PropTypes.func.isRequired,
   };
 
+  static contextTypes = {
+    useSpinner: PropTypes.func.isRequired,
+  };
+
   state = {
     creatingRecord: false,
   };
@@ -145,6 +149,7 @@ class May extends React.PureComponent {
       leaveTeam,
       addRecord,
     } = this.props;
+    const { useSpinner } = this.context;
 
     const myRecordsToday = !currentUser
       ? []
@@ -172,21 +177,23 @@ class May extends React.PureComponent {
                     你还没有选择队伍，请选择队伍：
                   </Alert>
                   <Form
-                    onSubmit={async event => {
-                      event.preventDefault();
-                      const formElement = event.currentTarget;
-                      const selectedElement = formElement.querySelector(
-                        'input[name="team"]:checked'
-                      );
-                      if (!selectedElement) return;
+                    onSubmit={event =>
+                      useSpinner(async () => {
+                        event.preventDefault();
+                        const formElement = event.currentTarget;
+                        const selectedElement = formElement.querySelector(
+                          'input[name="team"]:checked'
+                        );
+                        if (!selectedElement) return;
 
-                      await joinTeam({
-                        variables: {
-                          teamId: selectedElement.value,
-                          userId: currentUser.id,
-                        },
-                      });
-                    }}
+                        await joinTeam({
+                          variables: {
+                            teamId: selectedElement.value,
+                            userId: currentUser.id,
+                          },
+                        });
+                      })
+                    }
                   >
                     <FormGroup>
                       {_.sortBy(allTeams, t => t.order).map(team => (
@@ -226,28 +233,30 @@ class May extends React.PureComponent {
                     </Button>
                   ) : (
                     <Form
-                      onSubmit={async event => {
-                        event.preventDefault();
-                        const date = new Date();
-                        const hundreds =
-                          Number(
-                            event.currentTarget.querySelector(
-                              '[name="hundreds"]'
-                            ).value
-                          ) * 10;
+                      onSubmit={event =>
+                        useSpinner(async () => {
+                          event.preventDefault();
+                          const date = new Date();
+                          const hundreds =
+                            Number(
+                              event.currentTarget.querySelector(
+                                '[name="hundreds"]'
+                              ).value
+                            ) * 10;
 
-                        if (Number.isNaN(hundreds)) return;
+                          if (Number.isNaN(hundreds)) return;
 
-                        await addRecord({
-                          variables: {
-                            date,
-                            hundreds,
-                            userId: currentUser.id,
-                          },
-                        });
+                          await addRecord({
+                            variables: {
+                              date,
+                              hundreds,
+                              userId: currentUser.id,
+                            },
+                          });
 
-                        this.setState({ creatingRecord: false });
-                      }}
+                          this.setState({ creatingRecord: false });
+                        })
+                      }
                     >
                       <FormGroup>
                         <ControlLabel>公里数：</ControlLabel>
@@ -276,14 +285,16 @@ class May extends React.PureComponent {
                   <hr />
                   <Button
                     bsStyle="danger"
-                    onClick={async () => {
-                      await leaveTeam({
-                        variables: {
-                          userId: currentUser.id,
-                          teamId: currentUser.team.id,
-                        },
-                      });
-                    }}
+                    onClick={() =>
+                      useSpinner(async () => {
+                        await leaveTeam({
+                          variables: {
+                            userId: currentUser.id,
+                            teamId: currentUser.team.id,
+                          },
+                        });
+                      })
+                    }
                   >
                     重新选择队伍
                   </Button>
