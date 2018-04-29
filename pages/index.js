@@ -157,6 +157,11 @@ class May extends React.PureComponent {
           moment(r.date).isSame(Date.now(), 'day')
         );
 
+    const sortTeams = teams => _.sortBy(teams, t => t.order);
+    const sortUsers = users => _.sortBy(users, u => u.name);
+    const sortRecords = records =>
+      _.sortBy(records, r => moment(r.date).valueOf());
+
     return (
       <Layout title="五月挑战">
         {!currentUser ? (
@@ -196,7 +201,7 @@ class May extends React.PureComponent {
                     }
                   >
                     <FormGroup>
-                      {_.sortBy(allTeams, t => t.order).map(team => (
+                      {sortTeams(allTeams).map(team => (
                         <React.Fragment key={team.id}>
                           <Radio name="team" value={team.id} inline>
                             {team.name}
@@ -216,7 +221,7 @@ class May extends React.PureComponent {
                     <Alert bsStyle="warning">我今天还没跑步呢</Alert>
                   ) : (
                     <ul>
-                      {myRecordsToday.map(record => (
+                      {sortRecords(myRecordsToday).map(record => (
                         <li key={record.id}>
                           {moment(record.date).format('LT')}:{' '}
                           {record.hundreds / 10} km
@@ -324,7 +329,7 @@ class May extends React.PureComponent {
           }}
         >
           {!loading &&
-            _.sortBy(allTeams, t => t.order)
+            sortTeams(allTeams)
               .map(team => ({
                 ...team,
                 records: [].concat(
@@ -376,7 +381,7 @@ class May extends React.PureComponent {
                         fontSize: '1.6em',
                       }}
                     >
-                      {team.weekRecords.map(record => (
+                      {sortRecords(team.weekRecords).map(record => (
                         <tr key={record.id}>
                           <td>
                             <OverlayTrigger
@@ -406,7 +411,7 @@ class May extends React.PureComponent {
                     </tbody>
                   </Table>
                   <div className="clearfix">
-                    {_.sortBy(team.users, u => u.name).map(user => (
+                    {sortUsers(team.users).map(user => (
                       <div
                         key={user.id}
                         style={{
