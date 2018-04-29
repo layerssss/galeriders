@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import Link from 'next/link';
+import _ from 'lodash';
 import {
   Button,
   Panel,
@@ -22,6 +23,7 @@ import Layout from '../components/Layout.js';
     allTeams {
       id
       name
+      order
       users {
         id
         name
@@ -101,10 +103,10 @@ class May extends React.PureComponent {
       <Layout title="五月挑战">
         <p>五月挑战正在组队中哦，请大家选择自己所在队伍：</p>
         {!loading &&
-          allTeams.map(team => (
+          _.sortBy(allTeams, t => t.order).map(team => (
             <div className="clearfix" key={team.id}>
               <p>{team.name}:</p>
-              {team.users.map(user => (
+              {_.sortBy(team.users, u => u.name).map(user => (
                 <div
                   key={user.id}
                   style={{
@@ -145,7 +147,7 @@ class May extends React.PureComponent {
                     }}
                   >
                     <FormGroup>
-                      {allTeams.map(team => (
+                      {_.sortBy(allTeams, t => t.order).map(team => (
                         <React.Fragment key={team.id}>
                           <Radio name="team" value={team.id} inline>
                             {team.name}
