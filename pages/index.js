@@ -236,6 +236,13 @@ class May extends React.PureComponent {
                       onSubmit={event =>
                         useSpinner(async () => {
                           event.preventDefault();
+                          if (
+                            // eslint-disable-next-line no-alert
+                            !window.confirm(
+                              '记录添加后无法更改或删除，请确认哈'
+                            )
+                          )
+                            return;
                           const date = new Date();
                           const hundreds =
                             Number(
