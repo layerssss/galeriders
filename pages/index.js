@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
+import { graphql } from 'react-apollo';
 import Link from 'next/link';
 import { PageHeader, Button } from 'react-bootstrap';
 
 import data from '../lib/data.js';
 import Layout from '../components/Layout.js';
+import withUser from '../lib/withUser.js';
 
-@data(gql`
+@data
+@graphql(gql`
   query {
     allTeams {
       id
@@ -15,6 +18,7 @@ import Layout from '../components/Layout.js';
     }
   }
 `)
+@withUser
 class May extends React.PureComponent {
   static async getInitialProps() {
     return {};

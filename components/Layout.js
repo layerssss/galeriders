@@ -29,6 +29,10 @@ class Layout extends React.PureComponent {
     category: '大风车',
   };
 
+  static contextTypes = {
+    user: PropTypes.object,
+  };
+
   constructor(props) {
     super(props);
 
@@ -46,6 +50,7 @@ class Layout extends React.PureComponent {
 
   render() {
     const { title, category, children } = this.props;
+    const { user } = this.context;
 
     return (
       <div
@@ -113,6 +118,30 @@ class Layout extends React.PureComponent {
               <span className="sr-only">GitHub</span>
             </span>
           </a>
+          <div
+            style={{
+              fontSize: 18,
+              textAlign: 'right',
+            }}
+          >
+            {!user ? (
+              <Link href="/auth">
+                <a>登录</a>
+              </Link>
+            ) : (
+              <React.Fragment>
+                <img
+                  style={{
+                    height: '1em',
+                    width: '1em',
+                  }}
+                  src={user.picture}
+                  alt={`${user.name}的照片`}
+                />
+                {user.name}
+              </React.Fragment>
+            )}
+          </div>
         </div>
         <div
           style={{
