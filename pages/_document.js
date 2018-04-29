@@ -32,8 +32,8 @@ export default class MyDocument extends Document {
           />
           <link
             rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/simplex/bootstrap.min.css"
-            integrity="sha256-TKhQCpupjJ8Jh7dgjeNgBsEPk1eai3l57eH/w4h48ys="
+            href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css"
+            integrity="sha256-LxKiHTQko0DUCUSgrIK23SYMymvfuj8uxXmblBvVWm0="
             crossOrigin="anonymous"
           />
           <link

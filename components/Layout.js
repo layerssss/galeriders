@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Router from 'next/router';
 import ReactGA from 'react-ga';
-import FacebookProvider from 'react-facebook';
+import { Button } from 'react-bootstrap';
 
 ReactGA.initialize('UA-80409715-5');
 
@@ -66,11 +66,13 @@ class Layout extends React.PureComponent {
           </title>
         </Head>
         <div
-          style={
-            this.state.small
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            ...(this.state.small
               ? {
                   fontSize: 32,
-                  textAlign: 'center',
+                  justifyContent: 'center',
                 }
               : {
                   position: 'absolute',
@@ -78,8 +80,8 @@ class Layout extends React.PureComponent {
                   right: 10,
                   fontSize: 32,
                   lineHeight: 1,
-                }
-          }
+                }),
+          }}
         >
           <a href="https://www.facebook.com/galeriders/">
             <span
@@ -101,47 +103,41 @@ class Layout extends React.PureComponent {
               alt="Strava"
             />
           </a>
-          <a href="https://www.oxfamtrailwalker.org.nz/otw18/teams/welly-queen">
-            <img
-              style={{
-                width: '.9em',
-                position: 'relative',
-                top: '-.1em',
-                margin: '0 .1em',
-              }}
-              src="/static/icon_wellyqueen.png"
-              alt="Welly Queen"
-            />
-          </a>
           <a href="https://github.com/layerssss/galeriders">
             <span className="fa fa-github" style={{ color: '#444' }}>
               <span className="sr-only">GitHub</span>
             </span>
           </a>
-          <div
+          <span
             style={{
               fontSize: 18,
               textAlign: 'right',
+              margin: '0 10px',
             }}
           >
             {!user ? (
               <Link href="/auth">
-                <a>登录</a>
+                <Button>
+                  <span className="fa fa-user" />登录
+                </Button>
               </Link>
             ) : (
               <React.Fragment>
-                <img
-                  style={{
-                    height: '1em',
-                    width: '1em',
-                  }}
-                  src={user.picture}
-                  alt={`${user.name}的照片`}
-                />
-                {user.name}
+                <Button active>
+                  {' '}
+                  <img
+                    style={{
+                      height: '2em',
+                      width: '2em',
+                    }}
+                    src={user.picture}
+                    alt={`${user.name}的照片`}
+                  />
+                  {user.name}
+                </Button>
               </React.Fragment>
             )}
-          </div>
+          </span>
         </div>
         <div
           style={{
@@ -182,9 +178,7 @@ class Layout extends React.PureComponent {
             padding: '20px 10px',
           }}
         >
-          <FacebookProvider appId="147211725922734" language="zh_CN">
-            {children}
-          </FacebookProvider>
+          {children}
         </div>
       </div>
     );

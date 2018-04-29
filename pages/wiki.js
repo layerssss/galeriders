@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Label } from 'react-bootstrap';
-import { Like } from 'react-facebook';
 
 import Layout from '../components/Layout.js';
 import Markdown from '../components/Markdown.js';
@@ -23,11 +22,10 @@ class Page extends React.PureComponent {
 
   static propTypes = {
     item: PropTypes.object.isRequired,
-    url: PropTypes.object.isRequired,
   };
 
   render() {
-    const { item, url } = this.props;
+    const { item } = this.props;
 
     return (
       <Layout title={item.fields.name} category="大风车百科">
@@ -73,7 +71,6 @@ class Page extends React.PureComponent {
             ”
           </span>
         </div>
-        <Like href={`http://galeriders.club${url.asPath}`} showFaces share />
       </Layout>
     );
   }
