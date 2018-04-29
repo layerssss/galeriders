@@ -167,7 +167,7 @@ class May extends React.PureComponent {
           <Panel>
             <Panel.Heading>
               <Panel.Title toggle>
-                <span className="fa fa-user">我的记录</span>
+                <span className="fa fa-user">我的记录/添加记录</span>
               </Panel.Title>
             </Panel.Heading>
             <Panel.Body collapsible>
