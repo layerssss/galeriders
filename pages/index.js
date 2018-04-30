@@ -41,6 +41,10 @@ const sum = arr => arr.reduce((a, b) => a + b, 0);
         name
         published
         order
+        cover {
+          id
+          url
+        }
         users {
           id
           name
@@ -423,9 +427,39 @@ class May extends React.PureComponent {
                   <Well
                     style={{
                       margin: 10,
+                      position: 'relative',
+                      paddingTop: 170,
                     }}
                   >
-                    <p>{team.name}:</p>
+                    <div
+                      style={{
+                        position: 'absolute',
+                        left: 0,
+                        top: 0,
+                        right: 0,
+                        height: 170,
+                        ...(team.cover && {
+                          backgroundImage: `url(${team.cover.url})`,
+                          backgroundPosition: 'center',
+                          backgroundSize: 'cover',
+                          backgroundRepeat: 'no-repeat',
+                        }),
+                      }}
+                    >
+                      <div
+                        style={{
+                          position: 'absolute',
+                          left: 0,
+                          top: 0,
+                          right: 0,
+                          bottom: 0,
+                          background: `linear-gradient(transparent, #f9f9f9)`,
+                          textIndent: -9999,
+                        }}
+                      >
+                        {team.name}:
+                      </div>
+                    </div>
                     <p>
                       四月累积里程:
                       {sum(team.monthRecords.map(r => r.hundreds)) / 10} 公里
@@ -479,17 +513,14 @@ class May extends React.PureComponent {
                       </div>
                     ))}
                     <p>所有队员：</p>
-                    <div
-                      style={{
-                        display: 'flex',
-                        flexFlow: 'row wrap',
-                      }}
-                    >
+                    <div>
                       {sortUsers(team.users).map(user => (
                         <div
                           key={user.id}
                           style={{
                             margin: 2,
+                            display: 'flex',
+                            flexFlow: 'row nowrap',
                           }}
                         >
                           <OverlayTrigger
@@ -507,9 +538,11 @@ class May extends React.PureComponent {
                               style={{
                                 width: 30,
                                 height: 30,
+                                marginRight: 10,
                               }}
                             />
                           </OverlayTrigger>
+                          <span>{user.name}</span>
                         </div>
                       ))}
                     </div>
