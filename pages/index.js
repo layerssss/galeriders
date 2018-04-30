@@ -151,7 +151,8 @@ class May extends React.PureComponent {
     } = this.props;
     const { useSpinner } = this.context;
 
-    const today = moment.tz(timezone);
+    const today = moment().tz(timezone);
+    const month = moment('2018-05-01').tz(timezone);
 
     const myRecordsToday = !currentUser
       ? []
@@ -166,7 +167,7 @@ class May extends React.PureComponent {
       <Layout title="五月挑战">
         {!currentUser && (
           <Alert>
-            <p>2018 五月挑战正在组队中哦， 请大家登录后选择自己的队伍</p>
+            <p>你还没登录呢，登录后查看更多信息。</p>
           </Alert>
         )}
         {currentUser && (
@@ -175,7 +176,7 @@ class May extends React.PureComponent {
               <Panel>
                 <Panel.Body>
                   <Alert bsStyle="warning">
-                    你还没有选择队伍，请选择队伍：
+                    你还没有选择队伍，请选择队伍，选择后不能换哈：
                   </Alert>
                   <Form
                     onSubmit={event =>
@@ -366,11 +367,6 @@ class May extends React.PureComponent {
             )}
           </React.Fragment>
         )}
-        <Alert bsStyle="success">
-          <p>
-            五月挑战尚未开始，累积数据里暂时显示四月的里程，挑战开始时会从五月开始计算。
-          </p>
-        </Alert>
         <div style={{ textAlign: 'right' }}>
           <FormGroup>
             <ControlLabel>屏幕截图/照片：</ControlLabel>
@@ -407,7 +403,7 @@ class May extends React.PureComponent {
               .map(team => ({
                 ...team,
                 monthRecords: team.records.filter(r =>
-                  moment(r.date).isSame('2018-04-01', 'month')
+                  moment(r.date).isSame(month, 'month')
                 ),
               }))
               .map(team => ({
