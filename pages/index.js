@@ -461,7 +461,7 @@ class May extends React.PureComponent {
                       </div>
                     </div>
                     <p>
-                      四月累积里程:
+                      五月累积里程:
                       {sum(team.monthRecords.map(r => r.hundreds)) / 10} 公里
                     </p>
                     <p>
