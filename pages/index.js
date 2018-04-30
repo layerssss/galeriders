@@ -164,20 +164,16 @@ class May extends React.PureComponent {
 
     return (
       <Layout title="五月挑战">
-        {!currentUser ? (
+        {!currentUser && (
           <Alert>
             <p>2018 五月挑战正在组队中哦， 请大家登录后选择自己的队伍</p>
           </Alert>
-        ) : (
-          <Panel>
-            <Panel.Heading>
-              <Panel.Title toggle>
-                <span className="fa fa-user">我的记录/添加记录</span>
-              </Panel.Title>
-            </Panel.Heading>
-            <Panel.Body collapsible>
-              {!currentUser.team ? (
-                <React.Fragment>
+        )}
+        {currentUser && (
+          <React.Fragment>
+            {!currentUser.team && (
+              <Panel>
+                <Panel.Body>
                   <Alert bsStyle="warning">
                     你还没有选择队伍，请选择队伍：
                   </Alert>
@@ -190,6 +186,8 @@ class May extends React.PureComponent {
                           'input[name="team"]:checked'
                         );
                         if (!selectedElement) return;
+                        if (!window.confirm('选择队伍后无法更换，确定哈？'))
+                          return;
 
                         await joinTeam({
                           variables: {
@@ -215,29 +213,50 @@ class May extends React.PureComponent {
                       <Button type="submit">确认</Button>
                     </FormGroup>
                   </Form>
-                </React.Fragment>
-              ) : (
-                <React.Fragment>
+                </Panel.Body>
+              </Panel>
+            )}
+            {currentUser.team && (
+              <Panel>
+                <Panel.Heading>
+                  <Panel.Title>
+                    <span className="fa fa-user">我的记录/添加记录</span>
+                  </Panel.Title>
+                </Panel.Heading>
+                <Panel.Body>
                   <p>我今天的记录：</p>
                   {!myRecordsToday.length ? (
                     <Alert bsStyle="warning">我今天还没跑步呢</Alert>
                   ) : (
-                    sortRecords(myRecordsToday).map(record => (
-                      <div key={record.id}>
-                        <p>
-                          {moment(record.date).format('LT')}:{' '}
-                          {record.hundreds / 10} km
-                        </p>
-                        <p>
-                          {record.file && (
-                            <Image
-                              src={record.file.url}
-                              style={{ width: 230 }}
-                            />
-                          )}
-                        </p>
-                      </div>
-                    ))
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexFlow: 'row wrap',
+                      }}
+                    >
+                      {sortRecords([...myRecordsToday]).map(record => (
+                        <div
+                          key={record.id}
+                          style={{
+                            width: 240,
+                            margin: 5,
+                          }}
+                        >
+                          <p>
+                            {moment(record.date).format('LT')}:{' '}
+                            {record.hundreds / 10} km
+                          </p>
+                          <p>
+                            {record.file && (
+                              <Image
+                                src={record.file.url}
+                                style={{ width: '100%' }}
+                              />
+                            )}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
                   )}
                   <hr />
                   {!this.state.creatingRecord ? (
@@ -342,10 +361,10 @@ class May extends React.PureComponent {
                       </FormGroup>
                     </Form>
                   )}
-                </React.Fragment>
-              )}
-            </Panel.Body>
-          </Panel>
+                </Panel.Body>
+              </Panel>
+            )}
+          </React.Fragment>
         )}
         <Alert bsStyle="success">
           <p>
