@@ -8,6 +8,7 @@ module.exports = {
     node: true,
   },
   rules: {
+    'no-alert': 0,
     'react/jsx-filename-extension': [
       1,
       {
