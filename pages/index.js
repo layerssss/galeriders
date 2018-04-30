@@ -18,7 +18,6 @@ import {
   OverlayTrigger,
   ControlLabel,
   FormControl,
-  Table,
 } from 'react-bootstrap';
 
 import data from '../lib/data.js';
@@ -290,7 +289,7 @@ class May extends React.PureComponent {
           }}
         >
           {!loading &&
-            sortTeams(allTeams)
+            sortTeams([...allTeams, ...allTeams, ...allTeams, ...allTeams])
               .map(team => ({
                 ...team,
                 records: [].concat(
@@ -316,7 +315,7 @@ class May extends React.PureComponent {
                   key={team.id}
                   style={{
                     margin: 10,
-                    width: 460,
+                    maxWidth: 230,
                   }}
                 >
                   <p>{team.name}:</p>
@@ -329,44 +328,41 @@ class May extends React.PureComponent {
                     {sum(team.weekRecords.map(r => r.hundreds)) / 10} 公里
                   </p>
                   <p>本周记录：</p>
-                  <Table striped condensed hover>
-                    <thead>
-                      <tr>
-                        <th />
-                        <th>时间</th>
-                        <th>里程</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {sortRecords(team.weekRecords).map(record => (
-                        <tr key={record.id}>
-                          <td>
-                            <OverlayTrigger
-                              placement="bottom"
-                              overlay={
-                                <Tooltip id={`record-user-${record.id}`}>
-                                  {record.user.name}
-                                </Tooltip>
-                              }
-                            >
-                              <Image
-                                src={record.user.picture}
-                                alt={record.user.name}
-                                circle
-                                style={{
-                                  width: 40,
-                                  height: 40,
-                                  margin: 3,
-                                }}
-                              />
-                            </OverlayTrigger>
-                          </td>
-                          <td>{moment(record.date).format('dddd LT')}</td>
-                          <td>{record.hundreds / 10} 公里</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </Table>
+                  {sortRecords(team.weekRecords).map(record => (
+                    <div
+                      key={record.id}
+                      style={{
+                        padding: '10px 0',
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: 'flex',
+                        }}
+                      >
+                        <Image
+                          src={record.user.picture}
+                          alt={record.user.name}
+                          circle
+                          style={{
+                            width: 40,
+                            height: 40,
+                          }}
+                        />
+                        <div style={{ margin: '0 20px' }}>
+                          <span style={{ fontSize: '2em' }}>
+                            {record.hundreds / 10}
+                          </span>{' '}
+                          km
+                        </div>
+                      </div>
+                      <div style={{ lineHeight: 1 }}>
+                        ({record.user.name}于
+                        {moment(record.date).format('dddd LT')})
+                      </div>
+                    </div>
+                  ))}
+                  <p>所有队员：</p>
                   <div className="clearfix">
                     {sortUsers(team.users).map(user => (
                       <div
