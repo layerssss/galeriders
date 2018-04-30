@@ -85,27 +85,6 @@ const sum = arr => arr.reduce((a, b) => a + b, 0);
 )
 @graphql(
   gql`
-    mutation($userId: ID!, $teamId: ID!) {
-      removeFromTeamOnUser(usersUserId: $userId, teamTeamId: $teamId) {
-        teamTeam {
-          id
-          users {
-            id
-          }
-        }
-        usersUser {
-          id
-          team {
-            id
-          }
-        }
-      }
-    }
-  `,
-  { name: 'leaveTeam' }
-)
-@graphql(
-  gql`
     mutation($date: DateTime!, $hundreds: Int!, $userId: ID!) {
       createRecord(date: $date, hundreds: $hundreds, userId: $userId) {
         id
@@ -130,7 +109,6 @@ class May extends React.PureComponent {
   static propTypes = {
     data: PropTypes.object.isRequired,
     joinTeam: PropTypes.func.isRequired,
-    leaveTeam: PropTypes.func.isRequired,
     addRecord: PropTypes.func.isRequired,
   };
 
@@ -146,7 +124,6 @@ class May extends React.PureComponent {
     const {
       data: { loading, allTeams, user: currentUser },
       joinTeam,
-      leaveTeam,
       addRecord,
     } = this.props;
     const { useSpinner } = this.context;
@@ -294,22 +271,6 @@ class May extends React.PureComponent {
                       </FormGroup>
                     </Form>
                   )}
-                  <hr />
-                  <Button
-                    bsStyle="danger"
-                    onClick={() =>
-                      useSpinner(async () => {
-                        await leaveTeam({
-                          variables: {
-                            userId: currentUser.id,
-                            teamId: currentUser.team.id,
-                          },
-                        });
-                      })
-                    }
-                  >
-                    重新选择队伍
-                  </Button>
                 </React.Fragment>
               )}
             </Panel.Body>
@@ -376,11 +337,7 @@ class May extends React.PureComponent {
                         <th>里程</th>
                       </tr>
                     </thead>
-                    <tbody
-                      style={{
-                        fontSize: '1.6em',
-                      }}
-                    >
+                    <tbody>
                       {sortRecords(team.weekRecords).map(record => (
                         <tr key={record.id}>
                           <td>
