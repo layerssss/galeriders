@@ -1,5 +1,5 @@
 import React from 'react';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
@@ -26,6 +26,8 @@ import data from '../lib/data.js';
 import Layout from '../components/Layout.js';
 import uploadFile from '../lib/uploadFile.js';
 
+const timezone = 'Pacific/Auckland';
+moment.tz.setDefault(timezone);
 moment.locale('zh-cn');
 
 const sum = arr => arr.reduce((a, b) => a + b, 0);
@@ -148,11 +150,11 @@ class May extends React.PureComponent {
     } = this.props;
     const { useSpinner } = this.context;
 
+    const today = moment.tz(timezone);
+
     const myRecordsToday = !currentUser
       ? []
-      : currentUser.records.filter(r =>
-          moment(r.date).isSame(Date.now(), 'day')
-        );
+      : currentUser.records.filter(r => moment(r.date).isSame(today, 'day'));
 
     const sortTeams = teams => _.sortBy(teams, t => t.order);
     const sortUsers = users => _.sortBy(users, u => u.name);
@@ -389,7 +391,7 @@ class May extends React.PureComponent {
               .map(team => ({
                 ...team,
                 weekRecords: team.monthRecords.filter(r =>
-                  moment(r.date).isSame(Date.now(), 'week')
+                  moment(r.date).isSame(today, 'week')
                 ),
               }))
               .map(team => (
