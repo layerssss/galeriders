@@ -371,7 +371,7 @@ class May extends React.PureComponent {
           }}
         >
           {!loading &&
-            sortTeams([...allTeams, ...allTeams, ...allTeams, ...allTeams])
+            sortTeams(allTeams)
               .map(team => ({
                 ...team,
                 records: [].concat(
