@@ -39,6 +39,7 @@ const sum = arr => arr.reduce((a, b) => a + b, 0);
       allTeams {
         id
         name
+        published
         order
         users {
           id
@@ -200,13 +201,15 @@ class May extends React.PureComponent {
                     }
                   >
                     <FormGroup>
-                      {sortTeams(allTeams).map(team => (
-                        <React.Fragment key={team.id}>
-                          <Radio name="team" value={team.id} inline>
-                            {team.name}
-                          </Radio>{' '}
-                        </React.Fragment>
-                      )) || <Alert>我今天还没跑呢</Alert>}
+                      {sortTeams(allTeams.filter(t => t.published)).map(
+                        team => (
+                          <React.Fragment key={team.id}>
+                            <Radio name="team" value={team.id} inline>
+                              {team.name}
+                            </Radio>{' '}
+                          </React.Fragment>
+                        )
+                      ) || <Alert>我今天还没跑呢</Alert>}
                     </FormGroup>
                     <FormGroup>
                       <Button type="submit">确认</Button>
@@ -373,7 +376,7 @@ class May extends React.PureComponent {
           }}
         >
           {!loading &&
-            sortTeams(allTeams)
+            sortTeams(allTeams.filter(t => t.published))
               .map(team => ({
                 ...team,
                 records: [].concat(
