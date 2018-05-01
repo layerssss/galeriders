@@ -143,8 +143,9 @@ class May extends React.PureComponent {
   };
 
   state = {
+    showingRecordPictures: false,
+    showingRecordsOf: 'WEEK',
     creatingRecord: false,
-    recordPictures: 'HIDDEN',
   };
 
   render() {
@@ -373,15 +374,24 @@ class May extends React.PureComponent {
         )}
         <div style={{ textAlign: 'right' }}>
           <FormGroup>
-            <ControlLabel>屏幕截图/照片：</ControlLabel>
+            <Button
+              active={this.state.showingRecordPictures}
+              onClick={() =>
+                this.setState({
+                  showingRecordPictures: !this.state.showingRecordPictures,
+                })
+              }
+            >
+              显示图片
+            </Button>{' '}
             <ToggleButtonGroup
               type="radio"
-              name="recordPictures"
-              value={this.state.recordPictures}
-              onChange={value => this.setState({ recordPictures: value })}
+              name="showingRecordsOf"
+              value={this.state.showingRecordsOf}
+              onChange={value => this.setState({ showingRecordsOf: value })}
             >
-              <ToggleButton value="HIDDEN">不显示</ToggleButton>
-              <ToggleButton value="VISIBLE">显示</ToggleButton>
+              <ToggleButton value="WEEK">本周记录</ToggleButton>
+              <ToggleButton value="MONTH">五月记录</ToggleButton>
             </ToggleButtonGroup>
           </FormGroup>
         </div>
@@ -459,17 +469,40 @@ class May extends React.PureComponent {
                       >
                         {team.name}:
                       </div>
+                      <div
+                        style={{
+                          position: 'absolute',
+                          left: 0,
+                          top: 0,
+                          right: 0,
+                          bottom: 0,
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          fontSize: 24,
+                          color: 'white',
+                          textShadow: '0 0 20px black',
+                        }}
+                      >
+                        <span style={{ fontSize: '2em' }}>
+                          {sum(team.monthRecords.map(r => r.hundreds)) / 10}
+                        </span>km
+                      </div>
                     </div>
                     <p>
-                      五月累积里程:
-                      {sum(team.monthRecords.map(r => r.hundreds)) / 10} 公里
+                      本周累积里程:
+                      {sum(team.weekRecords.map(r => r.hundreds)) / 10} km
                     </p>
                     <p>
-                      本周累积里程:
-                      {sum(team.weekRecords.map(r => r.hundreds)) / 10} 公里
+                      {this.state.showingRecordsOf === 'WEEK'
+                        ? '本周记录'
+                        : '五月记录'}：
                     </p>
-                    <p>本周记录：</p>
-                    {sortRecords(team.weekRecords).map(record => (
+                    {sortRecords(
+                      this.state.showingRecordsOf === 'WEEK'
+                        ? team.weekRecords
+                        : team.monthRecords
+                    ).map(record => (
                       <div
                         key={record.id}
                         style={{
@@ -503,7 +536,7 @@ class May extends React.PureComponent {
                         </div>
                         <p>
                           {record.file &&
-                            this.state.recordPictures === 'VISIBLE' && (
+                            this.state.showingRecordPictures && (
                               <Image
                                 src={record.file.url}
                                 style={{ width: 180 }}
