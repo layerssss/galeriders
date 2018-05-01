@@ -25,6 +25,9 @@ export default class MyDocument extends Document {
               'minimum-scale=1, width=device-width, height=device-height'
             }
           />
+          {process.env.NODE_ENV === 'production' && (
+            <script src="/static/rollbar.js" />
+          )}
           <script
             src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"
             integrity="sha256-XWzSUJ+FIQ38dqC06/48sNRwU1Qh3/afjmJ080SneA8="
