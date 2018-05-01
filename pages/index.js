@@ -285,7 +285,7 @@ class May extends React.PureComponent {
                           if (
                             hundreds <= 0 ||
                             Number.isNaN(hundreds) ||
-                            hundreds > 200
+                            hundreds > 2000
                           )
                             return alert('公里数无效哈');
 
