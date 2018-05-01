@@ -34,6 +34,7 @@
     "react-dom": "^16.3.2",
     "react-ga": "^2.3.5",
     "recompose": "^0.27.0",
+    "rollbar": "^2.3.9",
     "styled-jsx": "^2.2.0"
   },
   "devDependencies": {

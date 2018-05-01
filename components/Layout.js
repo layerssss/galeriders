@@ -5,6 +5,10 @@ import Link from 'next/link';
 import Router from 'next/router';
 import ReactGA from 'react-ga';
 import { Button } from 'react-bootstrap';
+import Rollbar from 'rollbar';
+import getConfig from 'next/config';
+
+const { publicRuntimeConfig } = getConfig();
 
 ReactGA.initialize('UA-80409715-5');
 
@@ -46,6 +50,13 @@ class Layout extends React.PureComponent {
     if (window.innerWidth < 640)
       // eslint-disable-next-line react/no-did-mount-set-state
       this.setState({ small: true });
+    if (!window.rollbar)
+      window.rollbar = new Rollbar({
+        enabled: publicRuntimeConfig.isProduction,
+        accessToken: '0d7ab1e2f9f943fd8621dd6c5f313df3',
+        captureUncaught: true,
+        captureUnhandledRejections: true,
+      });
   }
 
   render() {
