@@ -368,9 +368,9 @@ class May extends React.PureComponent {
               value={this.state.showingRecordsOf}
               onChange={value => this.setState({ showingRecordsOf: value })}
             >
-              <ToggleButton value="DAY">今天</ToggleButton>
-              <ToggleButton value="WEEK">本周</ToggleButton>
-              <ToggleButton value="MONTH">五月</ToggleButton>
+              <ToggleButton value="DAY">今天记录</ToggleButton>
+              <ToggleButton value="WEEK">本周排行</ToggleButton>
+              <ToggleButton value="MONTH">五月排行</ToggleButton>
             </ToggleButtonGroup>
           </FormGroup>
         </div>
