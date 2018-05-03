@@ -35,7 +35,7 @@ class Record extends React.Component {
           {record.user.name}
           <br />
           {moment(record.date).isSame(today, 'week')
-            ? moment(record.date).fromNow()
+            ? moment(record.date).calendar()
             : moment(record.date).format('dddd LT')}
         </div>
         <div style={{ width: '40%' }}>
