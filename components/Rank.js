@@ -35,7 +35,7 @@ class Rank extends React.Component {
             style={{
               width: 200,
               flex: '0 1 auto',
-              margin: '10px 20px',
+              margin: 10,
               display: 'flex',
               flexFlow: 'row nowrap',
               justifyContent: 'space-between',
@@ -51,12 +51,20 @@ class Rank extends React.Component {
             <div
               style={{
                 marginLeft: 10,
-                width: 30,
+                width: 40,
                 color: 'white',
-                textShadow: '0 0 30px black',
+                fontWeight: 'bold',
+                textShadow: '0 0 5px black',
               }}
             >
-              #{userIndex + 1}
+              #
+              <span
+                style={{
+                  fontSize: '1.5em',
+                }}
+              >
+                {userIndex + 1}
+              </span>
             </div>
             <User user={user} />
             <div
