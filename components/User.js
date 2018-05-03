@@ -19,9 +19,11 @@ class User extends React.Component {
           alt={user.name}
           circle
           style={{
-            width: 30,
-            height: 30,
+            width: 40,
+            height: 40,
             marginRight: 10,
+            border: 'solid 1px #666',
+            boxShadow: '0 0 10px white',
           }}
         />
       </a>

@@ -29,7 +29,7 @@ class Index extends React.PureComponent {
     const { items } = this.props;
 
     return (
-      <Layout title="所有词条" category="大风车百科">
+      <Layout title="所有词条" category="风车大百科">
         <div
           style={{
             display: 'flex',

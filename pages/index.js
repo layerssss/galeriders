@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment-timezone';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
@@ -22,17 +21,14 @@ import {
 
 import data from '../lib/data.js';
 import Layout from '../components/Layout.js';
-import User from '../components/User.js';
+import Rank from '../components/Rank.js';
 import uploadFile from '../lib/uploadFile.js';
 import Record from '../components/Record';
 import getDayRecords from '../lib/getDayRecords.js';
 import getMonthRecords from '../lib/getMonthRecords.js';
 import getWeekRecords from '../lib/getWeekRecords.js';
-import timezone from '../lib/timezone.js';
 import sum from '../lib/sum.js';
-
-moment.tz.setDefault(timezone);
-moment.locale('zh-cn');
+import moment from '../lib/moment.js';
 
 @data
 @graphql(
@@ -389,7 +385,11 @@ class May extends React.PureComponent {
                 ...team,
                 records: [].concat(
                   ...team.users.map(u =>
-                    u.records.map(r => ({ ...r, user: u }))
+                    u.records.map(r => ({
+                      // wrap it
+                      ...r,
+                      user: { ...u },
+                    }))
                   )
                 ),
               }))
@@ -403,7 +403,7 @@ class May extends React.PureComponent {
               }))
               .map(team => ({
                 ...team,
-                weekRecords: getWeekRecords(team.monthRecords),
+                weekRecords: getWeekRecords(team.records),
               }))
               .map(team => ({
                 ...team,
@@ -493,45 +493,10 @@ class May extends React.PureComponent {
                         <Record key={record.id} record={record} />
                       ))
                     ) : (
-                      <>
-                        <p>排行榜：</p>
-                        <div>
-                          {_.orderBy(
-                            team.users.map(u => ({
-                              ...u,
-                              total: sum(
-                                team.showingRecords
-                                  .filter(r => r.user.id === u.id)
-                                  .map(r => r.hundreds)
-                              ),
-                            })),
-                            [u => u.total, u => u.name],
-                            ['desc', 'asc']
-                          ).map(user => (
-                            <div
-                              key={user.id}
-                              style={{
-                                margin: '10px 0',
-                                display: 'flex',
-                                flexFlow: 'row nowrap',
-                                justifyContent: 'space-between',
-                              }}
-                            >
-                              <User user={user} />
-                              <div
-                                style={{ lineHeight: 1, textAlign: 'right' }}
-                              >
-                                {user.name}
-                                <br />
-                                <span style={{ fontSize: '2em' }}>
-                                  {user.total / 10}
-                                </span>{' '}
-                                km
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </>
+                      <Rank
+                        users={team.users.map(u => ({ ...u, team }))}
+                        records={team.showingRecords}
+                      />
                     )}
                   </Well>
                 </div>

@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Router from 'next/router';
 import ReactGA from 'react-ga';
-import { Button } from 'react-bootstrap';
+import { Button, Nav, NavItem } from 'react-bootstrap';
 
 ReactGA.initialize('UA-80409715-5');
 
@@ -47,6 +47,13 @@ class Layout extends React.PureComponent {
       // eslint-disable-next-line react/no-did-mount-set-state
       this.setState({ small: true });
   }
+
+  handleNavClick = event => {
+    event.preventDefault();
+    const { href } = event.currentTarget;
+
+    Router.push(href);
+  };
 
   render() {
     const { title, category, children } = this.props;
@@ -173,6 +180,31 @@ class Layout extends React.PureComponent {
               {category}
             </h2>
           </div>
+        </div>
+        <div style={{ padding: 10 }}>
+          <Nav bsStyle="pills">
+            <NavItem
+              href="/"
+              active={title === '五月挑战'}
+              onClick={this.handleNavClick}
+            >
+              五月挑战
+            </NavItem>
+            <NavItem
+              href="/leaderBoard"
+              active={title === '风云榜'}
+              onClick={this.handleNavClick}
+            >
+              风云榜
+            </NavItem>
+            <NavItem
+              href="/wikiIndex"
+              active={category === '风车大百科'}
+              onClick={this.handleNavClick}
+            >
+              风车大百科
+            </NavItem>
+          </Nav>
         </div>
         <div
           style={{
