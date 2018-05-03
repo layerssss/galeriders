@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
-import { Well, PageHeader } from 'react-bootstrap';
+import { Well } from 'react-bootstrap';
 
 import data from '../lib/data.js';
 import Layout from '../components/Layout.js';
@@ -58,9 +58,8 @@ class May extends React.PureComponent {
     );
 
     return (
-      <Layout title="风云榜" category="大风车">
+      <Layout title="风云榜" category="五月挑战">
         <Well>
-          <PageHeader>五月风云榜</PageHeader>
           {!loading && (
             <Rank
               users={users}

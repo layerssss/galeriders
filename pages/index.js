@@ -321,7 +321,8 @@ class May extends React.PureComponent {
                           type="file"
                           accept="image/*"
                           onChange={event => {
-                            const [file] = event.target.files;
+                            const file = event.target.files[0];
+
                             const fileURI = !file
                               ? null
                               : URL.createObjectURL(file);

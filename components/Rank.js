@@ -18,6 +18,7 @@ class Rank extends React.Component {
         style={{
           display: 'flex',
           flexFlow: 'row wrap',
+          justifyContent: 'center',
         }}
       >
         {_.orderBy(
