@@ -14,8 +14,6 @@ import {
   Image,
   Radio,
   Well,
-  Tooltip,
-  OverlayTrigger,
   ControlLabel,
   FormControl,
   ToggleButton,
@@ -24,13 +22,17 @@ import {
 
 import data from '../lib/data.js';
 import Layout from '../components/Layout.js';
+import User from '../components/User.js';
 import uploadFile from '../lib/uploadFile.js';
+import Record from '../components/Record';
+import getDayRecords from '../lib/getDayRecords.js';
+import getMonthRecords from '../lib/getMonthRecords.js';
+import getWeekRecords from '../lib/getWeekRecords.js';
+import timezone from '../lib/timezone.js';
+import sum from '../lib/sum.js';
 
-const timezone = 'Pacific/Auckland';
 moment.tz.setDefault(timezone);
 moment.locale('zh-cn');
-
-const sum = arr => arr.reduce((a, b) => a + b, 0);
 
 @data
 @graphql(
@@ -48,7 +50,7 @@ const sum = arr => arr.reduce((a, b) => a + b, 0);
         users {
           id
           name
-          picture
+          auth0UserId
           records {
             id
             hundreds
@@ -62,6 +64,8 @@ const sum = arr => arr.reduce((a, b) => a + b, 0);
       }
       user {
         id
+        name
+        auth0UserId
         team {
           id
           name
@@ -143,8 +147,7 @@ class May extends React.PureComponent {
   };
 
   state = {
-    showingRecordPictures: false,
-    showingRecordsOf: 'WEEK',
+    showingRecordsOf: 'DAY',
     creatingRecord: false,
   };
 
@@ -156,17 +159,13 @@ class May extends React.PureComponent {
     } = this.props;
     const { useSpinner } = this.context;
 
-    const today = moment().tz(timezone);
-    const month = moment('2018-05-01').tz(timezone);
-
     const myRecordsToday = !currentUser
       ? []
-      : currentUser.records.filter(r => moment(r.date).isSame(today, 'day'));
+      : getDayRecords(currentUser.records);
 
     const sortTeams = teams => _.sortBy(teams, t => t.order);
-    const sortUsers = users => _.sortBy(users, u => u.name);
     const sortRecords = records =>
-      _.sortBy(records, r => moment(r.date).valueOf());
+      _.orderBy(records, [r => moment(r.date).valueOf()], ['desc']);
 
     return (
       <Layout title="五月挑战">
@@ -176,7 +175,7 @@ class May extends React.PureComponent {
           </Alert>
         )}
         {currentUser && (
-          <React.Fragment>
+          <>
             {!currentUser.team && (
               <Panel>
                 <Panel.Body>
@@ -248,18 +247,7 @@ class May extends React.PureComponent {
                             margin: 5,
                           }}
                         >
-                          <p>
-                            {moment(record.date).format('LT')}:{' '}
-                            {record.hundreds / 10} km
-                          </p>
-                          <p>
-                            {record.file && (
-                              <Image
-                                src={record.file.url}
-                                style={{ width: '100%' }}
-                              />
-                            )}
-                          </p>
+                          <Record record={{ ...record, user: currentUser }} />
                         </div>
                       ))}
                     </div>
@@ -370,28 +358,19 @@ class May extends React.PureComponent {
                 </Panel.Body>
               </Panel>
             )}
-          </React.Fragment>
+          </>
         )}
         <div style={{ textAlign: 'right' }}>
           <FormGroup>
-            <Button
-              active={this.state.showingRecordPictures}
-              onClick={() =>
-                this.setState({
-                  showingRecordPictures: !this.state.showingRecordPictures,
-                })
-              }
-            >
-              显示图片
-            </Button>{' '}
             <ToggleButtonGroup
               type="radio"
               name="showingRecordsOf"
               value={this.state.showingRecordsOf}
               onChange={value => this.setState({ showingRecordsOf: value })}
             >
-              <ToggleButton value="WEEK">本周记录</ToggleButton>
-              <ToggleButton value="MONTH">五月记录</ToggleButton>
+              <ToggleButton value="DAY">今天</ToggleButton>
+              <ToggleButton value="WEEK">本周</ToggleButton>
+              <ToggleButton value="MONTH">五月</ToggleButton>
             </ToggleButtonGroup>
           </FormGroup>
         </div>
@@ -416,15 +395,23 @@ class May extends React.PureComponent {
               }))
               .map(team => ({
                 ...team,
-                monthRecords: team.records.filter(r =>
-                  moment(r.date).isSame(month, 'month')
-                ),
+                dayRecords: getDayRecords(team.records),
               }))
               .map(team => ({
                 ...team,
-                weekRecords: team.monthRecords.filter(r =>
-                  moment(r.date).isSame(today, 'week')
-                ),
+                monthRecords: getMonthRecords(team.records),
+              }))
+              .map(team => ({
+                ...team,
+                weekRecords: getWeekRecords(team.monthRecords),
+              }))
+              .map(team => ({
+                ...team,
+                showingRecords: {
+                  DAY: team.dayRecords,
+                  WEEK: team.weekRecords,
+                  MONTH: team.monthRecords,
+                }[this.state.showingRecordsOf],
               }))
               .map(team => (
                 <div
@@ -438,7 +425,8 @@ class May extends React.PureComponent {
                     style={{
                       margin: 10,
                       position: 'relative',
-                      paddingTop: 170,
+                      padding: 5,
+                      paddingTop: '80%',
                     }}
                   >
                     <div
@@ -447,7 +435,7 @@ class May extends React.PureComponent {
                         left: 0,
                         top: 0,
                         right: 0,
-                        height: 170,
+                        paddingTop: '80%',
                         ...(team.cover && {
                           backgroundImage: `url(${team.cover.url})`,
                           backgroundPosition: 'center',
@@ -489,96 +477,62 @@ class May extends React.PureComponent {
                         </span>km
                       </div>
                     </div>
-                    <p>
-                      本周累积里程:
-                      {sum(team.weekRecords.map(r => r.hundreds)) / 10} km
+                    <p style={{ textAlign: 'center' }}>
+                      {
+                        {
+                          DAY: '今天',
+                          WEEK: '本周',
+                          MONTH: '五月',
+                        }[this.state.showingRecordsOf]
+                      }
+                      累积里程:
+                      {sum(team.showingRecords.map(r => r.hundreds)) / 10} km
                     </p>
-                    <p>
-                      {this.state.showingRecordsOf === 'WEEK'
-                        ? '本周记录'
-                        : '五月记录'}：
-                    </p>
-                    {sortRecords(
-                      this.state.showingRecordsOf === 'WEEK'
-                        ? team.weekRecords
-                        : team.monthRecords
-                    ).map(record => (
-                      <div
-                        key={record.id}
-                        style={{
-                          padding: '10px 0',
-                        }}
-                      >
-                        <div
-                          style={{
-                            display: 'flex',
-                          }}
-                        >
-                          <Image
-                            src={record.user.picture}
-                            alt={record.user.name}
-                            circle
-                            style={{
-                              width: 40,
-                              height: 40,
-                            }}
-                          />
-                          <div style={{ margin: '0 20px' }}>
-                            <span style={{ fontSize: '2em' }}>
-                              {record.hundreds / 10}
-                            </span>{' '}
-                            km
-                          </div>
-                        </div>
-                        <div style={{ lineHeight: 1 }}>
-                          ({record.user.name}于
-                          {moment(record.date).format('dddd LT')})
-                        </div>
-                        <p>
-                          {record.file &&
-                            this.state.showingRecordPictures && (
-                              <Image
-                                src={record.file.url}
-                                style={{ width: 180 }}
-                              />
-                            )}
-                        </p>
-                      </div>
-                    ))}
-                    <p>所有队员：</p>
-                    <div>
-                      {sortUsers(team.users).map(user => (
-                        <div
-                          key={user.id}
-                          style={{
-                            margin: 2,
-                            display: 'flex',
-                            flexFlow: 'row nowrap',
-                          }}
-                        >
-                          <OverlayTrigger
-                            placement="bottom"
-                            overlay={
-                              <Tooltip id={`team-user-${user.id}`}>
-                                {user.name}
-                              </Tooltip>
-                            }
-                          >
-                            <Image
-                              src={user.picture}
-                              alt={user.name}
-                              circle
+                    {this.state.showingRecordsOf === 'DAY' ? (
+                      sortRecords(team.showingRecords).map(record => (
+                        <Record key={record.id} record={record} />
+                      ))
+                    ) : (
+                      <>
+                        <p>排行榜：</p>
+                        <div>
+                          {_.orderBy(
+                            team.users.map(u => ({
+                              ...u,
+                              total: sum(
+                                team.showingRecords
+                                  .filter(r => r.user.id === u.id)
+                                  .map(r => r.hundreds)
+                              ),
+                            })),
+                            [u => u.total, u => u.name],
+                            ['desc', 'asc']
+                          ).map(user => (
+                            <div
+                              key={user.id}
                               style={{
-                                width: 30,
-                                height: 30,
-                                marginRight: 10,
+                                margin: '10px 0',
+                                display: 'flex',
+                                flexFlow: 'row nowrap',
+                                justifyContent: 'space-between',
                               }}
-                            />
-                          </OverlayTrigger>
-                          <span>{user.name}</span>
+                            >
+                              <User user={user} />
+                              <div
+                                style={{ lineHeight: 1, textAlign: 'right' }}
+                              >
+                                {user.name}
+                                <br />
+                                <span style={{ fontSize: '2em' }}>
+                                  {user.total / 10}
+                                </span>{' '}
+                                km
+                              </div>
+                            </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
+                      </>
+                    )}
                   </Well>
                 </div>
               ))}

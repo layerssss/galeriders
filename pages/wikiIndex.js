@@ -6,7 +6,9 @@ import { Label } from 'react-bootstrap';
 import Layout from '../components/Layout.js';
 import contentful from '../lib/contentful.js';
 import Time from '../components/Time.js';
+import data from '../lib/data.js';
 
+@data
 class Index extends React.PureComponent {
   static async getInitialProps() {
     const { items } = await contentful.getEntries({

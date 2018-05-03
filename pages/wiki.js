@@ -5,7 +5,10 @@ import { Label } from 'react-bootstrap';
 import Layout from '../components/Layout.js';
 import Markdown from '../components/Markdown.js';
 import contentful from '../lib/contentful.js';
+import data from '../lib/data.js';
 
+
+@data
 class Page extends React.PureComponent {
   static async getInitialProps({ query: { name } }) {
     const { items: [item] } = await contentful.getEntries({

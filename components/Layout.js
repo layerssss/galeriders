@@ -130,7 +130,9 @@ class Layout extends React.PureComponent {
                       height: '2em',
                       width: '2em',
                     }}
-                    src={user.picture}
+                    src={`//graph.facebook.com/${
+                      user.auth0UserId.split('|')[1]
+                    }/picture?type=square`}
                     alt={`${user.name}的照片`}
                   />
                   {user.name}
