@@ -58,7 +58,7 @@ class May extends React.PureComponent {
     );
 
     return (
-      <Layout title="琅琊榜" category="五月挑战">
+      <Layout>
         <Well>
           {!loading && (
             <Rank

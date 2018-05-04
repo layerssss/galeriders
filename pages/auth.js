@@ -6,7 +6,6 @@ import Auth0Lock from 'auth0-lock';
 import cookie from 'cookie';
 import { graphql } from 'react-apollo';
 
-import Layout from '../components/Layout.js';
 import data from '../lib/data.js';
 
 @data
@@ -95,7 +94,7 @@ class Auth extends React.PureComponent {
   };
 
   render() {
-    return <Layout title="登录">登录中...</Layout>;
+    return <div />;
   }
 }
 

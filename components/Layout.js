@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import Link from 'next/link';
-import Router from 'next/router';
+import Router, { withRouter } from 'next/router';
 import ReactGA from 'react-ga';
 import { Button, Nav, NavItem } from 'react-bootstrap';
 
@@ -17,20 +17,23 @@ Router.onRouteChangeComplete = () => {
   window.NProgress.remove();
 };
 
-class Layout extends React.PureComponent {
+@withRouter
+class Layout extends React.Component {
   static propTypes = {
-    title: PropTypes.string,
-    category: PropTypes.string,
-    children: PropTypes.any.isRequired,
+    pageTitle: PropTypes.string,
+    categoryTitle: PropTypes.string,
+    router: PropTypes.object.isRequired,
+    children: PropTypes.any,
   };
 
   static defaultProps = {
-    title: '首页',
-    category: '大风车',
+    pageTitle: '',
+    categoryTitle: '',
   };
 
   static contextTypes = {
     user: PropTypes.object,
+    login: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -48,16 +51,77 @@ class Layout extends React.PureComponent {
       this.setState({ small: true });
   }
 
-  handleNavClick = event => {
-    event.preventDefault();
-    const { href } = event.currentTarget;
-
-    Router.push(href);
-  };
-
   render() {
-    const { title, category, children } = this.props;
-    const { user } = this.context;
+    const { children, router } = this.props;
+    let { pageTitle, categoryTitle } = this.props;
+    const { user, login } = this.context;
+
+    const featuredItems = ['Galeriders', '五月挑战'];
+
+    const categories = [
+      {
+        title: '五月挑战',
+        pages: [
+          {
+            title: '战况',
+            pathname: '/',
+          },
+          {
+            title: '我的记录',
+            pathname: '/myRecords',
+          },
+          {
+            title: '琅琊榜',
+            pathname: '/leaderBoard',
+          },
+        ],
+      },
+      {
+        title: '风车大百科',
+        pages: [
+          { title: '所有词条', pathname: '/wikiIndex' },
+          ...featuredItems.map(item => ({
+            title: `“${item}”`,
+            pathname: '/wiki',
+            query: {
+              name: item,
+            },
+          })),
+        ],
+      },
+    ];
+
+    for (const category of categories)
+      for (const page of category.pages)
+        page.asPath = `${page.pathname}?${Object.entries(page.query || {})
+          .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
+          .join('&')}`.replace(/\?$/, '');
+
+    {
+      const allPages = [].concat(
+        ...categories.map(c => c.pages.map(p => ({ ...p, category: c })))
+      );
+
+      const page = allPages.find(p => p.asPath === router.asPath);
+
+      if (page) {
+        pageTitle = pageTitle || page.title;
+        categoryTitle = categoryTitle || page.category.title;
+      } else if (pageTitle && categoryTitle) {
+        const category = categories.find(c => c.title === categoryTitle);
+        if (category)
+          category.pages.push({
+            title: pageTitle,
+            pathname: router.pathname,
+            query: router.query,
+            asPath: router.asPath,
+          });
+      }
+    }
+
+    pageTitle = pageTitle || '大风车';
+
+    const currentCategory = categories.find(c => c.title === categoryTitle);
 
     return (
       <div
@@ -69,7 +133,7 @@ class Layout extends React.PureComponent {
       >
         <Head>
           <title>
-            {title} - {category}
+            {pageTitle} - {categoryTitle}
           </title>
         </Head>
         <div
@@ -123,11 +187,9 @@ class Layout extends React.PureComponent {
             }}
           >
             {!user ? (
-              <Link href="/auth">
-                <Button>
-                  <span className="fa fa-user" />登录
-                </Button>
-              </Link>
+              <Button onClick={() => login()}>
+                <span className="fa fa-user" />登录
+              </Button>
             ) : (
               <React.Fragment>
                 <Button active>
@@ -175,41 +237,67 @@ class Layout extends React.PureComponent {
             </a>
           </Link>
           <div>
-            <h1 style={{ fontSize: '2em', margin: '5px 0' }}>{title}</h1>
-            <h2 style={{ fontSize: '1em', color: '#888', margin: 0 }}>
-              {category}
+            <h2 style={{ fontSize: '2em', margin: '5px 0' }}>
+              {categoryTitle}
             </h2>
+            <h1 style={{ fontSize: '1em', color: '#888', margin: 0 }}>
+              {pageTitle}
+            </h1>
           </div>
         </div>
         <div style={{ padding: 10 }}>
-          <Nav bsStyle="pills">
-            <NavItem
-              href="/"
-              active={title === '五月挑战'}
-              onClick={this.handleNavClick}
-            >
-              五月挑战
-            </NavItem>
-            <NavItem
-              href="/leaderBoard"
-              active={title === '琅琊榜'}
-              onClick={this.handleNavClick}
-            >
-              琅琊榜
-            </NavItem>
-            <NavItem
-              href="/wikiIndex"
-              active={category === '风车大百科'}
-              onClick={this.handleNavClick}
-            >
-              风车大百科
-            </NavItem>
+          <Nav bsStyle="tabs">
+            {categories.map(category => (
+              <NavItem
+                active={categoryTitle === category.title}
+                key={category.title}
+                title={category.title}
+                href={category.pages[0].asPath}
+                onClick={event => {
+                  event.preventDefault();
+
+                  Router.push({
+                    pathname: category.pages[0].pathname,
+                    query: category.pages[0].query,
+                  });
+                }}
+              >
+                {category.title}
+              </NavItem>
+            ))}
           </Nav>
         </div>
+        {currentCategory && (
+          <div
+            style={{
+              padding: 10,
+            }}
+          >
+            <Nav bsStyle="pills">
+              {currentCategory.pages.map(page => (
+                <NavItem
+                  active={pageTitle === page.title}
+                  key={page.title}
+                  title={page.title}
+                  href={page.asPath}
+                  onClick={event => {
+                    event.preventDefault();
+
+                    Router.push({
+                      pathname: page.pathname,
+                      query: page.query,
+                    });
+                  }}
+                >
+                  {page.title}
+                </NavItem>
+              ))}
+            </Nav>
+          </div>
+        )}
         <div
           style={{
-            borderTop: 'solid 1px #ccc',
-            padding: '20px 10px',
+            padding: 10,
           }}
         >
           {children}

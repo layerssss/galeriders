@@ -32,7 +32,7 @@ class Page extends React.PureComponent {
     const { item } = this.props;
 
     return (
-      <Layout title={item.fields.name} category="风车大百科">
+      <Layout pageTitle={`“${item.fields.name}”`} categoryTitle="风车大百科">
         <p>
           别名：
           {item.fields.aliases &&
