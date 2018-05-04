@@ -222,20 +222,6 @@ class May extends React.PureComponent {
                 </div>
               ))}
         </div>
-        <p>其它</p>
-        <hr />
-        <ul>
-          <li>
-            <Link href="/wiki?name=%E4%BA%94%E6%9C%88%E6%8C%91%E6%88%98">
-              <a>关于“五月挑战”</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/wikiIndex">
-              <a>风车大百科</a>
-            </Link>
-          </li>
-        </ul>
       </Layout>
     );
   }
