@@ -35,7 +35,7 @@ class Rank extends React.Component {
             key={user.id}
             style={{
               width: 200,
-              flex: '0 1 auto',
+              flex: '1 1 auto',
               margin: 10,
               display: 'flex',
               flexFlow: 'row nowrap',
