@@ -192,10 +192,10 @@ class Layout extends React.PureComponent {
             </NavItem>
             <NavItem
               href="/leaderBoard"
-              active={title === '风云榜'}
+              active={title === '琅琊榜'}
               onClick={this.handleNavClick}
             >
-              风云榜
+              琅琊榜
             </NavItem>
             <NavItem
               href="/wikiIndex"
