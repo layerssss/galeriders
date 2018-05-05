@@ -94,6 +94,7 @@ class TeamPage extends React.PureComponent {
               style={{
                 display: 'flex',
                 flexFlow: 'row wrap',
+                margin: '0 -5px',
               }}
             >
               <div
@@ -101,7 +102,7 @@ class TeamPage extends React.PureComponent {
                   // wrap it
                   flex: '1 0 auto',
                   width: 250,
-                  marginRight: 20,
+                  margin: 5,
                 }}
               >
                 <Panel>
@@ -118,6 +119,7 @@ class TeamPage extends React.PureComponent {
                 style={{
                   flex: '100 0 auto',
                   width: 250,
+                  margin: 5,
                 }}
               >
                 {Object.entries(
