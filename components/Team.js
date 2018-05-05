@@ -10,21 +10,11 @@ class Team extends React.Component {
   static propTypes = {
     team: PropTypes.object.isRequired,
     children: PropTypes.any,
+    header: PropTypes.any,
   };
 
   render() {
-    const { team, children } = this.props;
-
-    const monthRecords = getMonthRecords(
-      [].concat(
-        ...team.users.map(u =>
-          u.records.map(r => ({
-            ...r,
-            user: u,
-          }))
-        )
-      )
-    );
+    const { team, children, header } = this.props;
 
     return (
       <Well
@@ -35,7 +25,7 @@ class Team extends React.Component {
         <div
           style={{
             position: 'relative',
-            maxHeight: 200,
+            maxHeight: 150,
             ...(team.cover && {
               backgroundImage: `url(${team.cover.url})`,
               backgroundPosition: 'center',
@@ -47,6 +37,7 @@ class Team extends React.Component {
           <div
             style={{
               paddingTop: '80%',
+              pointerEvents: 'none',
             }}
           />
           <div
@@ -62,23 +53,33 @@ class Team extends React.Component {
           >
             {team.name}:
           </div>
-          <div
-            style={{
-              position: 'absolute',
-              left: 0,
-              top: 0,
-              right: 0,
-              bottom: 0,
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              fontSize: 24,
-              color: 'white',
-              textShadow: '0 0 20px black',
-            }}
-          >
-            <Kilometers hundreds={sum(monthRecords.map(r => r.hundreds))} />
-          </div>
+          {(team.users || header) && (
+            <div
+              style={{
+                position: 'absolute',
+                left: 0,
+                top: 0,
+                right: 0,
+                bottom: 0,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                fontSize: 24,
+                color: 'white',
+                textShadow: '0 0 20px black',
+              }}
+            >
+              {header || (
+                <Kilometers
+                  hundreds={sum(
+                    getMonthRecords(
+                      [].concat(...team.users.map(u => u.records))
+                    ).map(r => r.hundreds)
+                  )}
+                />
+              )}
+            </div>
+          )}
         </div>
         {children}
       </Well>

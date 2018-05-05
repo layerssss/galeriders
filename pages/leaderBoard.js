@@ -28,8 +28,8 @@ import getMonthRecords from '../lib/getMonthRecords.js';
         }
         team {
           id
-          name
           published
+          name
           cover {
             id
             url
@@ -39,7 +39,7 @@ import getMonthRecords from '../lib/getMonthRecords.js';
     }
   `
 )
-class May extends React.Component {
+class LeaderBoard extends React.Component {
   static async getInitialProps() {
     return {};
   }
@@ -53,18 +53,16 @@ class May extends React.Component {
       data: { loading, allUsers },
     } = this.props;
 
-    const users = allUsers.filter(
-      u => u.team && u.team.published && u.team.cover
-    );
-
     return (
       <Layout>
         <Well>
           {!loading && (
             <Rank
-              users={users}
+              users={allUsers.filter(
+                u => u.team && u.team.published && u.team.cover
+              )}
               records={[].concat(
-                ...users.map(u =>
+                ...allUsers.map(u =>
                   getMonthRecords(u.records).map(r => ({ ...r, user: u }))
                 )
               )}
@@ -76,4 +74,4 @@ class May extends React.Component {
   }
 }
 
-export default May;
+export default LeaderBoard;

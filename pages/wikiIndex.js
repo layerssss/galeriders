@@ -9,7 +9,7 @@ import Time from '../components/Time.js';
 import data from '../lib/data.js';
 
 @data
-class Index extends React.Component {
+class WikiIndexPage extends React.Component {
   static async getInitialProps() {
     const { items } = await contentful.getEntries({
       content_type: 'wiki',
@@ -87,4 +87,4 @@ class Index extends React.Component {
   }
 }
 
-export default Index;
+export default WikiIndexPage;

@@ -51,7 +51,7 @@ import moment from '../lib/moment.js';
     }),
   }
 )
-class May extends React.PureComponent {
+class TeamPage extends React.PureComponent {
   static async getInitialProps({ query }) {
     const teamId = query.id;
     return { teamId };
@@ -153,4 +153,4 @@ class May extends React.PureComponent {
   }
 }
 
-export default May;
+export default TeamPage;

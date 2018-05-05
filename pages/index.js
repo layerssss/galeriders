@@ -20,7 +20,6 @@ import moment from '../lib/moment.js';
       allTeams(filter: { published: true }) {
         id
         name
-        published
         order
         cover {
           id

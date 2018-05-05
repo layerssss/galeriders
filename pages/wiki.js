@@ -8,7 +8,7 @@ import contentful from '../lib/contentful.js';
 import data from '../lib/data.js';
 
 @data
-class Page extends React.Component {
+class WikiPage extends React.Component {
   static async getInitialProps({ query: { name } }) {
     const {
       items: [item],
@@ -80,4 +80,4 @@ class Page extends React.Component {
   }
 }
 
-export default Page;
+export default WikiPage;
