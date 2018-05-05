@@ -39,7 +39,7 @@ import getMonthRecords from '../lib/getMonthRecords.js';
     }
   `
 )
-class May extends React.PureComponent {
+class May extends React.Component {
   static async getInitialProps() {
     return {};
   }

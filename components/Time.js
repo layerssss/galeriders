@@ -4,7 +4,7 @@ import Moment from 'moment';
 
 Moment.locale('zh-cn');
 
-class Time extends React.PureComponent {
+class Time extends React.Component {
   static propTypes = {
     time: PropTypes.string.isRequired,
   };

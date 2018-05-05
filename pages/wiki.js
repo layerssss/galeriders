@@ -8,7 +8,7 @@ import contentful from '../lib/contentful.js';
 import data from '../lib/data.js';
 
 @data
-class Page extends React.PureComponent {
+class Page extends React.Component {
   static async getInitialProps({ query: { name } }) {
     const {
       items: [item],

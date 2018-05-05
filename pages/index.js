@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
-import Link from 'next/link';
 import _ from 'lodash';
 import {
   FormGroup,
@@ -52,7 +51,7 @@ import moment from '../lib/moment.js';
     }
   `
 )
-class May extends React.PureComponent {
+class May extends React.Component {
   static async getInitialProps() {
     return {};
   }

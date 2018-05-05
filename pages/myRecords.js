@@ -107,7 +107,7 @@ import withUser from '../lib/withUser.js';
   `,
   { name: 'addRecord' }
 )
-class MyRecords extends React.PureComponent {
+class MyRecords extends React.Component {
   static async getInitialProps() {
     return {};
   }

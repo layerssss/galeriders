@@ -25,7 +25,7 @@ import data from '../lib/data.js';
   `,
   { name: 'createUser' }
 )
-class Auth extends React.PureComponent {
+class Auth extends React.Component {
   static contextTypes = {
     user: PropTypes.object,
   };

@@ -9,7 +9,7 @@ import Time from '../components/Time.js';
 import data from '../lib/data.js';
 
 @data
-class Index extends React.PureComponent {
+class Index extends React.Component {
   static async getInitialProps() {
     const { items } = await contentful.getEntries({
       content_type: 'wiki',
