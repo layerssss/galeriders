@@ -33,6 +33,7 @@ class Layout extends React.Component {
 
   static contextTypes = {
     user: PropTypes.object,
+    allTeams: PropTypes.array,
     login: PropTypes.func.isRequired,
   };
 
@@ -54,7 +55,7 @@ class Layout extends React.Component {
   render() {
     const { children, router } = this.props;
     let { pageTitle, categoryTitle } = this.props;
-    const { user, login } = this.context;
+    const { user, login, allTeams } = this.context;
 
     const featuredItems = ['Galeriders', '五月挑战'];
 
@@ -74,6 +75,13 @@ class Layout extends React.Component {
             title: '琅琊榜',
             pathname: '/leaderBoard',
           },
+          ...allTeams.map(team => ({
+            title: team.name,
+            pathname: '/team',
+            query: {
+              id: team.id,
+            },
+          })),
         ],
       },
       {

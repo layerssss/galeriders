@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 
 import User from '../components/User.js';
+import Kilometers from './Kilometers.js';
 import sum from '../lib/sum.js';
 
 class Rank extends React.Component {
@@ -73,7 +74,7 @@ class Rank extends React.Component {
             >
               {user.name}
               <br />
-              <span style={{ fontSize: '2em' }}>{user.total / 10}</span> km
+              <Kilometers hundreds={user.total} />
             </div>
           </div>
         ))}

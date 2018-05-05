@@ -5,6 +5,7 @@ import { Image } from 'react-bootstrap';
 
 import User from './User.js';
 import timezone from '../lib/timezone.js';
+import Kilometers from './Kilometers.js';
 
 class Record extends React.Component {
   static propTypes = {
@@ -30,7 +31,7 @@ class Record extends React.Component {
         >
           <User user={record.user} />
           <br />
-          <span style={{ fontSize: '2em' }}>{record.hundreds / 10}</span> km
+          <Kilometers hundreds={record.hundreds} />
           <br />
           {record.user.name}
           <br />
