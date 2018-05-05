@@ -50,13 +50,13 @@ class LeaderBoard extends React.Component {
 
   render() {
     const {
-      data: { loading, allUsers },
+      data: { allUsers },
     } = this.props;
 
     return (
       <Layout>
         <Well>
-          {!loading && (
+          {allUsers && (
             <Rank
               users={allUsers.filter(
                 u => u.team && u.team.published && u.team.cover

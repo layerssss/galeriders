@@ -75,7 +75,7 @@ class Layout extends React.Component {
             title: '琅琊榜',
             pathname: '/leaderBoard',
           },
-          ...allTeams.map(team => ({
+          ...(allTeams || []).map(team => ({
             title: team.name,
             pathname: '/team',
             query: {
