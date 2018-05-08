@@ -37,7 +37,7 @@ class Record extends React.Component {
           <br />
           {moment(record.date).isSame(today, 'week')
             ? moment(record.date).calendar()
-            : moment(record.date).format('dddd LT')}
+            : moment(record.date).format('Do dddd LT')}
         </div>
         <div style={{ width: '40%' }}>
           {record.file && (
