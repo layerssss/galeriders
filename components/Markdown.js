@@ -4,7 +4,11 @@ import { markdown } from 'markdown';
 
 class Markdown extends React.Component {
   static propTypes = {
-    source: PropTypes.string.isRequired,
+    source: PropTypes.string,
+  };
+
+  static defaultProps = {
+    source: '',
   };
 
   render() {
@@ -13,7 +17,7 @@ class Markdown extends React.Component {
     return (
       <div
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: markdown.toHTML(source) }}
+        dangerouslySetInnerHTML={{ __html: markdown.toHTML(source || '') }}
         {...others}
       />
     );
