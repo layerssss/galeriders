@@ -12,6 +12,7 @@ import Team from '../components/Team.js';
 import Record from '../components/Record';
 import User from '../components/User';
 import moment from '../lib/moment.js';
+import getMonthRecords from '../lib/getMonthRecords.js';
 
 @data
 @graphql(
@@ -161,7 +162,7 @@ class UserPage extends React.PureComponent {
                 flexFlow: 'row wrap',
               }}
             >
-              {sortRecords(user.records).map(record => (
+              {sortRecords(getMonthRecords(user.records)).map(record => (
                 <div key={record.id} style={{ width: 200, flex: '0 0 auto' }}>
                   <Record record={{ ...record, user }} />
                 </div>
