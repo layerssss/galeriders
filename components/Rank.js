@@ -31,53 +31,55 @@ class Rank extends React.Component {
           })),
           [u => u.total, u => u.name],
           ['desc', 'asc']
-        ).map((user, userIndex) => (
-          <div
-            key={user.id}
-            style={{
-              width: 200,
-              flex: '1 1 auto',
-              margin: 10,
-              display: 'flex',
-              flexFlow: 'row nowrap',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              background: [
-                `linear-gradient(to right, transparent, rgba(200, 200, 200, 0.7) 50%, #f9f9f9)`,
-                `left center / cover no-repeat url(${user.team.cover.url})`,
-              ].join(', '),
-              color: 'black',
-              padding: '10px 2px',
-            }}
-          >
+        )
+          .filter(u => !!u.total)
+          .map((user, userIndex) => (
             <div
+              key={user.id}
               style={{
-                marginLeft: 10,
-                width: 40,
-                color: 'white',
-                fontWeight: 'bold',
-                textShadow: '0 0 5px black',
+                width: 200,
+                flex: '1 1 auto',
+                margin: 10,
+                display: 'flex',
+                flexFlow: 'row nowrap',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                background: [
+                  `linear-gradient(to right, transparent, rgba(200, 200, 200, 0.7) 50%, #f9f9f9)`,
+                  `left center / cover no-repeat url(${user.team.cover.url})`,
+                ].join(', '),
+                color: 'black',
+                padding: '10px 2px',
               }}
             >
-              #
-              <span
+              <div
                 style={{
-                  fontSize: '1.5em',
+                  marginLeft: 10,
+                  width: 40,
+                  color: 'white',
+                  fontWeight: 'bold',
+                  textShadow: '0 0 5px black',
                 }}
               >
-                {userIndex + 1}
-              </span>
+                #
+                <span
+                  style={{
+                    fontSize: '1.5em',
+                  }}
+                >
+                  {userIndex + 1}
+                </span>
+              </div>
+              <User user={user} />
+              <div
+                style={{ lineHeight: 1, textAlign: 'right', flex: '1 1 auto' }}
+              >
+                {user.name}
+                <br />
+                <Kilometers hundreds={user.total} />
+              </div>
             </div>
-            <User user={user} />
-            <div
-              style={{ lineHeight: 1, textAlign: 'right', flex: '1 1 auto' }}
-            >
-              {user.name}
-              <br />
-              <Kilometers hundreds={user.total} />
-            </div>
-          </div>
-        ))}
+          ))}
       </div>
     );
   }
