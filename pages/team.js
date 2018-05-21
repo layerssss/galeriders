@@ -10,8 +10,10 @@ import Layout from '../components/Layout.js';
 import Rank from '../components/Rank.js';
 import Team from '../components/Team.js';
 import Record from '../components/Record';
+import Kilometers from '../components/Kilometers';
 import getMonthRecords from '../lib/getMonthRecords.js';
 import moment from '../lib/moment.js';
+import sum from '../lib/sum.js';
 
 @data
 @graphql(
@@ -22,6 +24,7 @@ import moment from '../lib/moment.js';
         name
         published
         order
+        color
         cover {
           id
           url
@@ -89,6 +92,13 @@ class TeamPage extends React.PureComponent {
             team={{
               ...team,
             }}
+            header={
+              <div style={{ textAlign: 'center' }}>
+                {team.name}
+                <br />
+                <Kilometers hundreds={sum(monthRecords.map(r => r.hundreds))} />
+              </div>
+            }
           >
             <div
               style={{

@@ -143,10 +143,12 @@ class May extends React.Component {
             ).map(record => (
               <div
                 key={record.id}
-                style={{ width: 200, flex: '0 0 auto', margin: '20px auto' }}
+                style={{ width: 170, flex: '0 0 auto', margin: '20px auto' }}
               >
                 <Team header={<User user={record.user} />} team={record.team}>
-                  <Record showUser={false} record={record} />
+                  <div style={{ padding: 10 }}>
+                    <Record showUser={false} record={record} />
+                  </div>
                 </Team>
               </div>
             ))}

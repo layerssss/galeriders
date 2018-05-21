@@ -35,7 +35,8 @@
     "react-dom": "^16.3.2",
     "react-ga": "^2.3.5",
     "recompose": "^0.27.0",
-    "styled-jsx": "^2.2.0"
+    "styled-jsx": "^2.2.0",
+    "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import tinycolor from 'tinycolor2';
 
 class Team extends React.Component {
   static propTypes = {
@@ -15,6 +16,7 @@ class Team extends React.Component {
       <div
         style={{
           position: 'relative',
+          boxShadow: `0 2px 10px ${tinycolor(team.color).darken(50).toString()}`,
         }}
       >
         <div
@@ -72,6 +74,9 @@ class Team extends React.Component {
         <div
           style={{
             position: 'relative',
+            background: `linear-gradient(#f9f9f9, ${tinycolor(team.color)
+              .setAlpha(0.5)
+              .toString()})`,
           }}
         >
           {children}

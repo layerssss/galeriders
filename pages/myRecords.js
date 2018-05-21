@@ -35,6 +35,7 @@ import withUser from '../lib/withUser.js';
         name
         published
         order
+        color
         cover {
           id
           url
@@ -47,6 +48,7 @@ import withUser from '../lib/withUser.js';
         team {
           id
           name
+          color
           cover {
             id
             url
@@ -207,129 +209,135 @@ class MyRecords extends React.Component {
                 }
                 team={currentUser.team}
               >
-                <p>我今天的记录：</p>
-                {!myRecordsToday.length ? (
-                  <Alert bsStyle="warning">我今天还没跑步呢</Alert>
-                ) : (
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexFlow: 'row wrap',
-                    }}
-                  >
-                    {sortRecords([...myRecordsToday]).map(record => (
-                      <div
-                        key={record.id}
-                        style={{
-                          width: 240,
-                          margin: 5,
-                        }}
-                      >
-                        <Record record={{ ...record, user: currentUser }} />
-                      </div>
-                    ))}
-                  </div>
-                )}
-                <hr />
-                {!this.state.creatingRecord ? (
-                  <Button
-                    onClick={() => this.setState({ creatingRecord: true })}
-                  >
-                    <span className="fa fa-plus" />添加记录
-                  </Button>
-                ) : (
-                  <Form
-                    onSubmit={event =>
-                      useSpinner(async () => {
-                        event.preventDefault();
-                        const form = event.currentTarget;
-                        const date = new Date();
-                        const hundreds =
-                          Number(
-                            form.querySelector('[name="hundreds"]').value
-                          ) * 10;
+                <div style={{ padding: 10 }}>
+                  <p>我今天的记录：</p>
+                  {!myRecordsToday.length ? (
+                    <Alert bsStyle="warning">我今天还没跑步呢</Alert>
+                  ) : (
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexFlow: 'row wrap',
+                      }}
+                    >
+                      {sortRecords([...myRecordsToday]).map(record => (
+                        <div
+                          key={record.id}
+                          style={{
+                            width: 240,
+                            margin: 5,
+                          }}
+                        >
+                          <Record record={{ ...record, user: currentUser }} />
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  <hr />
+                  {!this.state.creatingRecord ? (
+                    <Button
+                      onClick={() => this.setState({ creatingRecord: true })}
+                    >
+                      <span className="fa fa-plus" />添加记录
+                    </Button>
+                  ) : (
+                    <Form
+                      onSubmit={event =>
+                        useSpinner(async () => {
+                          event.preventDefault();
+                          const form = event.currentTarget;
+                          const date = new Date();
+                          const hundreds =
+                            Number(
+                              form.querySelector('[name="hundreds"]').value
+                            ) * 10;
 
-                        if (
-                          hundreds <= 0 ||
-                          Number.isNaN(hundreds) ||
-                          hundreds > 2000
-                        )
-                          return alert('公里数无效哈');
+                          if (
+                            hundreds <= 0 ||
+                            Number.isNaN(hundreds) ||
+                            hundreds > 2000
+                          )
+                            return alert('公里数无效哈');
 
-                        const { file } = this.state;
-                        if (!file) return alert('请上传个屏幕截图或者照片哈');
+                          const { file } = this.state;
+                          if (!file) return alert('请上传个屏幕截图或者照片哈');
 
-                        if (
-                          !window.confirm('记录添加后无法更改或删除，请确认哈')
-                        )
-                          return;
+                          if (
+                            !window.confirm(
+                              '记录添加后无法更改或删除，请确认哈'
+                            )
+                          )
+                            return;
 
-                        const { id: fileId } = await uploadFile(file);
+                          const { id: fileId } = await uploadFile(file);
 
-                        await addRecord({
-                          variables: {
-                            date,
-                            hundreds,
-                            fileId,
-                            userId: currentUser.id,
-                          },
-                        });
+                          await addRecord({
+                            variables: {
+                              date,
+                              hundreds,
+                              fileId,
+                              userId: currentUser.id,
+                            },
+                          });
 
-                        this.setState({
-                          creatingRecord: false,
-                          file: null,
-                          fileURI: null,
-                        });
-                        form.reset();
-                      })
-                    }
-                  >
-                    <FormGroup>
-                      <ControlLabel>公里数：</ControlLabel>
-                      <FormControl
-                        name="hundreds"
-                        type="number"
-                        step="0.1"
-                        defaultValue="0.0"
-                      />
-                    </FormGroup>
-
-                    <FormGroup>
-                      <ControlLabel>屏幕截图/照片：</ControlLabel>
-                      <FormControl
-                        name="file"
-                        type="file"
-                        accept="image/*"
-                        onChange={event => {
-                          const file = event.target.files[0];
-
-                          const fileURI = !file
-                            ? null
-                            : URL.createObjectURL(file);
-                          this.setState({ file, fileURI });
-                        }}
-                      />
-                      {this.state.fileURI && (
-                        <Image
-                          src={this.state.fileURI}
-                          alt="选择的图片"
-                          style={{ width: 230 }}
+                          this.setState({
+                            creatingRecord: false,
+                            file: null,
+                            fileURI: null,
+                          });
+                          form.reset();
+                        })
+                      }
+                    >
+                      <FormGroup>
+                        <ControlLabel>公里数：</ControlLabel>
+                        <FormControl
+                          name="hundreds"
+                          type="number"
+                          step="0.1"
+                          defaultValue="0.0"
                         />
-                      )}
-                    </FormGroup>
+                      </FormGroup>
 
-                    <FormGroup>
-                      <Button bsStyle="primary" type="submit">
-                        <span className="fa fa-plus" />添加记录
-                      </Button>{' '}
-                      <Button
-                        onClick={() => this.setState({ creatingRecord: false })}
-                      >
-                        取消
-                      </Button>
-                    </FormGroup>
-                  </Form>
-                )}
+                      <FormGroup>
+                        <ControlLabel>屏幕截图/照片：</ControlLabel>
+                        <FormControl
+                          name="file"
+                          type="file"
+                          accept="image/*"
+                          onChange={event => {
+                            const file = event.target.files[0];
+
+                            const fileURI = !file
+                              ? null
+                              : URL.createObjectURL(file);
+                            this.setState({ file, fileURI });
+                          }}
+                        />
+                        {this.state.fileURI && (
+                          <Image
+                            src={this.state.fileURI}
+                            alt="选择的图片"
+                            style={{ width: 230 }}
+                          />
+                        )}
+                      </FormGroup>
+
+                      <FormGroup>
+                        <Button bsStyle="primary" type="submit">
+                          <span className="fa fa-plus" />添加记录
+                        </Button>{' '}
+                        <Button
+                          onClick={() =>
+                            this.setState({ creatingRecord: false })
+                          }
+                        >
+                          取消
+                        </Button>
+                      </FormGroup>
+                    </Form>
+                  )}
+                </div>
               </Team>
             )}
           </>
