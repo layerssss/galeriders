@@ -264,7 +264,7 @@ class MyRecords extends React.Component {
 
                           if (
                             !window.confirm(
-                              '记录添加后无法更改或删除，请确认哈'
+                              '记录添加后无法更改或删除，请确认哈。(注意：务必仅上传当天的跑步记录，如果有之前的跑步记录需要补上传请联系头哥手动更改时间。)'
                             )
                           )
                             return;
