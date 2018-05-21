@@ -10,10 +10,15 @@ import Kilometers from './Kilometers.js';
 class Record extends React.Component {
   static propTypes = {
     record: PropTypes.object.isRequired,
+    showUser: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    showUser: true,
   };
 
   render() {
-    const { record } = this.props;
+    const { record, showUser } = this.props;
     const today = moment().tz(timezone);
 
     return (
@@ -29,8 +34,12 @@ class Record extends React.Component {
             textAlign: 'center',
           }}
         >
-          <User user={record.user} />
-          <br />
+          {showUser && (
+            <>
+              <User user={record.user} />
+              <br />
+            </>
+          )}
           <Kilometers hundreds={record.hundreds} />
           <br />
           {record.user.name}

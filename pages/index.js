@@ -8,8 +8,10 @@ import data from '../lib/data.js';
 import Layout from '../components/Layout.js';
 import Record from '../components/Record';
 import Team from '../components/Team';
+import User from '../components/User';
 import Kilometers from '../components/Kilometers';
 import getDayRecords from '../lib/getDayRecords.js';
+import getMonthRecords from '../lib/getMonthRecords.js';
 import sum from '../lib/sum.js';
 import moment from '../lib/moment.js';
 
@@ -21,6 +23,7 @@ import moment from '../lib/moment.js';
         id
         name
         order
+        color
         cover {
           id
           url
@@ -91,24 +94,64 @@ class May extends React.Component {
                 <div
                   key={team.id}
                   style={{
-                    width: 250,
+                    width: 240,
+                    margin: 5,
                     flex: '1 0 auto',
                   }}
                 >
-                  <Team team={team}>
-                    <p style={{ textAlign: 'center' }}>
-                      今天累积里程:
-                      <Kilometers
-                        hundreds={sum(team.dayRecords.map(r => r.hundreds))}
-                      />
-                    </p>
-                    {sortRecords(team.dayRecords).map(record => (
-                      <Record key={record.id} record={record} />
-                    ))}
-                  </Team>
+                  <Team
+                    team={team}
+                    header={
+                      <div>
+                        <span style={{ fontSize: 20 }}>
+                          <Kilometers
+                            hundreds={sum(
+                              getMonthRecords(
+                                [].concat(...team.users.map(u => u.records))
+                              ).map(r => r.hundreds)
+                            )}
+                          />
+                        </span>
+                        <br />
+                        今天累积里程:
+                        <Kilometers
+                          hundreds={sum(team.dayRecords.map(r => r.hundreds))}
+                        />
+                      </div>
+                    }
+                  />
                 </div>
               ))}
         </div>
+        <hr />
+        {allTeams && (
+          <div style={{ padding: 5, display: 'flex', flexFlow: 'row wrap' }}>
+            {sortRecords(
+              [].concat(
+                ...allTeams.map(team =>
+                  [].concat(
+                    ...team.users.map(user =>
+                      getDayRecords(user.records).map(record => ({
+                        ...record,
+                        user,
+                        team,
+                      }))
+                    )
+                  )
+                )
+              )
+            ).map(record => (
+              <div
+                key={record.id}
+                style={{ width: 200, flex: '0 0 auto', margin: '20px auto' }}
+              >
+                <Team header={<User user={record.user} />} team={record.team}>
+                  <Record showUser={false} record={record} />
+                </Team>
+              </div>
+            ))}
+          </div>
+        )}
       </Layout>
     );
   }

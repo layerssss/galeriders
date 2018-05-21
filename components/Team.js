@@ -1,10 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Well } from 'react-bootstrap';
-
-import getMonthRecords from '../lib/getMonthRecords.js';
-import Kilometers from './Kilometers.js';
-import sum from '../lib/sum.js';
 
 class Team extends React.Component {
   static propTypes = {
@@ -17,14 +12,16 @@ class Team extends React.Component {
     const { team, children, header } = this.props;
 
     return (
-      <Well
+      <div
         style={{
-          margin: 10,
+          position: 'relative',
         }}
       >
         <div
           style={{
-            position: 'relative',
+            position: header ? 'relative' : 'absolute',
+            left: 0,
+            right: 0,
             maxHeight: 150,
             ...(team.cover && {
               backgroundImage: `url(${team.cover.url})`,
@@ -53,7 +50,7 @@ class Team extends React.Component {
           >
             {team.name}:
           </div>
-          {(team.users || header) && (
+          {header && (
             <div
               style={{
                 position: 'absolute',
@@ -64,25 +61,22 @@ class Team extends React.Component {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                fontSize: 24,
                 color: 'white',
                 textShadow: '0 0 20px black',
               }}
             >
-              {header || (
-                <Kilometers
-                  hundreds={sum(
-                    getMonthRecords(
-                      [].concat(...team.users.map(u => u.records))
-                    ).map(r => r.hundreds)
-                  )}
-                />
-              )}
+              {header}
             </div>
           )}
         </div>
-        {children}
-      </Well>
+        <div
+          style={{
+            position: 'relative',
+          }}
+        >
+          {children}
+        </div>
+      </div>
     );
   }
 }

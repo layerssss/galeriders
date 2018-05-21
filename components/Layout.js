@@ -72,6 +72,10 @@ class Layout extends React.Component {
             pathname: '/myRecords',
           },
           {
+            title: '五月志',
+            pathname: '/timeline',
+          },
+          {
             title: '琅琊榜',
             pathname: '/leaderBoard',
           },
