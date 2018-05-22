@@ -703,6 +703,18 @@
     react-motion "^0.5.2"
     recompose "^0.26.0"
 
+"@nivo/stream@^0.36.0":
+  version "0.36.0"
+  resolved "https://registry.yarnpkg.com/@nivo/stream/-/stream-0.36.0.tgz#1821725b7b98cd6ce9b810b30306f525b77529ef"
+  dependencies:
+    "@nivo/core" "0.36.0"
+    "@nivo/legends" "0.35.2"
+    d3-format "^1.2.0"
+    d3-scale "^1.0.6"
+    d3-shape "^1.2.0"
+    lodash "^4.17.4"
+    recompose "^0.26.0"
+
 "@types/async@2.0.47":
   version "2.0.47"
   resolved "https://registry.yarnpkg.com/@types/async/-/async-2.0.47.tgz#f49ba1dd1f189486beb6e1d070a850f6ab4bd521"
