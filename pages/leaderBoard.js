@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
-import { Well } from 'react-bootstrap';
 
 import data from '../lib/data.js';
 import Layout from '../components/Layout.js';
@@ -55,20 +54,18 @@ class LeaderBoard extends React.Component {
 
     return (
       <Layout>
-        <Well>
-          {allUsers && (
-            <Rank
-              users={allUsers.filter(
-                u => u.team && u.team.published && u.team.cover
-              )}
-              records={[].concat(
-                ...allUsers.map(u =>
-                  getMonthRecords(u.records).map(r => ({ ...r, user: u }))
-                )
-              )}
-            />
-          )}
-        </Well>
+        {allUsers && (
+          <Rank
+            users={allUsers.filter(
+              u => u.team && u.team.published && u.team.cover
+            )}
+            records={[].concat(
+              ...allUsers.map(u =>
+                getMonthRecords(u.records).map(r => ({ ...r, user: u }))
+              )
+            )}
+          />
+        )}
       </Layout>
     );
   }
