@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import _ from 'lodash';
+import { Alert } from 'react-bootstrap';
 
 import data from '../lib/data.js';
 import Layout from '../components/Layout.js';
@@ -14,6 +15,7 @@ import getDayRecords from '../lib/getDayRecords.js';
 import getMonthRecords from '../lib/getMonthRecords.js';
 import sum from '../lib/sum.js';
 import moment from '../lib/moment.js';
+import may from '../lib/may.js';
 
 @data
 @graphql(
@@ -112,11 +114,17 @@ class May extends React.Component {
                             )}
                           />
                         </span>
-                        <br />
-                        今天累积里程:
-                        <Kilometers
-                          hundreds={sum(team.dayRecords.map(r => r.hundreds))}
-                        />
+                        {moment().isSame(may, 'month') && (
+                          <>
+                            <br />
+                            今天累积里程:
+                            <Kilometers
+                              hundreds={sum(
+                                team.dayRecords.map(r => r.hundreds)
+                              )}
+                            />
+                          </>
+                        )}
                       </div>
                     }
                   />
@@ -124,36 +132,42 @@ class May extends React.Component {
               ))}
         </div>
         <hr />
-        {allTeams && (
-          <div style={{ padding: 5, display: 'flex', flexFlow: 'row wrap' }}>
-            {sortRecords(
-              [].concat(
-                ...allTeams.map(team =>
-                  [].concat(
-                    ...team.users.map(user =>
-                      getDayRecords(user.records).map(record => ({
-                        ...record,
-                        user,
-                        team,
-                      }))
+        {!moment().isSame(may, 'month') && (
+          <Alert bsStyle="success">
+            五月挑战目前已经结束，看看五月志和琅琊榜吧。
+          </Alert>
+        )}
+        {allTeams &&
+          moment().isSame(may, 'month') && (
+            <div style={{ padding: 5, display: 'flex', flexFlow: 'row wrap' }}>
+              {sortRecords(
+                [].concat(
+                  ...allTeams.map(team =>
+                    [].concat(
+                      ...team.users.map(user =>
+                        getDayRecords(user.records).map(record => ({
+                          ...record,
+                          user,
+                          team,
+                        }))
+                      )
                     )
                   )
                 )
-              )
-            ).map(record => (
-              <div
-                key={record.id}
-                style={{ width: 170, flex: '0 0 auto', margin: '20px auto' }}
-              >
-                <Team header={<User user={record.user} />} team={record.team}>
-                  <div style={{ padding: 10 }}>
-                    <Record showUser={false} record={record} />
-                  </div>
-                </Team>
-              </div>
-            ))}
-          </div>
-        )}
+              ).map(record => (
+                <div
+                  key={record.id}
+                  style={{ width: 170, flex: '0 0 auto', margin: '20px auto' }}
+                >
+                  <Team header={<User user={record.user} />} team={record.team}>
+                    <div style={{ padding: 10 }}>
+                      <Record showUser={false} record={record} />
+                    </div>
+                  </Team>
+                </div>
+              ))}
+            </div>
+          )}
       </Layout>
     );
   }

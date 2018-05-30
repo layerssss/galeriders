@@ -12,12 +12,12 @@ import Kilometers from '../components/Kilometers.js';
 import Rank from '../components/Rank.js';
 import sum from '../lib/sum.js';
 import moment from '../lib/moment.js';
+import may from '../lib/may.js';
 
 const weeks = [];
 {
-  const may = moment('2018-05-01');
   let time = moment(may);
-  while (time.isSame('2018-05-01', 'month')) {
+  while (time.isSame(may, 'month')) {
     const start = moment(time).valueOf();
     let end = moment(time)
       .endOf('week')
