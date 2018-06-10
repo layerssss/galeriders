@@ -8,6 +8,7 @@ module.exports = {
     node: true,
   },
   rules: {
+    'react/sort-comp': 0,
     'react/prefer-stateless-function': 0,
     'no-alert': 0,
     'react/jsx-filename-extension': [
