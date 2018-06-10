@@ -50,7 +50,7 @@ class Record extends React.Component {
         </div>
         <div style={{ width: '40%' }}>
           {record.file && (
-            <a href={record.file.url} target="_blank">
+            <a href={record.file.url}>
               <Image src={record.file.url} style={{ width: '100%' }} />
             </a>
           )}
