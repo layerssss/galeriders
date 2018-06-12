@@ -10,8 +10,13 @@ ADD ./lib ./lib
 ADD ./components ./components
 ADD ./pages ./pages
 ADD ./.babelrc .
+ADD ./next.config.js ./next.config.js
+ADD ./scripts ./scripts
 
 RUN yarn build
 
-ENTRYPOINT yarn start --port 80
+
+ENV PORT '80'
+
+ENTRYPOINT yarn start
 
