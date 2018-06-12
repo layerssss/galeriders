@@ -4,16 +4,15 @@ import _ from 'lodash';
 
 import User from '../components/User.js';
 import Kilometers from './Kilometers.js';
-import sum from '../lib/sum.js';
 
 class Rank extends React.Component {
   static propTypes = {
     users: PropTypes.array.isRequired,
-    records: PropTypes.array.isRequired,
+    rankBy: PropTypes.func.isRequired,
   };
 
   render() {
-    const { users, records } = this.props;
+    const { users, rankBy } = this.props;
     return (
       <div
         style={{
@@ -23,63 +22,63 @@ class Rank extends React.Component {
         }}
       >
         {_.orderBy(
-          users.map(u => ({
-            ...u,
-            total: sum(
-              records.filter(r => r.user.id === u.id).map(r => r.hundreds)
-            ),
-          })),
-          [u => u.total, u => u.name],
-          ['desc', 'asc']
-        )
-          .filter(u => !!u.total)
-          .map((user, userIndex) => (
+          users
+            .map(user => ({
+              ...user,
+              score: rankBy(user),
+            }))
+            .filter(user => user.score),
+          u => u.score,
+          'desc'
+        ).map((user, userIndex) => (
+          <div
+            key={user.id}
+            style={{
+              width: 200,
+              flex: '1 1 auto',
+              margin: 10,
+              display: 'flex',
+              flexFlow: 'row nowrap',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              background: [
+                `linear-gradient(to right, transparent, rgba(200, 200, 200, 0.7) 50%, #f9f9f9)`,
+                !user.team
+                  ? '#ccc'
+                  : `left center / cover no-repeat url(${user.team.cover_url})`,
+              ].join(', '),
+              color: 'black',
+              padding: '10px 2px',
+            }}
+          >
             <div
-              key={user.id}
               style={{
-                width: 200,
-                flex: '1 1 auto',
-                margin: 10,
-                display: 'flex',
-                flexFlow: 'row nowrap',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                background: [
-                  `linear-gradient(to right, transparent, rgba(200, 200, 200, 0.7) 50%, #f9f9f9)`,
-                  `left center / cover no-repeat url(${user.team.cover.url})`,
-                ].join(', '),
-                color: 'black',
-                padding: '10px 2px',
+                marginLeft: 10,
+                width: 40,
+                color: 'white',
+                fontWeight: 'bold',
+                textShadow: '0 0 5px black',
               }}
             >
-              <div
+              #
+              <span
                 style={{
-                  marginLeft: 10,
-                  width: 40,
-                  color: 'white',
-                  fontWeight: 'bold',
-                  textShadow: '0 0 5px black',
+                  fontSize: '1.5em',
                 }}
               >
-                #
-                <span
-                  style={{
-                    fontSize: '1.5em',
-                  }}
-                >
-                  {userIndex + 1}
-                </span>
-              </div>
-              <User user={user} />
-              <div
-                style={{ lineHeight: 1, textAlign: 'right', flex: '1 1 auto' }}
-              >
-                {user.name}
-                <br />
-                <Kilometers hundreds={user.total} />
-              </div>
+                {userIndex + 1}
+              </span>
             </div>
-          ))}
+            <User user={user} />
+            <div
+              style={{ lineHeight: 1, textAlign: 'right', flex: '1 1 auto' }}
+            >
+              {user.full_name}
+              <br />
+              <Kilometers hundreds={user.score} />
+            </div>
+          </div>
+        ))}
       </div>
     );
   }

@@ -1,11 +1,10 @@
 import React from 'react';
-import moment from 'moment';
 import PropTypes from 'prop-types';
 import { Image } from 'react-bootstrap';
 
 import User from './User.js';
-import timezone from '../lib/timezone.js';
 import Kilometers from './Kilometers.js';
+import moment from '../lib/moment.js';
 
 class Record extends React.Component {
   static propTypes = {
@@ -19,7 +18,7 @@ class Record extends React.Component {
 
   render() {
     const { record, showUser } = this.props;
-    const today = moment().tz(timezone);
+    const today = moment();
 
     return (
       <div
@@ -42,18 +41,16 @@ class Record extends React.Component {
           )}
           <Kilometers hundreds={record.hundreds} />
           <br />
-          {record.user.name}
+          {record.user.full_name}
           <br />
-          {moment(record.date).isSame(today, 'week')
-            ? moment(record.date).calendar()
-            : moment(record.date).format('Do dddd LT')}
+          {moment(record.time).isSame(today, 'week')
+            ? moment(record.time).calendar()
+            : moment(record.time).format('Do dddd LT')}
         </div>
         <div style={{ width: '40%' }}>
-          {record.file && (
-            <a href={record.file.url}>
-              <Image src={record.file.url} style={{ width: '100%' }} />
-            </a>
-          )}
+          <a href={record.picture_url}>
+            <Image src={record.picture_url} style={{ width: '100%' }} />
+          </a>
         </div>
       </div>
     );

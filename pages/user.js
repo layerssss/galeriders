@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
-import _ from 'lodash';
 import { Button, Panel, Form, FormGroup, FormControl } from 'react-bootstrap';
 
 import data from '../lib/data.js';
@@ -10,34 +9,34 @@ import Markdown from '../components/Markdown';
 import Layout from '../components/Layout.js';
 import Team from '../components/Team.js';
 import Record from '../components/Record';
+import Kilometers from '../components/Kilometers';
 import User from '../components/User';
-import moment from '../lib/moment.js';
-import getMonthRecords from '../lib/getMonthRecords.js';
 
 @data
 @graphql(
   gql`
     query($userId: ID!) {
-      user: User(id: $userId) {
+      user(id: $userId) {
         id
-        name
+        full_name
         description
-        auth0UserId
+        picture_url
+        month_total_hundreds
         team {
           id
           name
-          cover {
-            id
-            url
-          }
+          cover_url
+          color
         }
-        records {
+        month_records {
           id
           hundreds
-          date
-          file {
+          time
+          picture_url
+          user {
             id
-            url
+            picture_url
+            full_name
           }
         }
       }
@@ -54,7 +53,7 @@ import getMonthRecords from '../lib/getMonthRecords.js';
 @graphql(
   gql`
     mutation($userId: ID!, $description: String!) {
-      updateUser(id: $userId, description: $description) {
+      update_user_description(id: $userId, description: $description) {
         id
         description
       }
@@ -89,23 +88,27 @@ class UserPage extends React.PureComponent {
 
     const { useSpinner } = this.context;
 
-    const sortRecords = records =>
-      _.orderBy(records, [r => moment(r.date).valueOf()], ['desc']);
-
     return (
-      <Layout pageTitle={user && user.name} categoryTitle="五月挑战">
+      <Layout pageTitle={user && user.full_name} categoryTitle="五月挑战">
         {user && (
           <Team
             team={user.team}
             header={
               <>
-                <User user={user} />
-                {user.name}
+                <p>
+                  <User user={user} />
+                  {user.full_name}
+                </p>
               </>
             }
           >
             <Panel>
               <Panel.Body>
+                <p>
+                  五月累积里程：<Kilometers
+                    hundreds={user.month_total_hundreds}
+                  />
+                </p>
                 {!this.state.editing && <Markdown source={user.description} />}
                 {!this.state.editing && (
                   <Button
@@ -162,9 +165,9 @@ class UserPage extends React.PureComponent {
                 flexFlow: 'row wrap',
               }}
             >
-              {sortRecords(getMonthRecords(user.records)).map(record => (
+              {user.month_records.map(record => (
                 <div key={record.id} style={{ width: 200, flex: '0 0 auto' }}>
-                  <Record record={{ ...record, user }} />
+                  <Record record={record} />
                 </div>
               ))}
             </div>

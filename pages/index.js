@@ -11,9 +11,6 @@ import Record from '../components/Record';
 import Team from '../components/Team';
 import User from '../components/User';
 import Kilometers from '../components/Kilometers';
-import getDayRecords from '../lib/getDayRecords.js';
-import getMonthRecords from '../lib/getMonthRecords.js';
-import sum from '../lib/sum.js';
 import moment from '../lib/moment.js';
 import may from '../lib/may.js';
 
@@ -21,27 +18,30 @@ import may from '../lib/may.js';
 @graphql(
   gql`
     query {
-      allTeams(filter: { published: true }) {
+      all_teams {
         id
         name
-        order
+        team_order
         color
-        cover {
+        cover_url
+
+        month_total_hundreds
+        day_total_hundreds
+      }
+
+      all_day_records {
+        id
+        hundreds
+        time
+        picture_url
+        user {
           id
-          url
-        }
-        users {
-          id
-          name
-          auth0UserId
-          records {
+          full_name
+          picture_url
+
+          team {
             id
-            hundreds
-            date
-            file {
-              id
-              url
-            }
+            cover_url
           }
         }
       }
@@ -59,12 +59,12 @@ class May extends React.Component {
 
   render() {
     const {
-      data: { allTeams },
+      data: { all_teams, all_day_records },
     } = this.props;
 
     const sortTeams = teams => _.sortBy(teams, t => t.order);
     const sortRecords = records =>
-      _.orderBy(records, [r => moment(r.date).valueOf()], ['desc']);
+      _.orderBy(records, [r => moment(r.time).valueOf()], ['desc']);
 
     return (
       <Layout>
@@ -76,60 +76,35 @@ class May extends React.Component {
             alignItems: 'flex-start',
           }}
         >
-          {allTeams &&
-            sortTeams(allTeams)
-              .map(team => ({
-                ...team,
-                dayRecords: getDayRecords(
-                  [].concat(
-                    ...team.users.map(u =>
-                      u.records.map(r => ({
-                        // wrap it
-                        ...r,
-                        user: { ...u },
-                      }))
-                    )
-                  )
-                ),
-              }))
-              .map(team => (
-                <div
-                  key={team.id}
-                  style={{
-                    width: 240,
-                    margin: 5,
-                    flex: '1 0 auto',
-                  }}
-                >
-                  <Team
-                    team={team}
-                    header={
-                      <div>
-                        <span style={{ fontSize: 20 }}>
-                          <Kilometers
-                            hundreds={sum(
-                              getMonthRecords(
-                                [].concat(...team.users.map(u => u.records))
-                              ).map(r => r.hundreds)
-                            )}
-                          />
-                        </span>
-                        {moment().isSame(may, 'month') && (
-                          <>
-                            <br />
-                            今天累积里程:
-                            <Kilometers
-                              hundreds={sum(
-                                team.dayRecords.map(r => r.hundreds)
-                              )}
-                            />
-                          </>
-                        )}
-                      </div>
-                    }
-                  />
-                </div>
-              ))}
+          {all_teams &&
+            sortTeams(all_teams).map(team => (
+              <div
+                key={team.id}
+                style={{
+                  width: 240,
+                  margin: 5,
+                  flex: '1 0 auto',
+                }}
+              >
+                <Team
+                  team={team}
+                  header={
+                    <div>
+                      <span style={{ fontSize: 20 }}>
+                        <Kilometers hundreds={team.month_total_hundreds} />
+                      </span>
+                      {moment().isSame(may, 'month') && (
+                        <>
+                          <br />
+                          今天累积里程:
+                          <Kilometers hundreds={team.day_total_hundreds} />
+                        </>
+                      )}
+                    </div>
+                  }
+                />
+              </div>
+            ))}
         </div>
         <hr />
         {!moment().isSame(may, 'month') && (
@@ -137,24 +112,10 @@ class May extends React.Component {
             五月挑战目前已经结束，看看五月志和琅琊榜吧。
           </Alert>
         )}
-        {allTeams &&
+        {all_day_records &&
           moment().isSame(may, 'month') && (
             <div style={{ padding: 5, display: 'flex', flexFlow: 'row wrap' }}>
-              {sortRecords(
-                [].concat(
-                  ...allTeams.map(team =>
-                    [].concat(
-                      ...team.users.map(user =>
-                        getDayRecords(user.records).map(record => ({
-                          ...record,
-                          user,
-                          team,
-                        }))
-                      )
-                    )
-                  )
-                )
-              ).map(record => (
+              {sortRecords(all_day_records).map(record => (
                 <div
                   key={record.id}
                   style={{ width: 170, flex: '0 0 auto', margin: '20px auto' }}

@@ -32,8 +32,8 @@ class Layout extends React.Component {
   };
 
   static contextTypes = {
-    user: PropTypes.object,
-    allTeams: PropTypes.array,
+    current_user: PropTypes.object,
+    all_teams: PropTypes.array,
     login: PropTypes.func.isRequired,
   };
 
@@ -55,7 +55,7 @@ class Layout extends React.Component {
   render() {
     const { children, router } = this.props;
     let { pageTitle, categoryTitle } = this.props;
-    const { user, login, allTeams } = this.context;
+    const { current_user, login, all_teams } = this.context;
 
     const featuredItems = ['Galeriders', '五月挑战'];
 
@@ -79,7 +79,7 @@ class Layout extends React.Component {
             title: '琅琊榜',
             pathname: '/leaderBoard',
           },
-          ...(allTeams || []).map(team => ({
+          ...(all_teams || []).map(team => ({
             title: team.name,
             pathname: '/team',
             query: {
@@ -198,7 +198,7 @@ class Layout extends React.Component {
               margin: '0 10px',
             }}
           >
-            {!user ? (
+            {!current_user ? (
               <Button onClick={() => login()}>
                 <span className="fa fa-user" />登录
               </Button>
@@ -211,12 +211,10 @@ class Layout extends React.Component {
                       height: '2em',
                       width: '2em',
                     }}
-                    src={`//graph.facebook.com/${
-                      user.auth0UserId.split('|')[1]
-                    }/picture?type=square`}
-                    alt={`${user.name}的照片`}
+                    src={current_user.picture_url}
+                    alt={`${current_user.name}的照片`}
                   />
-                  {user.name}
+                  {current_user.name}
                 </Button>
               </React.Fragment>
             )}

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
-import _ from 'lodash';
 import {
   Button,
   Panel,
@@ -22,8 +21,6 @@ import uploadFile from '../lib/uploadFile.js';
 import Record from '../components/Record.js';
 import User from '../components/User.js';
 import Team from '../components/Team.js';
-import getDayRecords from '../lib/getDayRecords.js';
-import getMonthRecords from '../lib/getMonthRecords.js';
 import moment from '../lib/moment.js';
 import withUser from '../lib/withUser.js';
 
@@ -32,37 +29,42 @@ import withUser from '../lib/withUser.js';
 @graphql(
   gql`
     query {
-      allTeams {
+      all_teams {
         id
         name
-        published
-        order
         color
-        cover {
-          id
-          url
-        }
+        cover_url
       }
-      user {
+      current_user {
         id
-        name
-        auth0UserId
+        full_name
+        picture_url
         team {
           id
           name
           color
-          cover {
-            id
-            url
-          }
+          cover_url
         }
-        records {
+        day_records {
           id
           hundreds
-          date
-          file {
+          time
+          picture_url
+          user {
             id
-            url
+            full_name
+            picture_url
+          }
+        }
+        month_records {
+          id
+          hundreds
+          time
+          picture_url
+          user {
+            id
+            full_name
+            picture_url
           }
         }
       }
@@ -71,15 +73,10 @@ import withUser from '../lib/withUser.js';
 )
 @graphql(
   gql`
-    mutation($userId: ID!, $teamId: ID!) {
-      addToTeamOnUser(usersUserId: $userId, teamTeamId: $teamId) {
-        usersUser {
-          id
-          team {
-            id
-          }
-        }
-        teamTeam {
+    mutation($teamId: ID!) {
+      join_team(id: $teamId) {
+        id
+        team {
           id
           users {
             id
@@ -92,30 +89,32 @@ import withUser from '../lib/withUser.js';
 )
 @graphql(
   gql`
-    mutation($date: DateTime!, $hundreds: Int!, $userId: ID!, $fileId: ID!) {
-      createRecord(
-        date: $date
-        hundreds: $hundreds
-        userId: $userId
-        fileId: $fileId
-      ) {
+    mutation($hundreds: Int!, $picture_url: String!) {
+      create_record(hundreds: $hundreds, picture_url: $picture_url) {
         id
         user {
           id
-          records {
+          day_total_hundreds
+          month_total_hundreds
+          team {
             id
-            date
-            hundreds
-            file {
+            day_total_hundreds
+            month_total_hundreds
+            day_records {
               id
-              url
             }
+            month_records {
+              id
+            }
+          }
+          day_records {
+            id
           }
         }
       }
     }
   `,
-  { name: 'addRecord' }
+  { name: 'createRecord' }
 )
 class MyRecords extends React.Component {
   static async getInitialProps() {
@@ -125,7 +124,7 @@ class MyRecords extends React.Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
     joinTeam: PropTypes.func.isRequired,
-    addRecord: PropTypes.func.isRequired,
+    createRecord: PropTypes.func.isRequired,
   };
 
   static contextTypes = {
@@ -138,25 +137,17 @@ class MyRecords extends React.Component {
 
   render() {
     const {
-      data: { allTeams, user: currentUser },
+      data: { all_teams, current_user },
       joinTeam,
-      addRecord,
+      createRecord,
     } = this.props;
     const { useSpinner } = this.context;
 
-    const myRecordsToday = !currentUser
-      ? []
-      : getDayRecords(currentUser.records);
-
-    const sortTeams = teams => _.sortBy(teams, t => t.order);
-    const sortRecords = records =>
-      _.orderBy(records, [r => moment(r.date).valueOf()], ['desc']);
-
     return (
       <Layout>
-        {currentUser && (
+        {current_user && (
           <>
-            {!currentUser.team && (
+            {!current_user.team && (
               <Panel>
                 <Panel.Body>
                   <Alert bsStyle="warning">
@@ -177,22 +168,19 @@ class MyRecords extends React.Component {
                         await joinTeam({
                           variables: {
                             teamId: selectedElement.value,
-                            userId: currentUser.id,
                           },
                         });
                       })
                     }
                   >
                     <FormGroup>
-                      {sortTeams(allTeams.filter(t => t.published)).map(
-                        team => (
-                          <React.Fragment key={team.id}>
-                            <Radio name="team" value={team.id} inline>
-                              {team.name}
-                            </Radio>{' '}
-                          </React.Fragment>
-                        )
-                      ) || <Alert>我今天还没跑呢</Alert>}
+                      {all_teams.map(team => (
+                        <React.Fragment key={team.id}>
+                          <Radio name="team" value={team.id} inline>
+                            {team.name}
+                          </Radio>{' '}
+                        </React.Fragment>
+                      ))}
                     </FormGroup>
                     <FormGroup>
                       <Button type="submit">确认</Button>
@@ -201,20 +189,20 @@ class MyRecords extends React.Component {
                 </Panel.Body>
               </Panel>
             )}
-            {currentUser.team && (
+            {current_user.team && (
               <Team
                 header={
                   <div>
-                    <User user={currentUser} />
-                    {currentUser.name}
+                    <User user={current_user} />
+                    {current_user.full_name}
                   </div>
                 }
-                team={currentUser.team}
+                team={current_user.team}
               >
                 {moment().isSame(may, 'month') ? (
                   <div style={{ padding: 10 }}>
                     <p>我今天的记录：</p>
-                    {!myRecordsToday.length ? (
+                    {!current_user.day_records.length ? (
                       <Alert bsStyle="warning">我今天还没跑步呢</Alert>
                     ) : (
                       <div
@@ -223,7 +211,7 @@ class MyRecords extends React.Component {
                           flexFlow: 'row wrap',
                         }}
                       >
-                        {sortRecords([...myRecordsToday]).map(record => (
+                        {current_user.day_records.map(record => (
                           <div
                             key={record.id}
                             style={{
@@ -231,7 +219,7 @@ class MyRecords extends React.Component {
                               margin: 5,
                             }}
                           >
-                            <Record record={{ ...record, user: currentUser }} />
+                            <Record record={record} />
                           </div>
                         ))}
                       </div>
@@ -249,7 +237,6 @@ class MyRecords extends React.Component {
                           useSpinner(async () => {
                             event.preventDefault();
                             const form = event.currentTarget;
-                            const date = new Date();
                             const hundreds =
                               Number(
                                 form.querySelector('[name="hundreds"]').value
@@ -273,14 +260,12 @@ class MyRecords extends React.Component {
                             )
                               return;
 
-                            const { id: fileId } = await uploadFile(file);
+                            const { url: picture_url } = await uploadFile(file);
 
-                            await addRecord({
+                            await createRecord({
                               variables: {
-                                date,
                                 hundreds,
-                                fileId,
-                                userId: currentUser.id,
+                                picture_url,
                               },
                             });
 
@@ -351,19 +336,17 @@ class MyRecords extends React.Component {
                         flexFlow: 'row wrap',
                       }}
                     >
-                      {sortRecords(getMonthRecords(currentUser.records)).map(
-                        record => (
-                          <div
-                            key={record.id}
-                            style={{
-                              width: 240,
-                              margin: 5,
-                            }}
-                          >
-                            <Record record={{ ...record, user: currentUser }} />
-                          </div>
-                        )
-                      )}
+                      {current_user.month_records.map(record => (
+                        <div
+                          key={record.id}
+                          style={{
+                            width: 240,
+                            margin: 5,
+                          }}
+                        >
+                          <Record record={record} />
+                        </div>
+                      ))}
                     </div>
                   </div>
                 )}

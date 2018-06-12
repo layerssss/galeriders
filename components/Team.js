@@ -16,7 +16,9 @@ class Team extends React.Component {
       <div
         style={{
           position: 'relative',
-          boxShadow: `0 2px 10px ${tinycolor(team.color).darken(50).toString()}`,
+          boxShadow: `0 2px 10px ${tinycolor(team.color)
+            .darken(50)
+            .toString()}`,
         }}
       >
         <div
@@ -25,12 +27,10 @@ class Team extends React.Component {
             left: 0,
             right: 0,
             maxHeight: 150,
-            ...(team.cover && {
-              backgroundImage: `url(${team.cover.url})`,
-              backgroundPosition: 'center',
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat',
-            }),
+            backgroundImage: `url(${team.cover_url})`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
           }}
         >
           <div

@@ -11,14 +11,13 @@ class User extends React.Component {
 
   render() {
     const { user } = this.props;
-    const facebookId = user.auth0UserId.split('|')[1];
 
     return (
       <Link href={{ pathname: '/user', query: { id: user.id } }}>
         <a>
           <Image
-            src={`//graph.facebook.com/${facebookId}/picture?type=square`}
-            alt={user.name}
+            src={user.picture_url}
+            alt={user.full_name}
             circle
             style={{
               width: 40,

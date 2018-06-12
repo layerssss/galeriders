@@ -2,60 +2,40 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
-import _ from 'lodash';
 import { Nav, NavItem } from 'react-bootstrap';
 
+import sum from '../lib/sum.js';
 import data from '../lib/data.js';
 import Layout from '../components/Layout.js';
 import Team from '../components/Team.js';
 import Kilometers from '../components/Kilometers.js';
 import Rank from '../components/Rank.js';
-import sum from '../lib/sum.js';
 import moment from '../lib/moment.js';
-import may from '../lib/may.js';
-
-const weeks = [];
-{
-  let time = moment(may);
-  while (time.isSame(may, 'month')) {
-    const start = moment(time).valueOf();
-    let end = moment(time)
-      .endOf('week')
-      .valueOf();
-    if (!moment(end).isSame(may, 'month')) end = moment(may).endOf('month');
-    weeks.push({
-      start,
-      end,
-    });
-    time = moment(end).add(1, 'day');
-  }
-}
 
 @data
 @graphql(
   gql`
     query {
-      allTeams(filter: { published: true }) {
+      weeks {
+        id
+        start_day
+        end_day
+      }
+      all_teams {
         id
         name
-        order
+        week_hundreds
         color
-        cover {
-          id
-          url
-        }
+        cover_url
         users {
           id
-          name
-          auth0UserId
-          records {
+          full_name
+          picture_url
+          week_hundreds
+          team {
             id
-            hundreds
-            date
-            file {
-              id
-              url
-            }
+            cover_url
+            color
           }
         }
       }
@@ -68,76 +48,50 @@ class TimelinePage extends React.Component {
   };
 
   state = {
-    week: weeks[0],
+    weekIndex: 0,
   };
 
   render() {
     const {
-      data: { allTeams },
+      data: { all_teams, weeks },
     } = this.props;
 
-    const sortTeams = teams => _.sortBy(teams, t => t.order);
+    const week = !weeks ? null : [this.state.weekIndex];
 
     return (
       <Layout>
         <Nav bsStyle="tabs">
-          {weeks.map(week => (
+          {weeks.map(({ id, start_day, end_day }, weekIndex) => (
             <NavItem
-              active={this.state.week.start === week.start}
-              key={week.start}
+              active={this.state.weekIndex === weekIndex}
+              key={id}
               onClick={event => {
                 event.preventDefault();
 
-                this.setState({ week });
+                this.setState({ weekIndex });
               }}
             >
-              {moment(week.start).format('MMMDo')} ~{' '}
-              {moment(week.end).format('MMMDo')}
+              {moment(start_day).format('MMMDo')} ~{' '}
+              {moment(end_day).format('MMMDo')}
             </NavItem>
           ))}
         </Nav>
-        {allTeams && (
-          <>
-            <h2 style={{ textAlign: 'center' }}>
-              {moment(this.state.week.start).format('MMMDo')} ~{' '}
-              {moment(this.state.week.end).format('MMMDo')}
-            </h2>
-            <div
-              style={{
-                display: 'flex',
-                flexFlow: 'row wrap',
-                justifyContent: 'center',
-                alignItems: 'flex-start',
-              }}
-            >
-              {sortTeams(allTeams)
-                .map(team => ({
-                  ...team,
-                  records: [].concat(
-                    ...team.users.map(u =>
-                      u.records.map(r => ({
-                        // wrap it
-                        ...r,
-                        user: { ...u },
-                      }))
-                    )
-                  ),
-                }))
-                .map(({ records, ...team }) => ({
-                  ...team,
-                  weekRecords: records.filter(
-                    r =>
-                      moment(r.date).isSameOrAfter(
-                        this.state.week.start,
-                        'day'
-                      ) &&
-                      moment(r.date).isSameOrBefore(this.state.week.end, 'day')
-                  ),
-                  sumRecords: records.filter(r =>
-                    moment(r.date).isSameOrBefore(this.state.week.end, 'day')
-                  ),
-                }))
-                .map(({ weekRecords, sumRecords, ...team }) => (
+        {all_teams &&
+          week && (
+            <>
+              <h2 style={{ textAlign: 'center' }}>
+                {moment(week.start_day).format('MMMDo')} ~{' '}
+                {moment(week.end_day).format('MMMDo')}
+              </h2>
+              <div
+                style={{
+                  display: 'flex',
+                  flexFlow: 'row wrap',
+                  justifyContent: 'center',
+                  alignItems: 'flex-start',
+                }}
+              >
+                {all_teams.map(team => (
                   <div
                     key={team.id}
                     style={{
@@ -152,27 +106,36 @@ class TimelinePage extends React.Component {
                         <div>
                           <span style={{ fontSize: 20 }}>
                             <Kilometers
-                              hundreds={sum(weekRecords.map(r => r.hundreds))}
+                              hundreds={
+                                team.week_hundreds[this.state.weekIndex]
+                              }
                             />
                           </span>
                           <br />
                           该周累积里程:
                           <Kilometers
-                            hundreds={sum(sumRecords.map(r => r.hundreds))}
+                            hundreds={sum(
+                              team.week_hundreds.slice(
+                                0,
+                                this.state.weekIndex + 1
+                              )
+                            )}
                           />
                         </div>
                       }
                     >
                       <Rank
-                        users={team.users.map(user => ({ ...user, team }))}
-                        records={weekRecords}
+                        users={team.users}
+                        rankBy={user =>
+                          user.week_hundreds[this.state.weekIndex]
+                        }
                       />
                     </Team>
                   </div>
                 ))}
-            </div>
-          </>
-        )}
+              </div>
+            </>
+          )}
       </Layout>
     );
   }

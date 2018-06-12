@@ -11,53 +11,55 @@ import Rank from '../components/Rank.js';
 import Team from '../components/Team.js';
 import Record from '../components/Record';
 import Kilometers from '../components/Kilometers';
-import getMonthRecords from '../lib/getMonthRecords.js';
 import moment from '../lib/moment.js';
-import sum from '../lib/sum.js';
 
 @data
 @graphql(
   gql`
-    query($teamId: ID!) {
-      team: Team(id: $teamId) {
+    query($team_id: ID!) {
+      team(id: $team_id) {
         id
         name
-        published
-        order
         color
-        cover {
-          id
-          url
-        }
+        cover_url
+        month_total_hundreds
         users {
           id
-          name
-          auth0UserId
-          records {
+          full_name
+          picture_url
+          month_total_hundreds
+          team {
             id
-            hundreds
-            date
-            file {
-              id
-              url
-            }
+            color
+            cover_url
+          }
+        }
+        month_records {
+          id
+          hundreds
+          time
+          picture_url
+          user {
+            id
+            full_name
+            picture_url
           }
         }
       }
     }
   `,
   {
-    options: ({ teamId }) => ({
+    options: ({ team_id }) => ({
       variables: {
-        teamId,
+        team_id,
       },
     }),
   }
 )
 class TeamPage extends React.PureComponent {
   static async getInitialProps({ query }) {
-    const teamId = query.id;
-    return { teamId };
+    const team_id = query.id;
+    return { team_id };
   }
 
   static propTypes = {
@@ -68,22 +70,6 @@ class TeamPage extends React.PureComponent {
     const {
       data: { team },
     } = this.props;
-
-    const sortRecords = records =>
-      _.orderBy(records, [r => moment(r.date).valueOf()], ['desc']);
-
-    const monthRecords = getMonthRecords(
-      sortRecords(
-        [].concat(
-          ...team.users.map(u =>
-            u.records.map(r => ({
-              ...r,
-              user: u,
-            }))
-          )
-        )
-      )
-    );
 
     return (
       <Layout>
@@ -96,7 +82,7 @@ class TeamPage extends React.PureComponent {
               <div style={{ textAlign: 'center' }}>
                 {team.name}
                 <br />
-                <Kilometers hundreds={sum(monthRecords.map(r => r.hundreds))} />
+                <Kilometers hundreds={team.month_total_hundreds} />
               </div>
             }
           >
@@ -120,8 +106,8 @@ class TeamPage extends React.PureComponent {
                     <Panel.Title>{team.name}</Panel.Title>
                   </Panel.Heading>
                   <Rank
-                    users={team.users.map(u => ({ ...u, team }))}
-                    records={monthRecords}
+                    users={team.users}
+                    rankBy={user => user.month_total_hundreds}
                   />
                 </Panel>
               </div>
@@ -133,7 +119,9 @@ class TeamPage extends React.PureComponent {
                 }}
               >
                 {Object.entries(
-                  _.groupBy(monthRecords, r => moment(r.date).format('dddd Do'))
+                  _.groupBy(team.month_records, r =>
+                    moment(r.time).format('dddd Do')
+                  )
                 ).map(([day, records]) => (
                   <Panel key={day}>
                     <Panel.Heading>
