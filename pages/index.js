@@ -21,7 +21,6 @@ import may from '../lib/may.js';
       all_teams {
         id
         name
-        team_order
         color
         cover_url
 
