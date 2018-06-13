@@ -39,7 +39,7 @@ runAsync(async () => {
   const httpServer = http.createServer(expressApp);
 
   await new Promise((resolve, reject) => {
-    httpServer.listen(process.env.PORT || 3000, resolve);
+    httpServer.listen(process.env.PORT || 3001, resolve);
     httpServer.on('error', reject);
   });
 
