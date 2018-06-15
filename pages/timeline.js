@@ -56,7 +56,7 @@ class TimelinePage extends React.Component {
       data: { all_teams, weeks },
     } = this.props;
 
-    const week = !weeks ? null : [this.state.weekIndex];
+    const week = !weeks ? null : weeks[this.state.weekIndex];
 
     return (
       <Layout>
