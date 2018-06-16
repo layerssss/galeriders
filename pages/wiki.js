@@ -1,80 +1,99 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Label } from 'react-bootstrap';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 
 import Layout from '../components/Layout.js';
 import Markdown from '../components/Markdown.js';
-import contentful from '../lib/contentful.js';
 import data from '../lib/data.js';
 
 @data
+@graphql(
+  gql`
+    query($title: String!) {
+      wiki_item(title: $title) {
+        id
+        title
+        content
+        aliases
+        updated_at
+      }
+    }
+  `,
+  {
+    options: ({ title }) => ({
+      variables: {
+        title,
+      },
+    }),
+  }
+)
 class WikiPage extends React.Component {
   static async getInitialProps({ query: { name } }) {
-    const {
-      items: [item],
-    } = await contentful.getEntries({
-      content_type: 'wiki',
-      'fields.name': name,
-    });
-
-    if (!item) throw new Error('该词条可能已被删除');
-
     return {
-      item,
+      title: name,
     };
   }
 
   static propTypes = {
-    item: PropTypes.object.isRequired,
+    data: PropTypes.object.isRequired,
+    title: PropTypes.string.isRequired,
   };
 
   render() {
-    const { item } = this.props;
+    const {
+      title,
+      data: { wiki_item },
+    } = this.props;
 
     return (
-      <Layout pageTitle={`“${item.fields.name}”`} categoryTitle="风车大百科">
-        <p>
-          别名：
-          {item.fields.aliases &&
-            item.fields.aliases.map(alias => (
-              <Label bsStyle="info" style={{ margin: 5 }} key={alias}>
-                {alias}
-              </Label>
-            ))}
-        </p>
-        <div
-          style={{
-            display: 'flex',
-            flexFlow: 'row nowrap',
-          }}
-        >
-          <span
-            style={{
-              fontSize: '5em',
-              color: '#ccc',
-              alignSelf: 'flex-start',
-            }}
-          >
-            “
-          </span>
-          <Markdown
-            style={{
-              fontSize: '1.3em',
-              maxWidth: 600,
-              margin: 20,
-            }}
-            source={item.fields.content}
-          />
-          <span
-            style={{
-              fontSize: '5em',
-              color: '#ccc',
-              alignSelf: 'flex-end',
-            }}
-          >
-            ”
-          </span>
-        </div>
+      <Layout pageTitle={`“${title}”`} categoryTitle="风车大百科">
+        {wiki_item && (
+          <>
+            <p>
+              别名：
+              {wiki_item.aliases.map(alias => (
+                <Label bsStyle="info" style={{ margin: 5 }} key={alias}>
+                  {alias}
+                </Label>
+              ))}
+            </p>
+            <div
+              style={{
+                display: 'flex',
+                flexFlow: 'row nowrap',
+              }}
+            >
+              <span
+                style={{
+                  fontSize: '5em',
+                  color: '#ccc',
+                  alignSelf: 'flex-start',
+                }}
+              >
+                “
+              </span>
+              <Markdown
+                style={{
+                  fontSize: '1.3em',
+                  maxWidth: 600,
+                  margin: 20,
+                }}
+                source={wiki_item.content}
+              />
+              <span
+                style={{
+                  fontSize: '5em',
+                  color: '#ccc',
+                  alignSelf: 'flex-end',
+                }}
+              >
+                ”
+              </span>
+            </div>
+          </>
+        )}
       </Layout>
     );
   }
