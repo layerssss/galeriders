@@ -16,6 +16,10 @@ import User from '../components/User';
 @graphql(
   gql`
     query($userId: ID!) {
+      current_user {
+        id
+        is_admin
+      }
       user(id: $userId) {
         id
         full_name
@@ -82,7 +86,7 @@ class UserPage extends React.PureComponent {
 
   render() {
     const {
-      data: { user },
+      data: { user, current_user },
       updateUserDescription,
     } = this.props;
 
@@ -110,14 +114,16 @@ class UserPage extends React.PureComponent {
                   />
                 </p>
                 {!this.state.editing && <Markdown source={user.description} />}
-                {!this.state.editing && (
-                  <Button
-                    bsStyle="info"
-                    onClick={() => this.setState({ editing: true })}
-                  >
-                    修改简介
-                  </Button>
-                )}
+                {!this.state.editing &&
+                  current_user &&
+                  (current_user.is_admin || current_user.id === user.id) && (
+                    <Button
+                      bsStyle="info"
+                      onClick={() => this.setState({ editing: true })}
+                    >
+                      修改简介
+                    </Button>
+                  )}
                 {this.state.editing && (
                   <Form
                     onSubmit={event =>
