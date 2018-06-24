@@ -15,7 +15,6 @@ import {
 } from 'react-bootstrap';
 
 import data from '../lib/data.js';
-import may from '../lib/may.js';
 import Layout from '../components/Layout.js';
 import uploadFile from '../lib/uploadFile.js';
 import Record from '../components/Record.js';
@@ -35,6 +34,7 @@ import withUser from '../lib/withUser.js';
         color
         cover_url
       }
+      month
       current_user {
         id
         full_name
@@ -92,22 +92,32 @@ import withUser from '../lib/withUser.js';
     mutation($hundreds: Int!, $picture_url: String!) {
       create_record(hundreds: $hundreds, picture_url: $picture_url) {
         id
+        time
+        hundreds
+        picture_url
         user {
           id
           day_total_hundreds
           month_total_hundreds
-          team {
-            id
-            day_total_hundreds
-            month_total_hundreds
-            day_records {
-              id
-            }
-            month_records {
-              id
-            }
-          }
           day_records {
+            id
+          }
+        }
+
+        day {
+          records {
+            id
+          }
+        }
+
+        team {
+          id
+          day_total_hundreds
+          month_total_hundreds
+          day_records {
+            id
+          }
+          month_records {
             id
           }
         }
@@ -137,7 +147,7 @@ class MyRecords extends React.Component {
 
   render() {
     const {
-      data: { all_teams, current_user },
+      data: { all_teams, current_user, month },
       joinTeam,
       createRecord,
     } = this.props;
@@ -199,7 +209,7 @@ class MyRecords extends React.Component {
                 }
                 team={current_user.team}
               >
-                {moment().isSame(may, 'month') ? (
+                {moment().isSame(month, 'month') ? (
                   <div style={{ padding: 10 }}>
                     <p>我今天的记录：</p>
                     {!current_user.day_records.length ? (

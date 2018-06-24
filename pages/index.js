@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
-import _ from 'lodash';
 import { Alert } from 'react-bootstrap';
 
 import data from '../lib/data.js';
@@ -12,12 +11,12 @@ import Team from '../components/Team';
 import User from '../components/User';
 import Kilometers from '../components/Kilometers';
 import moment from '../lib/moment.js';
-import may from '../lib/may.js';
 
 @data
 @graphql(
   gql`
     query {
+      month
       all_teams {
         id
         name
@@ -28,18 +27,21 @@ import may from '../lib/may.js';
         day_total_hundreds
       }
 
-      all_day_records {
+      today {
         id
-        hundreds
-        time
-        picture_url
-        user {
+        records {
           id
-          full_name
+          hundreds
+          time
           picture_url
-
+          user {
+            id
+            full_name
+            picture_url
+          }
           team {
             id
+            color
             cover_url
           }
         }
@@ -58,12 +60,8 @@ class May extends React.Component {
 
   render() {
     const {
-      data: { all_teams, all_day_records },
+      data: { all_teams, month, today },
     } = this.props;
-
-    const sortTeams = teams => _.sortBy(teams, t => t.order);
-    const sortRecords = records =>
-      _.orderBy(records, [r => moment(r.time).valueOf()], ['desc']);
 
     return (
       <Layout>
@@ -76,7 +74,7 @@ class May extends React.Component {
           }}
         >
           {all_teams &&
-            sortTeams(all_teams).map(team => (
+            all_teams.map(team => (
               <div
                 key={team.id}
                 style={{
@@ -92,7 +90,7 @@ class May extends React.Component {
                       <span style={{ fontSize: 20 }}>
                         <Kilometers hundreds={team.month_total_hundreds} />
                       </span>
-                      {moment().isSame(may, 'month') && (
+                      {moment().isSame(month, 'month') && (
                         <>
                           <br />
                           今天累积里程:
@@ -106,15 +104,15 @@ class May extends React.Component {
             ))}
         </div>
         <hr />
-        {!moment().isSame(may, 'month') && (
+        {!moment().isSame(month, 'month') && (
           <Alert bsStyle="success">
             五月挑战目前已经结束，看看五月志和琅琊榜吧。
           </Alert>
         )}
-        {all_day_records &&
-          moment().isSame(may, 'month') && (
+        {today &&
+          moment().isSame(month, 'month') && (
             <div style={{ padding: 5, display: 'flex', flexFlow: 'row wrap' }}>
-              {sortRecords(all_day_records).map(record => (
+              {today.records.map(record => (
                 <div
                   key={record.id}
                   style={{ width: 170, flex: '0 0 auto', margin: '20px auto' }}

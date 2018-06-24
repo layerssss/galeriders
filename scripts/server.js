@@ -34,6 +34,14 @@ runAsync(async () => {
       agent: apiAgent,
     })
   );
+  expressApp.use(
+    '/api',
+    httpProxyMiddleware({
+      target: `${config.apiOrigin}`,
+      changeOrigin: true,
+      agent: apiAgent,
+    })
+  );
   expressApp.use(nextApp.getRequestHandler());
 
   const httpServer = http.createServer(expressApp);
