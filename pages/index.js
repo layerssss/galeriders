@@ -27,23 +27,20 @@ import moment from '../lib/moment.js';
         day_total_hundreds
       }
 
-      today {
+      all_day_records {
         id
-        records {
+        hundreds
+        time
+        picture_url
+        user {
           id
-          hundreds
-          time
+          full_name
           picture_url
-          user {
-            id
-            full_name
-            picture_url
-          }
-          team {
-            id
-            color
-            cover_url
-          }
+        }
+        team {
+          id
+          color
+          cover_url
         }
       }
     }
@@ -60,7 +57,7 @@ class May extends React.Component {
 
   render() {
     const {
-      data: { all_teams, month, today },
+      data: { all_teams, month, all_day_records },
     } = this.props;
 
     return (
@@ -109,10 +106,11 @@ class May extends React.Component {
             五月挑战目前已经结束，看看五月志和琅琊榜吧。
           </Alert>
         )}
-        {today &&
+        {month &&
+          all_day_records &&
           moment().isSame(month, 'month') && (
             <div style={{ padding: 5, display: 'flex', flexFlow: 'row wrap' }}>
-              {today.records.map(record => (
+              {all_day_records.map(record => (
                 <div
                   key={record.id}
                   style={{ width: 170, flex: '0 0 auto', margin: '20px auto' }}

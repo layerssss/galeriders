@@ -104,12 +104,6 @@ import withUser from '../lib/withUser.js';
           }
         }
 
-        day {
-          records {
-            id
-          }
-        }
-
         team {
           id
           day_total_hundreds
@@ -124,7 +118,22 @@ import withUser from '../lib/withUser.js';
       }
     }
   `,
-  { name: 'createRecord' }
+  {
+    name: 'createRecord',
+    options: {
+      refetchQueries: [
+        {
+          query: gql`
+            {
+              all_day_records {
+                id
+              }
+            }
+          `,
+        },
+      ],
+    },
+  }
 )
 class MyRecords extends React.Component {
   static async getInitialProps() {
