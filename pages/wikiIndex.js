@@ -18,6 +18,9 @@ import data from '../lib/data.js';
         title
         aliases
         updated_at
+        updated_by_user {
+          full_name
+        }
       }
     }
   `
@@ -65,7 +68,8 @@ class WikiIndexPage extends React.Component {
                   }}
                 >
                   <Label className="pull-right">
-                    <Time time={item.updated_at} />
+                    <Time time={item.updated_at} /> 由{' '}
+                    {item.updated_by_user.full_name}
                   </Label>
                   <h2
                     style={{
