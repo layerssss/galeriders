@@ -1,63 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import gql from 'graphql-tag';
+import Link from 'next/link';
+import { Label } from 'react-bootstrap';
 import { graphql } from 'react-apollo';
-import { Alert } from 'react-bootstrap';
+import gql from 'graphql-tag';
 
-import data from '../lib/data.js';
 import Layout from '../components/Layout.js';
-import Record from '../components/Record';
-import Team from '../components/Team';
-import User from '../components/User';
-import Kilometers from '../components/Kilometers';
-import moment from '../lib/moment.js';
+import Time from '../components/Time.js';
+import data from '../lib/data.js';
 
 @data
 @graphql(
   gql`
     query {
-      month
-      all_teams {
+      all_wiki_items {
         id
-        name
-        color
-        cover_url
-
-        month_total_hundreds
-        day_total_hundreds
-      }
-
-      all_day_records {
-        id
-        hundreds
-        time
-        picture_url
-        user {
-          id
+        title
+        aliases
+        updated_at
+        updated_by_user {
           full_name
-          picture_url
-        }
-        team {
-          id
-          color
-          cover_url
         }
       }
     }
   `
 )
-class May extends React.Component {
-  static async getInitialProps() {
-    return {};
-  }
-
+class WikiIndexPage extends React.Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
   };
 
   render() {
     const {
-      data: { all_teams, month, all_day_records },
+      data: { all_wiki_items },
     } = this.props;
 
     return (
@@ -66,67 +41,59 @@ class May extends React.Component {
           style={{
             display: 'flex',
             flexFlow: 'row wrap',
-            justifyContent: 'center',
-            alignItems: 'flex-start',
+            justifyContent: 'stretch',
           }}
         >
-          {all_teams &&
-            all_teams.map(team => (
-              <div
-                key={team.id}
-                style={{
-                  width: 240,
-                  margin: 5,
-                  flex: '1 0 auto',
+          {all_wiki_items &&
+            all_wiki_items.map(item => (
+              <Link
+                key={item.id}
+                prefetch
+                href={{
+                  pathname: '/wiki',
+                  query: { name: item.title },
                 }}
               >
-                <Team
-                  team={team}
-                  header={
-                    <div>
-                      <span style={{ fontSize: 20 }}>
-                        <Kilometers hundreds={team.month_total_hundreds} />
-                      </span>
-                      {moment().isSame(month, 'month') && (
-                        <>
-                          <br />
-                          今天累积里程:
-                          <Kilometers hundreds={team.day_total_hundreds} />
-                        </>
-                      )}
-                    </div>
-                  }
-                />
-              </div>
+                <a
+                  style={{
+                    display: 'block',
+                    width: 250,
+                    margin: 10,
+                    flex: '1 0 auto',
+
+                    boxShadow: '0 1px 5px #aaa',
+                    textDecoration: 'none',
+                    borderRadius: 5,
+                    padding: 10,
+                  }}
+                >
+                  <Label className="pull-right">
+                    <Time time={item.updated_at} /> 由{' '}
+                    {item.updated_by_user.full_name}
+                  </Label>
+                  <h2
+                    style={{
+                      fontSize: '1.5em',
+                      margin: 0,
+                    }}
+                  >
+                    {item.title}
+                  </h2>
+                  <div style={{ margin: '5px 0' }}>
+                    {item.aliases &&
+                      item.aliases.map(alias => (
+                        <Label bsStyle="info" style={{ margin: 5 }} key={alias}>
+                          {alias}
+                        </Label>
+                      ))}
+                  </div>
+                </a>
+              </Link>
             ))}
         </div>
-        <hr />
-        {!moment().isSame(month, 'month') && (
-          <Alert bsStyle="success">
-            五月挑战目前已经结束，看看五月志和琅琊榜吧。
-          </Alert>
-        )}
-        {month &&
-          all_day_records &&
-          moment().isSame(month, 'month') && (
-            <div style={{ padding: 5, display: 'flex', flexFlow: 'row wrap' }}>
-              {all_day_records.map(record => (
-                <div
-                  key={record.id}
-                  style={{ width: 170, flex: '0 0 auto', margin: '20px auto' }}
-                >
-                  <Team header={<User user={record.user} />} team={record.team}>
-                    <div style={{ padding: 10 }}>
-                      <Record showUser={false} record={record} />
-                    </div>
-                  </Team>
-                </div>
-              ))}
-            </div>
-          )}
       </Layout>
     );
   }
 }
 
-export default May;
+export default WikiIndexPage;

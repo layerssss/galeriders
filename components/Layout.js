@@ -61,11 +61,24 @@ class Layout extends React.Component {
 
     const categories = [
       {
+        title: '风车大百科',
+        pages: [
+          { title: '所有词条', pathname: '/' },
+          ...featuredItems.map(item => ({
+            title: `“${item}”`,
+            pathname: '/wiki',
+            query: {
+              name: item,
+            },
+          })),
+        ],
+      },
+      {
         title: '五月挑战',
         pages: [
           {
             title: '战况',
-            pathname: '/',
+            pathname: '/may',
           },
           {
             title: '我的记录',
@@ -84,19 +97,6 @@ class Layout extends React.Component {
             pathname: '/team',
             query: {
               id: team.id,
-            },
-          })),
-        ],
-      },
-      {
-        title: '风车大百科',
-        pages: [
-          { title: '所有词条', pathname: '/wikiIndex' },
-          ...featuredItems.map(item => ({
-            title: `“${item}”`,
-            pathname: '/wiki',
-            query: {
-              name: item,
             },
           })),
         ],
