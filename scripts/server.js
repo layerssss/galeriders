@@ -30,7 +30,7 @@ runAsync(async () => {
     '/graphql',
     httpProxyMiddleware({
       target: `${config.apiOrigin}`,
-      changeOrigin: true,
+      xfwd: true,
       agent: apiAgent,
     })
   );
