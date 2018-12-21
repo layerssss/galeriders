@@ -1,0 +1,1585 @@
+{
+  "items": [{
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "5DZj3VZXTUcAKk6IMAOmii",
+      "type": "Entry",
+      "createdAt": "2017-11-26T04:28:25.931Z",
+      "updatedAt": "2017-11-26T04:28:25.931Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 1,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "迷路",
+      "content": "跑山经常出现的情况，因为本地路线简单，离公路近，所以不必惊慌。预防方法为勤看GPS地图，多人检查。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "121mpYdNZ04MOSAq02MYO8",
+      "type": "Entry",
+      "createdAt": "2017-11-27T04:35:53.092Z",
+      "updatedAt": "2017-11-28T21:02:41.292Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 2,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "Steph",
+      "aliases": ["企鹅君"],
+      "type": ["成员"],
+      "content": "作为大风车的吉祥物，Steph是一只憨态可掬的胖企鹅，他多次出现在大风车的各项赛事中，是五花团队的最佳小伙伴。(本词条需要您的补充)"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "x3LZaZ6RbwU8oEqQAi8iI",
+      "type": "Entry",
+      "createdAt": "2017-11-27T04:46:14.425Z",
+      "updatedAt": "2017-11-28T20:54:03.436Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 3,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "Home Run",
+      "type": ["词条"],
+      "content": "以家为起点和终点的距离为5-10公里的路线。就像体育运动的主场一样，因为熟悉而了解路面感和距离感，认识花草气味及猫狗。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "2g6FdisRQECWMo4SaQyEOY",
+      "type": "Entry",
+      "createdAt": "2017-12-14T09:02:18.112Z",
+      "updatedAt": "2017-12-14T09:02:18.112Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 1,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "跑步经济性",
+      "aliases": ["Running Economy"],
+      "content": "在同样配速下，能量需耗率更低者有更好的跑步经济性，是体现跑步能力最直接的数据。影响跑步经济性的因素包括最大耗氧量，体重，肌肉，以及协调人体运动的神经系统。长期训练可使得神经系统发生适应性变化，减少多余技术动作，减少无效做功，肌肉适应落地缓冲后转换为蹬伸，最终使得跑步经济性提高。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "5DFco4iPO82cciGAIQAOom",
+      "type": "Entry",
+      "createdAt": "2017-11-26T04:29:32.367Z",
+      "updatedAt": "2017-11-28T21:02:18.518Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 4,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "八爷",
+      "aliases": ["TABABA"],
+      "type": ["成员"],
+      "content": "速度之神，在本市任何竞速或山地比赛中都有进入前5%的实力，在Hutt的Parkrun中被其他参与者形容为“荧光色的风”。在本群自发的跑步活动中，若到终点前视线中可以看到八爷，即可称顶尖高手。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "3CMvvyQaMMQkYg0q28uEka",
+      "type": "Entry",
+      "createdAt": "2017-11-27T05:14:22.513Z",
+      "updatedAt": "2017-11-28T20:56:16.207Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 2,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "包子",
+      "aliases": ["Bob"],
+      "type": ["成员"],
+      "content": "包子/Bob: 群内昵称“包子”，加入大风车不久便在刷水活动中崭露头角，也是大风车队内速度派的佼佼者。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "ueDfLp2eL6mAW48Cock0s",
+      "type": "Entry",
+      "createdAt": "2017-11-26T06:09:45.938Z",
+      "updatedAt": "2017-11-26T06:09:45.938Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 1,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "狗哥",
+      "aliases": ["二狗子", "犬次郎"],
+      "content": "群中昵称“约翰尼.坦”，大风车创始人之一，元老级别人物， 体型消瘦健硕，体能充沛，是短距离冲刺的高手。约翰尼热衷于各类运动，在排球，空手道以及射击等领域均有建树，他同时还是少年组的篮球客座教练，带领球队夺得过2016年的冠军。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "22NACktag02wOGcYw0iEk8",
+      "type": "Entry",
+      "createdAt": "2017-11-26T06:12:04.003Z",
+      "updatedAt": "2017-11-26T06:12:04.003Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 1,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "石头",
+      "aliases": ["颜值担当", "私通"],
+      "content": "群中昵称“Stone.L”，此人眉清目秀，用哪个时代的标准来看，都是个不折不扣的美男子，是大风车男性中的颜值担当。石头绝非徒有其表，此人有着一股安静的凶狠，在多次比赛中代表大风车表现不俗，更是队中配速的刷新者。近期受伤病影响跑量减少，但依然是大风车不可缺少的成员之一。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "2HBVVzSiw0iAgCmAEkKuUK",
+      "type": "Entry",
+      "createdAt": "2017-11-26T06:09:12.738Z",
+      "updatedAt": "2017-11-26T06:09:12.738Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 1,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "校长",
+      "content": "群中昵称“豪”，大风车元老级别人物，能在各种天气轻松征服考考山，有光脚跑步的绝技。被大风车队员尊称为“校长”是因为其技术全面，擅游泳，公路自行车和公路跑，曾完成过迷你铁三，铁人三项是他下一个目标。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "6BZwvwyl0cKwMcy6EwcoEq",
+      "type": "Entry",
+      "createdAt": "2017-11-26T04:31:22.075Z",
+      "updatedAt": "2017-11-26T04:31:22.075Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 1,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "五花",
+      "content": "aka Welly Queen，本群五大天王，均为女性，即将挑战2017Oxfam百公里。昵称为大花，大王，大神，大帅，大顺。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "xmCBM63UsgiEmOeuqoC62",
+      "type": "Entry",
+      "createdAt": "2017-11-26T06:12:57.963Z",
+      "updatedAt": "2017-11-26T06:12:57.963Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 1,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "海哥",
+      "aliases": ["老司机", "老中医"],
+      "content": "群中昵称“Jacky天海”，此人主攻自行车，练就一双好腿力，跑起步来游刃有余，海哥的步频在全队最为稳定，曾与TABABA（参考词条TABABA）携手创下Makara Loop大风车队内纪录。海哥生的一副热心肠，经常在群里为大家答疑解惑，并兼任调节气氛的开心果."
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "1REWAvRJCwscqqAaMyKGqi",
+      "type": "Entry",
+      "createdAt": "2017-11-26T06:01:50.180Z",
+      "updatedAt": "2017-11-28T20:55:51.057Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 4,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "叫兽",
+      "aliases": ["刘队"],
+      "type": ["成员"],
+      "content": "群中昵称“刘冰”，大风车创始人之一，活动的发起者，也是“跑哪儿躺哪儿”的发明者，"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "1ovCl1eNRmye8o4o2AQI0I",
+      "type": "Entry",
+      "createdAt": "2017-11-26T04:30:37.048Z",
+      "updatedAt": "2017-11-26T04:30:37.048Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 1,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "Mask",
+      "content": "aka马赛克，是MaskGG的简称，此男子现已改名为MoAnA，是Lower Hutt至Petone地区夜跑之王，擅长健身以及观测天气。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "2B4AnxRAYUICOcQmKUUww0",
+      "type": "Entry",
+      "createdAt": "2017-11-26T06:14:23.943Z",
+      "updatedAt": "2017-11-26T06:14:23.943Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 1,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "Peter",
+      "aliases": ["老李"],
+      "content": "大风车隐藏人物，从未出现在群聊中，香港减肥励志传奇，巴西柔术高手，因语言障碍，其他信息目前为不详，本词条日后会更新。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "2gbUFMbe3SyWaoigCEqCEk",
+      "type": "Entry",
+      "createdAt": "2017-11-26T06:10:22.315Z",
+      "updatedAt": "2017-11-26T06:10:22.315Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 1,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "阿布",
+      "aliases": ["小布", "布莱恩"],
+      "content": "群中昵称“布莱恩”，大风车元老级别人物，在群里被誉为发图小能手，擅长于中长跑，最大特点为适应力极强，能迅速接受各类型地面。阿布还是惠灵顿华人足球队首发后卫，最喜欢的球队是阿森纳。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "oNcjdvDNSgakmqKI2aOuu",
+      "type": "Entry",
+      "createdAt": "2017-11-27T04:38:27.124Z",
+      "updatedAt": "2017-11-28T21:01:24.680Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 2,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "Lucy",
+      "aliases": ["大神"],
+      "type": ["成员"],
+      "content": "群内昵称“Lucy”, 五花以及Welly Queen Oxfam成员之一，在2016年臭名昭著的惠马天气中，在受伤的情况下，她是当年唯一完成全马的大风车女队员，其耐力与意志力可见一斑。Lucy刚刚完成新普利茅斯个人80公里，再次刷新了大风车女队员的纪录，目前Lucy正在积极备战OxFam百公里挑战。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "196cqeyoPaE4wGaGMSow4O",
+      "type": "Entry",
+      "createdAt": "2017-11-26T06:13:21.991Z",
+      "updatedAt": "2017-11-26T06:13:21.991Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 1,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "巍",
+      "content": "群中昵称“巍”，是惠灵顿地区数一数二的跆拳道黑带高手，其特点是体力超群，在研修跆拳道之余还能参与跑步以及健身活动。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "4ltr6aX4RO6CICaCAgokQ0",
+      "type": "Entry",
+      "createdAt": "2017-11-27T04:44:14.918Z",
+      "updatedAt": "2017-11-28T20:59:27.461Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 2,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "大花",
+      "aliases": ["小曦", "教主"],
+      "content": "群内昵称“陈小曦”，大风车五花之一，国内外大赛经验丰富的女选手，跑量和耐力惊人，更是Welly Queen OxFam活动的发起者之一，除跑步外还涉足攀岩，登山以及混合健身领域。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "2gahbwZ2E0yMiKC2q8wMQO",
+      "type": "Entry",
+      "createdAt": "2017-11-27T04:41:56.128Z",
+      "updatedAt": "2017-11-28T21:00:29.616Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 2,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "拉爆",
+      "type": ["词条"],
+      "content": "在跑步中跟随实力高于自己的人，导致心率过高，肌肉疲劳，体力不支，需要停止跟随的现象。有时自己一个人也可能因为体力分配不均，导致无法完成预计的路线，称为自己把自己拉爆。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "1jIedeUJxQao6w6gGMKkWI",
+      "type": "Entry",
+      "createdAt": "2017-11-27T04:51:03.361Z",
+      "updatedAt": "2017-11-28T20:54:55.144Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 3,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "Ting",
+      "type": ["成员"],
+      "content": "群内昵称Ting，近期加入大风车的女选手，亭亭玉立体能过人，第一次随队拉练便轻松完成Makara，但本人更擅长段距离，在Parkrun等其他赛事中均有不俗表现。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "5d59uZIoWsKi0gQ8UooMAa",
+      "type": "Entry",
+      "createdAt": "2017-11-27T04:47:46.645Z",
+      "updatedAt": "2017-11-28T20:58:11.820Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 2,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "刷水",
+      "aliases": ["Powerade Challenge"],
+      "type": ["活动"],
+      "content": "有Powerade公司举办的活动，全长七公里，注册即送手环用于记录选手信息，在终点处会自动发送运动饮料一瓶，在奥克兰，惠灵顿，基督城都有设有赛道。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "3RYeSZHLa06CEkQy80OeSs",
+      "type": "Entry",
+      "createdAt": "2017-12-14T08:39:26.662Z",
+      "updatedAt": "2017-12-14T08:41:11.037Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 3,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "Welly Queen ",
+      "aliases": ["风城五花"],
+      "type": ["成员"],
+      "content": "由大风车五花组成的健步慈善活动，五名队员分别为：\n1. 小曦\n2. Lucy\n3. Juan\n4. June\n5. MJJ\n\nWelly Queen将参加在2018年3月举行的OxFam健步百公里的慈善比赛，参赛队伍要在规定24小时内，完成100公里的健步路线，对参赛选手的体能和意志力都是很大的考验。\nWelly Queen活动主页：[Welly Queen Oxfam Trail Walker 2018](https://www.facebook.com/WellyQueenOxfam/)\n\n",
+      "contributor": "Alex"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "56nLdlO4Wc8UI6QYSWOmoi",
+      "type": "Entry",
+      "createdAt": "2017-11-27T04:39:19.385Z",
+      "updatedAt": "2017-11-28T21:01:05.605Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 3,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "娟姐",
+      "aliases": ["大王", "Juan"],
+      "type": ["成员"],
+      "content": "群内昵称“Juan”，五花以及Welly Queen Oxfam成员之一，也是大风车在一号公路ParkRun的负责人。Juan的跑量在大风车里虽不算出众，但没人能否认其位置的重要性，在多次赛事中均有亮相，队员们都愿意叫她一声“娟姐”。Juan还是惠灵顿龙舟队的首发选手，更值得一提的是她高超的厨艺。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "4T0S1OriFiuMEkG6wi4WE6",
+      "type": "Entry",
+      "createdAt": "2017-11-26T04:31:43.317Z",
+      "updatedAt": "2017-11-28T20:53:50.989Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 14,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "Galeriders",
+      "aliases": ["御风城管", "大风车"],
+      "type": ["词条"],
+      "content": "本跑步群的名字,也用于参加团体跑步比赛。成立于2015年,名字取自惠灵顿的气候,中文应为御风城管,但在某次网页程序自动翻译中被译为大风车。\n\n### Squard:\n- [叫兽](https://galeriders.club/wiki?name=%E5%8F%AB%E5%85%BD)\n- [阿布](https://galeriders.club/wiki?name=%E9%98%BF%E5%B8%83)\n- [狗哥](https://galeriders.club/wiki?name=%E7%8B%97%E5%93%A5)\n- [校长](https://galeriders.club/wiki?name=%E6%A0%A1%E9%95%BF)\n- [八爷](https://galeriders.club/wiki?name=%E5%85%AB%E7%88%B7)\n- [Mask](https://galeriders.club/wiki?name=Mask)\n- [石头](https://galeriders.club/wiki?name=%E7%9F%B3%E5%A4%B4)\n- [暴君](https://galeriders.club/wiki?name=%E6%9A%B4%E5%90%9B)\n- [海哥](https://galeriders.club/wiki?name=%E6%B5%B7%E5%93%A5)\n- [光线](https://galeriders.club/wiki?name=%E5%85%89%E7%BA%BF)\n- [巍](https://galeriders.club/wiki?name=%E5%B7%8D)\n\n\n"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "gV8WBesbIcGwYUwsUUoam",
+      "type": "Entry",
+      "createdAt": "2017-11-27T04:50:13.972Z",
+      "updatedAt": "2017-11-28T20:52:50.668Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 3,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "Nathan",
+      "aliases": ["楠哥"],
+      "type": ["成员"],
+      "content": "群内昵称Aujourd'hui，大风车元老级人物，长距离公路和山地的配速高手，游泳也是其强项，是队内敢跑敢拼的榜样。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "5BGDCJwLLyw8A4YusMweMa",
+      "type": "Entry",
+      "createdAt": "2017-11-26T04:29:04.074Z",
+      "updatedAt": "2017-11-26T09:45:01.965Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 2,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "湾马",
+      "aliases": ["Round the Bays"],
+      "content": "Round The Bays，本市最大的全民跑步活动，每年气候最好的2月底在东湾举行，距离可选5，10，21公里，很多公司组队参加。",
+      "contributor": "叫兽"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "5t5ty40pfUWwmsuqAqsc4O",
+      "type": "Entry",
+      "createdAt": "2017-11-27T05:14:47.603Z",
+      "updatedAt": "2017-11-28T20:56:04.571Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 2,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "大师兄",
+      "aliases": ["Tony"],
+      "type": ["成员"],
+      "content": "Tony/大师兄：体格健壮且作风顽强，带领风队夺得队内拉练比赛的冠军，被大家亲切的称为大师兄。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "a8EaMA57NuGkoQksWQiGE",
+      "type": "Entry",
+      "createdAt": "2017-12-14T09:01:46.859Z",
+      "updatedAt": "2017-12-14T09:01:46.859Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 1,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "Tip Tract",
+      "content": "市区跑山最大气的路线，包含海滨，山谷，山脊，以及连绵上坡，全程荡气回肠。山顶有特色建筑The Golf Ball，路线可以延续到Brooklyn的风车以及Zelandia。\n\np.s. 本周日早晨8点举行第一届民办活动惠灵顿Tip Track马拉松（免费，有志愿者供水，看包），全长距离跑六圈，但活动规则明确注明重在参与，爱跑几圈跑几圈。\n\n[https://www.meetup.com/WellingtonRunningMeetup/events/243102098/](https://www.meetup.com/WellingtonRunningMeetup/events/243102098/)"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "4FHDAWKlXWcM8qkuEogm0Y",
+      "type": "Entry",
+      "createdAt": "2017-11-27T04:40:54.956Z",
+      "updatedAt": "2017-11-28T20:54:29.468Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 5,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "马君君 ",
+      "aliases": ["大帅", "MJJ"],
+      "type": ["成员"],
+      "content": "群内昵称“马君君”，大风车五花与OxFam的组织者之一，表面虽是“全真教”级别的装备党，实则是个运动实力派，加入大风车不久就囊括了新西兰多项赛事的名次，其新西兰处女赛就是大名鼎鼎的皇后镇马拉松。\n\n马君君性格爽快任性，放荡不羁的表面下有着一颗细腻的小心脏，五花之中她是最爱哭鼻子的女生，却也是最坚强的大帅，面对伤痛和挫折她可以做到一滴泪不掉，但面对受伤和疲惫的五花队友，她却毫不吝惜自己的情感。\n\n马君君是个不断刷新PB的速度型选手，也成功完成了向耐力型选手的完美转型，这一切得益于其在健身房挥汗如雨的自虐，她是大风车里肌肉含量较高的女队员。在一次穿山拉练时，马君君不慎将备用干衣袜悉数背在身上，导致拉练结束后无衣可换，一时传为佳话，但几次拉练后马君君迅速补足了缺乏经验的短板，多次顺利完成拉练。马君君近日刚刚完成了奥克兰全马拉松，实现了自我突破，她的下一个目标就是OxFam100公里。\n马君君最爱的球队是北京国安和阿森纳，最爱的食物是巧克力，最爱的动物是兔子。 （本词条不代表笔者个人观点，如有异议请联系刘冰，参考“叫兽”词条）"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "1AFH6dEI9ywWoiYWoAo0Ak",
+      "type": "Entry",
+      "createdAt": "2017-11-27T04:51:46.208Z",
+      "updatedAt": "2017-11-28T20:55:09.316Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 3,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "喜欢晴天的巧",
+      "type": ["成员"],
+      "content": "群内昵称巧，大风车的女性跑者代表人物之一，热衷于各类体育项目，先天身体素质优秀，强项为山地跑以及远足，目前正在备战OxFam100公里。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "2KoV5eIK6ACmwi6wSAeOAs",
+      "type": "Entry",
+      "createdAt": "2017-11-26T04:27:17.680Z",
+      "updatedAt": "2017-11-26T04:27:17.680Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 1,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "LSD",
+      "content": "Long Slow Distance 长距离慢跑，玄学的一种。以长距离为首要目的，忽略速度和时间，配合气候和景色到达天人合一的感受。著名的路线包括Blue Mountain 25k和Makara Loop 33k，是训练马拉松的必要项目。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "lMRLG6tW6GcgaOeoU2g0q",
+      "type": "Entry",
+      "createdAt": "2017-11-26T04:32:01.534Z",
+      "updatedAt": "2017-11-26T06:05:15.101Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 2,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "东湾",
+      "aliases": ["Oriental Bay"],
+      "content": "Oriental Bay的翻译简称，本市首选休闲跑步路线，起点默认为Crab Shack。有海湾风景，数量较多的跑者，多个饮水处及卫生间。每年有运动饮料Powerade举办的刷水活动。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "3bHRPQLSMMs2AgUiWG88aM",
+      "type": "Entry",
+      "createdAt": "2017-11-26T06:11:11.195Z",
+      "updatedAt": "2017-11-26T06:11:11.195Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 1,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "光线",
+      "aliases": ["线哥"],
+      "content": "群中昵称“光线”，表面挥金如土实则内心质朴，虽未有长距离成绩，但他的跑量却不输任何人，原因在于其数年如一日的坚持，每天跑量不多却风雨无阻，他也是‘买买买’的代言人，具体请参考词条买买买"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "Xu9uKJNyc8I6iSKwoS26W",
+      "type": "Entry",
+      "createdAt": "2017-12-14T09:07:37.253Z",
+      "updatedAt": "2017-12-14T09:07:37.253Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 1,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "道口",
+      "aliases": ["trailhead"],
+      "content": "山地车或步行路径的入口。无论是环绕市区或国家公园的步道都有多个道口。官网指定的道口有停车场和地图，另外还有供维护人员使用的道口，居民区里的小路，以及地图没有注明的野路。因为步道会持续性的扩展并配合城市建设开发，所以会有新路径出现。\n\n问题: Belmont Regional Park 有几个官方道口？"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "5B0feqIBsQse688usKq006",
+      "type": "Entry",
+      "createdAt": "2017-11-27T04:49:23.578Z",
+      "updatedAt": "2017-11-28T20:57:53.858Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 2,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "Jack",
+      "type": ["成员"],
+      "content": "群内昵称老侯，东湾又一名高手，在刷水和湾马活动中成绩不俗，近期北上奥克兰发展，依然在坚持着最爱的跑步运动。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "1wpridKaeUaGYS06KGS06u",
+      "type": "Entry",
+      "createdAt": "2017-11-26T04:25:48.011Z",
+      "updatedAt": "2017-11-28T20:55:41.637Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 4,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "Parkrun",
+      "type": ["活动"],
+      "content": "一项遍及全球的跑步活动，在惠灵顿设有两处场地：一号公路方向的魄力撸啊市和二号公路方向的下哈特市，每周六早上八点开始，全长五公里，有志愿者记录成绩并拍照，你既可以做参与者，也可以申请做志愿者。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "6woNeVDSBUUQaMs624KWYo",
+      "type": "Entry",
+      "createdAt": "2017-11-26T06:13:56.604Z",
+      "updatedAt": "2017-11-26T06:13:56.604Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 1,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "暴君",
+      "aliases": ["小鲜肉", "嘴炮王"],
+      "content": "群中昵称“暴君”，安静沉稳的北方汉子，其娃娃脸与昵称“暴君”虽自相矛盾，却不影响其耐力与坚韧，是大风车默默无闻却又不可缺少的队员。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "1rA6IUc0AAScmkCSWKMUAu",
+      "type": "Entry",
+      "createdAt": "2017-11-27T04:45:08.697Z",
+      "updatedAt": "2018-06-15T06:17:38.157Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 5,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "五月挑战",
+      "aliases": ["May Challenge", "星座对战"],
+      "type": ["活动"],
+      "content": "起始于2017，本群为备战六月份惠马的训练。按照星座的属性分为四队，风/火/水/土，比较各队累计跑步里程。2017年总里程2825公里，风浪队(风相+水相）在31日最后一个小时以1420公里击败1405公里的火山队（火相+土相）\n\n2018五月挑战已经圆满结束。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "304RJrX9NCUOmQqqK4muMs",
+      "type": "Entry",
+      "createdAt": "2017-11-26T04:30:57.970Z",
+      "updatedAt": "2017-11-26T04:30:57.970Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 1,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "跑山",
+      "content": "在山林间包含上下坡的山地跑，常根据坡度跑走切换。景色优美，路面不平整，需要山地跑鞋。惠灵顿因为地貌有传统的山地跑文化。多条完善的路线遍布全市。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "1SbuWuQbs0CKwUeuoI28UQ",
+      "type": "Entry",
+      "createdAt": "2017-12-14T09:05:29.899Z",
+      "updatedAt": "2017-12-14T09:05:29.899Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 1,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "Hood Run",
+      "content": "将于2017/18夏季开启的周末活动，是Home Run的升级版。每周由不同成员组织，路线围绕组织者所在的街区，路线应包括以下内容：\n历史建筑或地标\n该街区Main Street\n穿越附近Trails\n中途补给便利店\n山顶观景地\n活动结束后的咖啡店"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "4zViBob6UwAeQaAWYicIA2",
+      "type": "Entry",
+      "createdAt": "2017-11-27T05:13:15.520Z",
+      "updatedAt": "2018-06-15T06:20:18.741Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 4,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "头哥",
+      "aliases": ["Michael"],
+      "type": ["成员"],
+      "content": "头哥，又名：猴哥，程序猿，是本群的网管。\n\n专长：在 ParkRun 最后200米时冲刺突袭各路高手，已有多名高手深受其害。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "58SoB6RbZYgm0W6iK6kya8",
+      "type": "Entry",
+      "createdAt": "2017-11-26T04:27:53.827Z",
+      "updatedAt": "2017-11-26T04:27:53.827Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 1,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "买买买",
+      "content": "出现在群里讨论装备时常出现的三个字，通常由经济条件优越的成员提出，帮助犹豫不决的成员下决心，同时用于肯定产品的性价比。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "1OVR7IFSX2SYCacA02eYaI",
+      "type": "Entry",
+      "createdAt": "2017-11-26T04:29:54.438Z",
+      "updatedAt": "2017-11-26T04:29:54.438Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 1,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "马拉松",
+      "content": "距离为42.195公里的跑步比赛。提及时不必强调全马，因为马拉松一词只用来指代全程。参加半程比赛不可以声称“我要去跑马拉松”，只可以说“我要去跑半马”。新词汇如“10k马拉松”，“迷你马拉松”，乃某国愚人所创，极为遭嫌弃，尤其要避免。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "iiBAU7YcKWQ4KAqY4cgas",
+      "type": "Entry",
+      "createdAt": "2017-11-27T04:34:50.106Z",
+      "updatedAt": "2018-06-15T06:19:12.739Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 4,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "PB",
+      "aliases": ["Personal Best"],
+      "type": ["词条"],
+      "content": "Personal Best，一般用来形容5K， 10K， 半马，以及马拉松这四个距离自己的最好表现。"
+    }
+  }, {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "cmwf5ppb92dc"
+        }
+      },
+      "id": "5qxSMDwcx2aSM6WAMoMoo4",
+      "type": "Entry",
+      "createdAt": "2017-11-27T04:42:53.419Z",
+      "updatedAt": "2017-11-28T21:00:18.331Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 3,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "wiki"
+        }
+      },
+      "locale": "zh-CN"
+    },
+    "fields": {
+      "name": "大顺 ",
+      "aliases": ["六六", "June"],
+      "type": ["成员"],
+      "content": "群内昵称“六月”，大风车五花与Welly Queen OxFam的组织者之一，身为耐力型跑者能在各类天气和地形中完成路线，灿烂阳光的笑容是其标志性的表情"
+    }
+  }]
+}

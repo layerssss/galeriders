@@ -1,0 +1,29 @@
+# == Schema Information
+#
+# Table name: records
+#
+#  id          :bigint(8)        not null, primary key
+#  picture_url :string
+#  hundreds    :integer
+#  user_id     :integer
+#  team_id     :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  time        :datetime
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  picture_url: MyString
+  hundreds: 1
+  date: 2018-05-08
+  user_id: 1
+  team_id: 1
+
+two:
+  picture_url: MyString
+  hundreds: 1
+  date: 2018-05-08
+  user_id: 1
+  team_id: 1
