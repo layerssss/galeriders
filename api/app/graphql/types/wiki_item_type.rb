@@ -10,5 +10,5 @@ Types::WikiItemType = GraphQL::ObjectType.define do
 
   field :created_at, !Types::DateTimeType
   field :updated_at, !Types::DateTimeType
-  field :updated_by_user, !Types::UserType
+  field :updated_by_user, Types::UserType
 end

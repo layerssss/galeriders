@@ -120,8 +120,11 @@ export default compose(
             </span>
           </div>
           <p>
-            <Time time={data.wiki_item.updated_at} /> 由{" "}
-            {data.wiki_item.updated_by_user.full_name} 编辑{" "}
+            <Time time={data.wiki_item.updated_at} />
+            {data.wiki_item.updated_by_user && (
+              <>由{data.wiki_item.updated_by_user.full_name}</>
+            )}
+            编辑{" "}
             {data.current_user && (
               // eslint-disable-next-line jsx-a11y/anchor-is-valid
               <a
@@ -193,8 +196,11 @@ export default compose(
             <ControlLabel>修改记录：</ControlLabel>
             {data.wiki_item.revisions.map(revision => (
               <p key={revision.id}>
-                <Time time={revision.created_at} /> 由{" "}
-                {revision.updated_by_user.full_name} 编辑
+                <Time time={revision.created_at} />
+                {revision.updated_by_user && (
+                  <>由 {revision.updated_by_user.full_name}</>
+                )}{" "}
+                编辑
               </p>
             ))}
           </FormGroup>

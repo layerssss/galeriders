@@ -47,7 +47,8 @@ export default compose(
           }}
         >
           <Label className="pull-right">
-            <Time time={item.updated_at} /> 由 {item.updated_by_user.full_name}
+            <Time time={item.updated_at} />{" "}
+            {item.updated_by_user && <>由 {item.updated_by_user.full_name}</>}
           </Label>
           <h2
             style={{

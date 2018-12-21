@@ -5,5 +5,5 @@ Types::WikiItemRevisionType = GraphQL::ObjectType.define do
   field :id, !types.ID
   field :content, !types.String
   field :created_at, !Types::DateTimeType
-  field :updated_by_user, !Types::UserType
+  field :updated_by_user, Types::UserType
 end

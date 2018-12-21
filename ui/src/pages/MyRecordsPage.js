@@ -77,6 +77,22 @@ export default compose(
     `,
     "createRecord"
   ),
+  withMutation(
+    gql`
+      mutation($teamId: ID!) {
+        join_team(id: $teamId) {
+          id
+          team {
+            id
+            users {
+              id
+            }
+          }
+        }
+      }
+    `,
+    "joinTeam"
+  ),
   withState("creatingRecord", "setCreatingRecord", false),
   withState("picture", "setPicture", null)
 )(
