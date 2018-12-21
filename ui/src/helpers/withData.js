@@ -1,5 +1,7 @@
-import { compose, branch, renderNothing, renderComponent } from "recompose";
+import { compose, branch, renderComponent } from "recompose";
 import { graphql } from "react-apollo";
+
+import Spinner from "../components/Spinner";
 
 const withData = (query, getVariables = () => ({})) =>
   compose(
@@ -10,7 +12,7 @@ const withData = (query, getVariables = () => ({})) =>
         variables: getVariables(props)
       })
     }),
-    branch(({ data }) => data.loading, renderNothing),
+    branch(({ data }) => data.loading, renderComponent(Spinner)),
     branch(
       ({ data }) => data.error,
       renderComponent(({ data: { error } }) => `Error: ${error.message}`)

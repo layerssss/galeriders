@@ -26,7 +26,7 @@ const apolloClient = new ApolloClient({
       };
     }),
     new BatchHttpLink({
-      uri: `${process.env.REACT_APP_API_ORIGIN}/graphql`,
+      uri: `${process.env.REACT_APP_API_ORIGIN}/graphql`
     })
   ]),
   cache: new InMemoryCache({

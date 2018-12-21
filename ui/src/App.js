@@ -1,6 +1,13 @@
 import React from "react";
 import gql from "graphql-tag";
-import { compose, lifecycle, withProps } from "recompose";
+import NProgress from "nprogress";
+import {
+  compose,
+  lifecycle,
+  withProps,
+  withState,
+  withHandlers
+} from "recompose";
 import {
   BrowserRouter,
   Route,
@@ -8,6 +15,7 @@ import {
   Redirect,
   withRouter
 } from "react-router-dom";
+import EventListener from "react-event-listener";
 import { ApolloProvider } from "react-apollo";
 import jQuery from "jquery";
 
@@ -26,6 +34,28 @@ import Layout from "./components/Layout";
 import withWrapper from "./helpers/withWrapper";
 import RoutingContext from "./helpers/RoutingContext";
 import apolloClient from "./helpers/apolloClient";
+
+const SpinnerEventListner = compose(
+  withState("spinners", "setSpinners", []),
+  withHandlers({
+    checkSpinners: ({ spinners }) => () => {
+      if (spinners.length) NProgress.inc();
+      else NProgress.done();
+    }
+  })
+)(({ setSpinners, checkSpinners }) => (
+  <EventListener
+    target={window}
+    onSpinnerStart={event => {
+      const id = event.detail.id;
+      setSpinners(spinners => [...spinners, id], checkSpinners);
+    }}
+    onSpinnerStop={event => {
+      const id = event.detail.id;
+      setSpinners(spinners => spinners.filter(s => s !== id), checkSpinners);
+    }}
+  />
+));
 
 const RouteEventListener = compose(
   withRouter,
@@ -79,6 +109,7 @@ export default compose(
 )(() => (
   <>
     <RouteEventListener />
+    <SpinnerEventListner />
     <Switch>
       <Route path="/" exact component={IndexPage} />
       <Route path="/auth" exact component={AuthPage} />
