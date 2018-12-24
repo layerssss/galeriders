@@ -1,6 +1,7 @@
 import { compose, withProps } from "recompose";
 import { graphql } from "react-apollo";
-import uuid from "uuid";
+
+import useSpinner from "../helpers/useSpinner";
 
 const withMutation = (query, name, refetchQuery = null) =>
   compose(
@@ -8,15 +9,9 @@ const withMutation = (query, name, refetchQuery = null) =>
       name
     }),
     withProps(({ [name]: mutate }) => ({
-      [name]: async variables => {
-        const id = uuid.v4();
-        window.dispatchEvent(
-          new CustomEvent("spinnerstart", { detail: { id } })
-        );
-
-        let result;
-        try {
-          result = await mutate({
+      [name]: variables =>
+        useSpinner(async () => {
+          const result = await mutate({
             variables,
             errorPolicy: "all",
             awaitRefetchQueries: true,
@@ -28,18 +23,9 @@ const withMutation = (query, name, refetchQuery = null) =>
                   }
                 ]
           });
-        } catch (error) {
-          window.dispatchEvent(
-            new CustomEvent("spinnerstop", { detail: { id } })
-          );
-        }
 
-        window.dispatchEvent(
-          new CustomEvent("spinnerstop", { detail: { id } })
-        );
-
-        return result;
-      }
+          return result;
+        })
     }))
   );
 

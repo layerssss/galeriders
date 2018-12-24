@@ -227,8 +227,8 @@ export default compose(
                           picture_url
                         });
 
-                        setCreatingRecord(false);
                         setPicture(null);
+                        setCreatingRecord(false);
                         form.reset();
                       }}
                     >

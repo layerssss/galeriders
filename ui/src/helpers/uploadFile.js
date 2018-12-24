@@ -1,25 +1,28 @@
-async function uploadFile(file) {
-  const body = new FormData();
-  body.append("data", file);
+import useSpinner from '../helpers/useSpinner';
 
-  const token = window.localStorage.getItem("token");
+const uploadFile = file =>
+  useSpinner(async () => {
+    const body = new FormData();
+    body.append("data", file);
 
-  const response = await fetch(
-    `${process.env.REACT_APP_API_ORIGIN}/api/upload_picture`,
-    {
-      method: "POST",
-      body,
-      headers: new Headers({
-        authorization: `Bearer ${token}`
-      })
-    }
-  );
+    const token = window.localStorage.getItem("token");
 
-  if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+    const response = await fetch(
+      `${process.env.REACT_APP_API_ORIGIN}/api/upload_picture`,
+      {
+        method: "POST",
+        body,
+        headers: new Headers({
+          authorization: `Bearer ${token}`
+        })
+      }
+    );
 
-  const data = await response.json();
+    if (!response.ok) throw new Error(`Error: ${response.statusText}`);
 
-  return data;
-}
+    const data = await response.json();
+
+    return data;
+  });
 
 export default uploadFile;

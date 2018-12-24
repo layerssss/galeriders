@@ -43,18 +43,40 @@ const SpinnerEventListner = compose(
       else NProgress.done();
     }
   })
-)(({ setSpinners, checkSpinners }) => (
-  <EventListener
-    target={window}
-    onSpinnerStart={event => {
-      const id = event.detail.id;
-      setSpinners(spinners => [...spinners, id], checkSpinners);
-    }}
-    onSpinnerStop={event => {
-      const id = event.detail.id;
-      setSpinners(spinners => spinners.filter(s => s !== id), checkSpinners);
-    }}
-  />
+)(({ setSpinners, checkSpinners, spinners }) => (
+  <>
+    <EventListener
+      target={window}
+      onSpinnerStart={event => {
+        const id = event.detail.id;
+        setSpinners(spinners => [...spinners, id], checkSpinners);
+      }}
+      onSpinnerStop={event => {
+        const id = event.detail.id;
+        setSpinners(spinners => spinners.filter(s => s !== id), checkSpinners);
+      }}
+    />
+
+    <div
+      style={{
+        position: "fixed",
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        zIndex: 1,
+        transition: "opacity ease .3s",
+        ...(!spinners.length
+          ? {
+              pointerEvents: "none",
+              opacity: 0
+            }
+          : {
+              opacity: 0.2
+            })
+      }}
+    />
+  </>
 ));
 
 const RouteEventListener = compose(
