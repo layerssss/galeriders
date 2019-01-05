@@ -31,8 +31,8 @@ const RankItem = compose(
     ({ userId }) => ({ userId })
   )
 )(({ data, index, score }) => (
-  <div
-    key={data.user.id}
+  <a
+    href={`/user/${data.user.id}`}
     style={{
       width: 200,
       flex: "1 1 auto",
@@ -75,7 +75,7 @@ const RankItem = compose(
       <br />
       <Kilometers hundreds={score} />
     </div>
-  </div>
+  </a>
 ));
 
 const Rank = compose(

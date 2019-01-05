@@ -50,23 +50,25 @@ export default compose(
             flex: "1 0 auto"
           }}
         >
-          <Team
-            id={team.id}
-            header={
-              <div>
-                <span style={{ fontSize: 20 }}>
-                  <Kilometers hundreds={team.month_total_hundreds} />
-                </span>
-                {moment().isSame(data.month, "month") && (
-                  <>
-                    <br />
-                    今天累积里程:
-                    <Kilometers hundreds={team.day_total_hundreds} />
-                  </>
-                )}
-              </div>
-            }
-          />
+          <a href={`/team/${team.id}`}>
+            <Team
+              id={team.id}
+              header={
+                <div>
+                  <span style={{ fontSize: 20 }}>
+                    <Kilometers hundreds={team.month_total_hundreds} />
+                  </span>
+                  {moment().isSame(data.month, "month") && (
+                    <>
+                      <br />
+                      今天累积里程:
+                      <Kilometers hundreds={team.day_total_hundreds} />
+                    </>
+                  )}
+                </div>
+              }
+            />
+          </a>
         </div>
       ))}
     </div>

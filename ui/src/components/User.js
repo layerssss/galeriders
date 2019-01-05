@@ -23,18 +23,16 @@ export default compose(
     ({ id }) => ({ id })
   )
 )(({ data }) => (
-  <a href={`/user/${data.user.id}`}>
-    <Image
-      src={data.user.picture_url}
-      alt={data.user.full_name}
-      circle
-      style={{
-        width: 40,
-        height: 40,
-        marginRight: 10,
-        border: "solid 1px #666",
-        boxShadow: "0 0 10px white"
-      }}
-    />
-  </a>
+  <Image
+    src={data.user.picture_url}
+    alt={data.user.full_name}
+    circle
+    style={{
+      width: 40,
+      height: 40,
+      marginRight: 10,
+      border: "solid 1px #666",
+      boxShadow: "0 0 10px white"
+    }}
+  />
 ));
