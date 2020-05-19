@@ -1,0 +1,30 @@
+name: build galeriders
+
+on:
+  push:
+    branches: [master]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: layerssss/michaelhost-actions-build@master
+        with:
+          registry: registry.micy.in
+          registry_username: layerssss
+          registry_password: ${{ secrets.REGISTRY_PASSWORD }}
+          image_name: layerssss/galeriders
+          image_tag: api
+          build_context: api
+          michaelhost_webhook_url: https://hooks.v4.micy.in
+          michaelhost_secret: ${{ secrets.MICHAELHOST_SECRET }}
+      - uses: layerssss/michaelhost-actions-build@master
+        with:
+          registry: registry.micy.in
+          registry_username: layerssss
+          registry_password: ${{ secrets.REGISTRY_PASSWORD }}
+          image_name: layerssss/galeriders
+          image_tag: ui
+          build_context: ui
+          michaelhost_webhook_url: https://hooks.v4.micy.in
+          michaelhost_secret: ${{ secrets.MICHAELHOST_SECRET }}
