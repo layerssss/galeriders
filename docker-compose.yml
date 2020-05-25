@@ -2,10 +2,12 @@ version: '3'
 services:
   ui:
     image: registry.micy.in/layerssss/galeriders:ui
+    restart: always
     ports:
       - "80"
   api:
     image: registry.micy.in/layerssss/galeriders:api
+    restart: always
     command: "bin/rails server --port 80"
     links:
       - db
@@ -16,6 +18,7 @@ services:
       - "data:/rails/data"
   migrator:
     image: registry.micy.in/layerssss/galeriders:api
+    restart: on-failure
     command: "bin/rails db:migrate"
     links:
       - db
@@ -24,6 +27,7 @@ services:
       - "data:/rails/data"
   db:
     image: postgres:9.5
+    restart: always
     environment:
       POSTGRES_PASSWORD: mysecretpassword
       POSTGRES_USER: pguser
