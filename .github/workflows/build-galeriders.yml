@@ -13,10 +13,10 @@ jobs:
           registry: registry.micy.in
           registry_username: layerssss
           registry_password: ${{ secrets.REGISTRY_PASSWORD }}
-          image_name: layerssss/galeriders
-          image_tag: api
+          image_name: galeriders/api
+          image_tag: latest
           build_context: api
-          michaelhost_webhook_url: https://hooks.v4.micy.in
+          michaelhost_webhook_url: https://hooks.swarm.micy.in
           michaelhost_secret: ${{ secrets.MICHAELHOST_SECRET }}
   build-ui:
     runs-on: ubuntu-latest
@@ -27,8 +27,8 @@ jobs:
           registry: registry.micy.in
           registry_username: layerssss
           registry_password: ${{ secrets.REGISTRY_PASSWORD }}
-          image_name: layerssss/galeriders
-          image_tag: ui
+          image_name: galeriders/ui
+          image_tag: latest
           build_context: ui
-          michaelhost_webhook_url: https://hooks.v4.micy.in
+          michaelhost_webhook_url: https://hooks.swarm.micy.in
           michaelhost_secret: ${{ secrets.MICHAELHOST_SECRET }}
