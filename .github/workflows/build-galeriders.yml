@@ -13,9 +13,9 @@ jobs:
           registry: registry.micy.in
           registry_username: layerssss
           registry_password: ${{ secrets.REGISTRY_PASSWORD }}
-          image_name: galeriders/api
+          image_name: galeriders/gr_api
           image_tag: latest
-          build_context: api
+          build_context: gr_api
           michaelhost_webhook_url: https://swarm-hooks.micy.in
           michaelhost_secret: ${{ secrets.MICHAELHOST_SECRET }}
   build-ui:
@@ -27,8 +27,8 @@ jobs:
           registry: registry.micy.in
           registry_username: layerssss
           registry_password: ${{ secrets.REGISTRY_PASSWORD }}
-          image_name: galeriders/ui
+          image_name: galeriders/gr_ui
           image_tag: latest
-          build_context: ui
+          build_context: gr_ui
           michaelhost_webhook_url: https://swarm-hooks.micy.in
           michaelhost_secret: ${{ secrets.MICHAELHOST_SECRET }}
