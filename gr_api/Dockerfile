@@ -1,4 +1,4 @@
-FROM ruby:2.5.1
+FROM ruby:2.7.4
 
 RUN mkdir -p /rails
 WORKDIR /rails
